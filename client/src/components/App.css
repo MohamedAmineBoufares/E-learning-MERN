@@ -1,0 +1,9 @@
+html,body{
+    margin: 0;
+    height: 100%;
+}
+
+.navbar {
+    background: rgba(216, 212, 213, 0.568);
+}
+
