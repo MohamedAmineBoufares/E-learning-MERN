@@ -1,22 +1,22 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { isAuthenticated , logout} from "../helpers/auth";
+import { isAuthenticated, logout } from "../helpers/auth";
 
-const Header = ({history}) => {
+const Header = ({ history }) => {
        const handleLogout = (evt) => {
               logout(() => {
-                  history.push('/signin');
+                     history.push("/signin");
               });
-          };
-       
+       };
+
        //views
        const showNavigation = () => (
               <nav className='navbar navbar-expand-lg navbar-light bg-light  '>
                      <div className='container-fluid'>
-                            <Link to='/' className='navbar-brand'>
-                            <i class="fas fa-user-circle"></i> Welcome
-                            </Link>
-                            <i class="fas fa-search"></i>
+                            Logo
+                            <li className='nav-item'>
+                                   <i className='fas fa-user-circle'></i> Welcome
+                            </li>
                             <button
                                    className='navbar-toggler'
                                    type='button'
@@ -34,17 +34,17 @@ const Header = ({history}) => {
                                                  <Fragment>
                                                         <li className='nav-item'>
                                                                <Link to='/' className='nav-link' aria-current='page'>
-                                                               <i className='fas fa-home'></i> Home
+                                                                      <i className='fas fa-home'></i> Home
                                                                </Link>
                                                         </li>
                                                         <li className='nav-item'>
                                                                <Link to='/signup' className='nav-link' aria-current='page'>
-                                                               <i className='fas fa-edit'></i> Signup
+                                                                      <i className='fas fa-edit'></i> Signup
                                                                </Link>
                                                         </li>
                                                         <li className='nav-item'>
                                                                <Link to='/signin' className='nav-link'>
-                                                               <i className='fas fa-sign-in-alt'></i>{' '} Signin
+                                                                      <i className='fas fa-sign-in-alt'></i> Signin
                                                                </Link>
                                                         </li>
                                                  </Fragment>
@@ -53,19 +53,23 @@ const Header = ({history}) => {
                                           {isAuthenticated() && isAuthenticated().role === 0 && (
                                                  <Fragment>
                                                         <li className='nav-item'>
-                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
-                                                               <i className='fas fa-home'></i>{' '} Dashboard
+                                                               <Link to='#' className='nav-link'>
+                                                                      <i className='fas fa-search'></i> Search
+                                                               </Link>
+
+                                                               {/* <Link to='/user/dashboard' className='nav-link'>
+                                                                      
+                                                                      <i className='fas fa-home'></i> Dashboard
+                                                               </Link> */}
+                                                        </li>
+                                                        <li className='nav-item'>
+                                                               <Link to='#' className='nav-link' aria-current='page'>
+                                                                      <i className='fas fa-shopping-cart fa-spin fa-1x'></i> Cart
                                                                </Link>
                                                         </li>
-                                                         
                                                         <li className='nav-item'>
-                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
-                                                               <i className='fas fa-shopping-cart fa-spin fa-1x'></i>{' '} Cart
-                                                               </Link>
-                                                        </li>
-                                                        <li className='nav-item'>
-                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
-                                                               <i className='far fa-heart fa-spin '></i> Favorites {' '}
+                                                               <Link to='#' className='nav-link' aria-current='page'>
+                                                                      <i className='far fa-heart fa-spin '></i> Favorites{" "}
                                                                </Link>
                                                         </li>
                                                  </Fragment>
@@ -75,7 +79,7 @@ const Header = ({history}) => {
                                                  <Fragment>
                                                         <li className='nav-item'>
                                                                <Link to='/admin/dashboard' className='nav-link' aria-current='page'>
-                                                               <i className='fas fa-home'></i>{' '} Dashboard
+                                                                      <i className='fas fa-home'></i> Dashboard
                                                                </Link>
                                                         </li>
                                                  </Fragment>
@@ -84,8 +88,11 @@ const Header = ({history}) => {
                                           {isAuthenticated() && (
                                                  <Fragment>
                                                         <li className='nav-item'>
-                                                               <button className='btn btn-link text-secondary text-decoration-none pl-0' onClick={handleLogout}>
-                                                               <i className='fas fa-sign-out-alt'></i>{' '} Logout
+                                                               <button
+                                                                      className='btn btn-link text-secondary text-decoration-none pl-0'
+                                                                      onClick={handleLogout}
+                                                               >
+                                                                      <i className='fas fa-sign-out-alt'></i> Logout
                                                                </button>
                                                         </li>
                                                  </Fragment>
