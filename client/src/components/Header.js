@@ -52,9 +52,21 @@ const Header = ({ history }) => {
 
                                           {isAuthenticated() && isAuthenticated().role === 0 && (
                                                  <Fragment>
+                                                        {/* dropDown for categories user dash */}
+                                                        <div class="dropdown">
+                                                               <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                      Categories
+                                                               </button>
+                                                               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                      <a className="dropdown-item" href="#">Action</a>
+                                                                      <a className="dropdown-item" href="#">Another action</a>
+                                                                      <a className="dropdown-item" href="#">Something else here</a>
+                                                               </div>
+                                                        </div>
+
                                                         <li className='nav-item'>
                                                                <Link to='#' className='nav-link'>
-                                                                      <i className='fas fa-search'></i> Search
+                                                                      <i className='fas fa-search'></i>
                                                                </Link>
 
                                                                {/* <Link to='/user/dashboard' className='nav-link'>
@@ -64,12 +76,12 @@ const Header = ({ history }) => {
                                                         </li>
                                                         <li className='nav-item'>
                                                                <Link to='#' className='nav-link' aria-current='page'>
-                                                                      <i className='fas fa-shopping-cart fa-spin fa-1x'></i> Cart
+                                                                      <i className='fas fa-shopping-cart fa-1x'></i>
                                                                </Link>
                                                         </li>
                                                         <li className='nav-item'>
                                                                <Link to='#' className='nav-link' aria-current='page'>
-                                                                      <i className='far fa-heart fa-spin '></i> Favorites{" "}
+                                                                      <i className='far fa-heart '></i> 
                                                                </Link>
                                                         </li>
                                                  </Fragment>
