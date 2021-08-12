@@ -1,97 +1,102 @@
-//Header c'est le conteneur react contenant le navBar
-import React, {Fragment} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {isAuthenticated, logout} from '../helpers/auth';
+import React, { Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { isAuthenticated , logout} from "../helpers/auth";
 
-const Header = ({ history }) => {
-    const handleLogout = (evt) => {
-        logout(() => {
-            history.push('/signin');
-        });
-    }
-    //création des views
-    const showNavigation = () => (
-        <nav className="navbar navbar-expand-lg navbar-light ">        
-                <Link to='/' className="navbar-brand" > 
-                    Logo
-                </Link>
-                <button 
-                    className="navbar-toggler" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#navbarTogglerDemo02" 
-                    aria-controls="navbarTogglerDemo02" 
-                    aria-expanded="false" 
-                    aria-label="Toggle navigation">
+const Header = ({history}) => {
+       const handleLogout = (evt) => {
+              logout(() => {
+                  history.push('/signin');
+              });
+          };
+       
+       //views
+       const showNavigation = () => (
+              <nav className='navbar navbar-expand-lg navbar-light bg-light  '>
+                     <div className='container-fluid'>
+                            <Link to='/' className='navbar-brand'>
+                            <i class="fas fa-user-circle"></i> Welcome
+                            </Link>
+                            <i class="fas fa-search"></i>
+                            <button
+                                   className='navbar-toggler'
+                                   type='button'
+                                   data-bs-toggle='collapse'
+                                   data-bs-target='#navbarTogglerDemo02'
+                                   aria-controls='navbarTogglerDemo02'
+                                   aria-expanded='false'
+                                   aria-label='Toggle navigation'
+                            >
+                                   <span className='navbar-toggler-icon'></span>
+                            </button>
+                            <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
+                                   <ul className='navbar-nav ml-auto mb-2 mb-lg-0'>
+                                          {!isAuthenticated() && (
+                                                 <Fragment>
+                                                        <li className='nav-item'>
+                                                               <Link to='/' className='nav-link' aria-current='page'>
+                                                               <i className='fas fa-home'></i> Home
+                                                               </Link>
+                                                        </li>
+                                                        <li className='nav-item'>
+                                                               <Link to='/signup' className='nav-link' aria-current='page'>
+                                                               <i className='fas fa-edit'></i> Signup
+                                                               </Link>
+                                                        </li>
+                                                        <li className='nav-item'>
+                                                               <Link to='/signin' className='nav-link'>
+                                                               <i className='fas fa-sign-in-alt'></i>{' '} Signin
+                                                               </Link>
+                                                        </li>
+                                                 </Fragment>
+                                          )}
 
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                                          {isAuthenticated() && isAuthenticated().role === 0 && (
+                                                 <Fragment>
+                                                        <li className='nav-item'>
+                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
+                                                               <i className='fas fa-home'></i>{' '} Dashboard
+                                                               </Link>
+                                                        </li>
+                                                         
+                                                        <li className='nav-item'>
+                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
+                                                               <i className='fas fa-shopping-cart fa-spin fa-1x'></i>{' '} Cart
+                                                               </Link>
+                                                        </li>
+                                                        <li className='nav-item'>
+                                                               <Link to='/user/dashboard' className='nav-link' aria-current='page'>
+                                                               <i className='far fa-heart fa-spin '></i> Favorites {' '}
+                                                               </Link>
+                                                        </li>
+                                                 </Fragment>
+                                          )}
 
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-                        {!isAuthenticated() && (
-                            <Fragment>
+                                          {isAuthenticated() && isAuthenticated().role === 1 && (
+                                                 <Fragment>
+                                                        <li className='nav-item'>
+                                                               <Link to='/admin/dashboard' className='nav-link' aria-current='page'>
+                                                               <i className='fas fa-home'></i>{' '} Dashboard
+                                                               </Link>
+                                                        </li>
+                                                 </Fragment>
+                                          )}
 
-                                <li className="nav-item">
-                                    <Link to='/' className="nav-link " >
-                                        <i className='fas fa-home'></i> Home
-                                    </Link>
-                                </li>
-                                <li className="nav-item" >
-                                    <Link to='signup' className="nav-link " >
-                                        <i className='fas fa-edit'></i> Signup
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to='signin' className="nav-link" >
-                                        <i className='fas fa-sign-in-alt'></i> Signin
-                                    </Link>
-                                </li> 
-                            </Fragment>
-                        )}
-
-                        {isAuthenticated() && isAuthenticated().role === 0 && (
-                            <Fragment>
-                                <li className="nav-item">
-                                    <Link to='/user/dashboard' className="nav-link " >
-                                    <i className='fas fa-home'></i> Dashboard
-                                    </Link>
-                                </li>                              
-                            </Fragment>
-                        )}       
-
-                        {isAuthenticated() && isAuthenticated().role === 1 && (
-                            <Fragment>
-                                <li className="nav-item">
-                                    <Link to='/admin/dashboard' className="nav-link " >
-                                    <i className='fas fa-home'></i> Dashboard
-                                    </Link>
-                                </li>                              
-                            </Fragment>
-                        )}       
-                        {isAuthenticated() && (
-                            <Fragment>
-                                <li className="nav-item">
-
-                                    <button 
-                                       
-                                        className='btn btn-link text-secondary text-decoration-none pl-0 '
-                                        onClick= {handleLogout}
-                                        >
-                                        <i className='fas fa-sign-out-alt'></i> Logout
-                                    </button>
-                                </li>                              
-                            </Fragment>
-                        )}            
-                    </ul>
-                </div>        
-        </nav>
-    );
-
-
-    //render's view
-    return <header id='header'>{ showNavigation()}</header>;
-
+                                          {isAuthenticated() && (
+                                                 <Fragment>
+                                                        <li className='nav-item'>
+                                                               <button className='btn btn-link text-secondary text-decoration-none pl-0' onClick={handleLogout}>
+                                                               <i className='fas fa-sign-out-alt'></i>{' '} Logout
+                                                               </button>
+                                                        </li>
+                                                 </Fragment>
+                                          )}
+                                   </ul>
+                            </div>
+                     </div>
+              </nav>
+       );
+       //render
+       return <header id='header'>{showNavigation()}</header>;
 };
 
 export default withRouter(Header);

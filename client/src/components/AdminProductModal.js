@@ -184,7 +184,7 @@ const AdminProductModal = () => {
                                     </div>
 
                                     <div className='form-row'>
-                                        <div className='form-group col-md-6'>
+                                        
                                                 <label className='text-secondary'>
                                                     Category
                                                 </label>
@@ -192,7 +192,7 @@ const AdminProductModal = () => {
                                                     name='productCategory'
                                                     onChange={handleProductChange} 
                                                     >
-                                                <option value=''>Choose one...</option>
+                                                <option value=''>Choose a category...</option>
                                                 {categories &&
                                                     categories.map((c) => (
                                                         <option 
@@ -203,9 +203,10 @@ const AdminProductModal = () => {
                                                             </option>
                                                     ))}
                                             </select>
-                                        </div>
+                                    
+                                    </div>
 
-                                    <div className='form-group'>
+                                    <div className='form-group' rows='3'>
                                         <label className='text-secondary'>
                                             video URL
                                         </label>
@@ -216,7 +217,7 @@ const AdminProductModal = () => {
                                         value={videoUrl}
                                         onChange={handleProductChange}
                                         />
-                                    </div>
+                                    
 
                                     <div className='form-group'>
                                         <label className='text-secondary'>
@@ -230,6 +231,7 @@ const AdminProductModal = () => {
                                         onChange={handleProductChange}
                                         />
                                     </div>
+                                   
 
                                         
                                     </div>                                                                   

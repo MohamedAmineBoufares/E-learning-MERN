@@ -1,0 +1,81 @@
+.popup__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(38, 70, 83, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 75rem;
+  height: fit-content;
+  padding: 3rem 2rem;
+  background-color: white;
+  border-radius: 3rem;
+}
+
+.box > h1 {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  color: #e76f51;
+  align-self: center;
+}
+
+.box > p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.transaction__number__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.transaction__number {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 25rem;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  color: #2a9d8f;
+}
+
+.transaction__number__container > button {
+  padding: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 0.1rem solid black;
+  font-size: 1.2rem;
+}
+
+/*Change the color of the placeholder text 
+of an input field: */
+
+.transaction__number::-webkit-input-placeholder /* Edge */,
+.transaction__number:-ms-input-placeholder  /* Internet Explorer 10-11 */,
+.transaction__number::placeholder {
+  color: #2a9d8f;
+}
+
+.transaction__number__container > button:hover {
+  background-color: #2a9d8f;
+  cursor: pointer;
+  color: white;
+  border-color: #2a9d8f;
+  transition: 0.2s ease-in-out;
+}
+
+.transaction__number__container a {
+  text-decoration: none;
+  color: inherit;
+}

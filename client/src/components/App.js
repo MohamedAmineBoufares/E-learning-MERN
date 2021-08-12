@@ -11,6 +11,11 @@ import AdminEditProduct from './AdminEditProduct';
 import UserRoute from './UserRoute';
 import AdminRoute from './AdminRoute';
 import NotFound from './NotFound';
+import CoursePriview from "../pages/Client/CoursePriview";
+import CourseVideo from "../pages/Client/CourseVideo";
+import Course from "../pages/Client/Course";
+/* import Cart from "../pages/Client/Cart"; */
+
 
 const App = () => {
   return(
@@ -32,6 +37,34 @@ const App = () => {
               exact 
               path ='/admin/edit/product/:productId' 
               component={AdminEditProduct} />
+
+            {/* Course Video */}
+            <Route path="/course_video">
+              <div className="App">
+                <CourseVideo />
+              </div>
+            </Route>
+
+            {/* Video Privew */}
+            <Route path="/video_preview">
+              <div className="App">
+                <CoursePriview />
+              </div>
+            </Route>
+
+            {/* Course Content */}
+            <Route path="/course_content">
+              <div className="App">
+                <Course />
+              </div>
+            </Route>
+
+            {/* Cart */}
+            {/* <Route path="/cart">
+              <div className="App">
+                <Cart />
+              </div>
+            </Route> */}
 
             <Route component={NotFound} />
           </Switch>

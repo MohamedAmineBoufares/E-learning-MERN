@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+}
+
+.infos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.infos__num {
+  margin-right: 2rem;
+}
+
+.bar__container {
+  border-radius: 1rem;
+  height: 1rem;
+  background-color: white;
+}
+
+.bar {
+  background-color: #2a9d8f;
+  border-radius: 1rem;
+  height: 1rem;
+  width: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 10rem;
+  }
+}
