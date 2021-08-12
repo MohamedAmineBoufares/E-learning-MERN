@@ -1,11 +1,32 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { isAuthenticated, logout } from "../helpers/auth";
+
+
+import { getCategories } from "../api/category";
 
 const Header = ({ history }) => {
        const handleLogout = (evt) => {
               logout(() => {
                      history.push("/signin");
+              });
+       };
+      
+       const [categories, setCategories] = useState(null);
+       const [loading, setLoading] = useState(false);
+
+       /* ************LIFECYCLE METHOD (for getting gategories)************** */
+       useEffect(() => {
+              loadCategories();
+       }, [loading])
+       
+       const loadCategories = async () => {
+              await getCategories()
+                     .then(response => {
+                            setCategories(response.data.categories);
+                     })
+                     .catch(err => {
+                            console.log(err);
               });
        };
 
@@ -53,7 +74,7 @@ const Header = ({ history }) => {
                                           {isAuthenticated() && isAuthenticated().role === 0 && (
                                                  <Fragment>
                                                         {/* dropDown for categories user dash */}
-                                                        <div class="dropdown">
+                                                       {/*  <div class="dropdown">
                                                                <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                       Categories
                                                                </button>
@@ -62,6 +83,26 @@ const Header = ({ history }) => {
                                                                       <a className="dropdown-item" href="#">Another action</a>
                                                                       <a className="dropdown-item" href="#">Something else here</a>
                                                                </div>
+                                                        </div> */}
+
+                                                        <div className='form-row'>
+                                   
+                                                               <select className='custom-select mr-sm-2' 
+                                                                      name='productCategory'
+                                                                      
+                                                                      >
+                                                               <option value=''>categories</option>
+                                                               {categories &&
+                                                                      categories.map((c) => (
+                                                                      <option 
+                                                                      key={c._id}
+                                                                      value={c._id}
+                                                                      >
+                                                                             {c.category}
+                                                                             </option>
+                                                                      ))}
+                                                               </select>
+                                                        
                                                         </div>
 
                                                         <li className='nav-item'>
