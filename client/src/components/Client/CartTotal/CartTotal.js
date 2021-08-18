@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectItems } from "../../../features/cart/cartSlice";
 import PurchaseMessage from "../PurchaseMessage/PurchaseMessage";
 import styles from "./CartTotal.module.css";
 
 function CartTotal() {
-  const items = useSelector(selectItems);
+  const items = useSelector((state) => state.cart.items);;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,8 +16,8 @@ function CartTotal() {
     <div className={styles.container}>
       <p>Total:</p>
       <h1>
-        {items.reduce((a, b) => {
-          return a + b.coursePrice;
+        {items && items.reduce((a, b) => {
+          return a + b.productPrice;
         }, 0)} DT
       </h1>
       <div className={styles.checkout__btn} onClick={togglePopup}>

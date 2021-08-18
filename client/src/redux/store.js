@@ -5,12 +5,16 @@ import loadingReducer from './reducers/loadingReducers';
 import messageReducer from './reducers/messageReducers';
 import categoryReducers from './reducers/categoryReducers';
 import productReducer from './reducers/productReducers';
+import cartReducers from './reducers/cartReducers';
+import favoriteReducers from "./reducers/favoriteReducers"
 
 const reducer = combineReducers({
     loading: loadingReducer,
     messages: messageReducer,
     categories: categoryReducers,
     products: productReducer,
+    cart: cartReducers,
+    favorite: favoriteReducers,
 });
 
 const initialState = {};

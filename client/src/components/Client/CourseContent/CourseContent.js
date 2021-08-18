@@ -5,20 +5,24 @@ import FavoriteIcon from "@material-ui/icons/FavoriteBorder";
 import PlayIcon from "@material-ui/icons/PlayArrowOutlined";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PreviewVideo from "../PreviewVideo/PreviewVideo";
+import { useSelector } from "react-redux";
 
-function CourseContent() {
+function CourseContent({ courseId }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const course = useSelector((state) => state.products.product);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
   return (
+    
     <div className={styles.container}>
       {/* The left part which contains the course title + a discription + the rating + whishlist button */}
 
       <div className={styles.Content__left}>
-        <h1>Hi</h1>
-        <p>Hi</p>
+        {course && <h1>{course.productName}</h1>}
+        {course && <p>{course.productDesc}</p>}
 
         <div className={styles.rating__container}>
           <p className={styles.p}>4.0</p>
@@ -45,7 +49,7 @@ function CourseContent() {
           className={styles.course__img}
           title="Course"
           alt="the course"
-          src="https://ampjar.com/wp-content/uploads/2019/06/ig-sponsored-hero@2x-970x577.png"
+          src={`/uploads/${course && course.fileName}`}
         />
 
         <div className={styles.watch__preview} onClick={togglePopup}>
@@ -53,14 +57,14 @@ function CourseContent() {
           <p>Watch preview</p>
         </div>
 
-        <h1 className={styles.course__price}>200 DT</h1>
+        {course && <h1 className={styles.course__price}>{course.productPrice} DT</h1>}
 
         <div className={styles.buy__course}>
           <ShoppingCartIcon className={styles.buy__course__icon} />
           <p>Add to cart</p>
         </div>
       </div>
-      {isOpen && <PreviewVideo handleClose={togglePopup} />}
+      {isOpen && <PreviewVideo handleClose={togglePopup} videoURL={course.previewUrl}/>}
     </div>
   );
 }

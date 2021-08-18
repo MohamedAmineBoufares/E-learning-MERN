@@ -5,7 +5,7 @@ import VideoCourse from "../../components/Client/VideoCourse/VideoCourse";
 function CourseVideo() {
   return (
     <div>
-      <Header />
+     
       <VideoCourse />
     </div>
   );

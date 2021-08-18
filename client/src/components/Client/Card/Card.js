@@ -6,19 +6,23 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../features/cart/cartSlice";
-import { addToFav } from "../../../features/favorite/favoriteSlice";
+import { addToCart } from "../../../redux/actions/cartActions";
+import { addToFavorite } from "../../../redux/actions/favoriteActions";
 
-function Card({product, src, productName, courseRating, productPrice, courseID, quantity=1 }) {
+function Card({ product }) {
+  // Constes so I can recall them inside an object, later
+  const productName = product.productName;
+  const fileName = product.fileName;
+  const productPrice = product.productPrice;
+  const _id = product._id;
+
   const dispatch = useDispatch();
   const addCart = () => {
     const item = {
-      src,
+      fileName,
       productName,
-      courseRating,
       productPrice,
-      courseID,
-      quantity,
+      _id,
     };
 
     // Sending the course to store
@@ -27,24 +31,30 @@ function Card({product, src, productName, courseRating, productPrice, courseID, 
 
   const addFav = () => {
     const item = {
-      src,
+      fileName,
       productName,
-      courseRating,
       productPrice,
-      courseID,
+      _id,
     };
-    dispatch(addToFav(item));
+
+    // Sending the course to store
+    dispatch(addToFavorite(item));
   };
 
   return (
     <div className={styles.container}>
-      <Link to="/course_content" className={styles.link}>
-        <img className={styles.img} alt="Course" title={productName} src={`/uploads/${product.fileName}`} />
+      <Link to={"/course_content/" + _id} className={styles.link}>
+        <img
+          className={styles.img}
+          alt="Course"
+          title={product.productName}
+          src={`/uploads/${product.fileName}`}
+        />
 
         <h2 className={styles.course__name}>{product.productName}</h2>
 
         <div className={styles.rating__container}>
-          <p className={styles.p}>{courseRating}</p>
+          {/* <p className={styles.p}>{courseRating}</p> */}
 
           <div className={styles.rating__fire}>
             <FireIcon className={styles.fire__icon} />
@@ -55,7 +65,6 @@ function Card({product, src, productName, courseRating, productPrice, courseID, 
           </div>
         </div>
       </Link>
-
 
       <div className={styles.price__container}>
         <p className={styles.p}>{product.productPrice} DT</p>

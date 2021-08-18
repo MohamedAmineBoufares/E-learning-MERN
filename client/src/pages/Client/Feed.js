@@ -8,8 +8,8 @@ import Header from "../../components/Client/Header/Header";
 function Feed() {
     return (
         <div>
-            <Header />
-            {/* <Progress /> */}
+           
+            
             <Courses />
             <Contact />
         </div>

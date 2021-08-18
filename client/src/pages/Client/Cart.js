@@ -5,7 +5,7 @@ import CartContent from "../../components/Client/CartContent/CartContent";
 function Cart() {
   return (
     <div>
-      <Header />
+     
       <CartContent />
     </div>
   );

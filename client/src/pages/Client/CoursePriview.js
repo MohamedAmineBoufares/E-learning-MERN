@@ -5,7 +5,7 @@ import CartContent from "../../components/Client/CartContent/CartContent";
 function CoursePriview() {
   return (
     <div>
-      <Header />
+      
       <CartContent />
     </div>
   );

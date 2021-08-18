@@ -5,20 +5,19 @@ import { IconButton } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForeverOutlined";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../../features/cart/cartSlice";
+import { removeFromCart } from "../../../redux/actions/cartActions";
 
-function CartItem({ src, courseName, coursePrice, courseID, quantity }) {
+function CartItem({ fileName, productName, productPrice, _id }) {
   const dispatch = useDispatch();
   const remove = () => {
-    dispatch(removeFromCart({ courseID }));
-    console.log("DONE")
+    dispatch(removeFromCart({_id}));
+    // console.log("DONE");
   };
   return (
     <div className={styles.item__infos}>
-      <img src={src} text={courseName} alt={courseName} />
-      <h2>{courseName}</h2>
+      <img src={fileName} text={productName} alt={productName} />
+      <h2>{productName}</h2>
       <div className={styles.item__number}>
-        <h2>{quantity}</h2>
         <div className={styles.item__number__modifiy}>
           <IconButton>
             <AddIcon />
@@ -30,7 +29,7 @@ function CartItem({ src, courseName, coursePrice, courseID, quantity }) {
         </div>
       </div>
       <div className={styles.item__price}>
-        <h2>{coursePrice} DT</h2>
+        <h2>{productPrice} DT</h2>
       </div>
       <IconButton style={{ color: "red" }} onClick={remove}>
         <DeleteForeverIcon />

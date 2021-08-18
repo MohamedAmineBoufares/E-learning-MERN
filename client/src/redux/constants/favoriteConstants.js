@@ -1,0 +1,1 @@
+export const ADD_TO_Favorite = "ADD_TO_Favorite"
