@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./PurchaseMessage.module.css";
+import { useSelector } from "react-redux";
+import { getLocalStorage } from "../../../helpers/localStorage";
+import { addCartToUser } from "../../../api/product";
 
 export default function PurchaseMessage({ handleClose }) {
+  const [userID, setUserID] = useState();
+  const [input, setInput] = useState("");
+
+  const items = useSelector((state) => state.cart.items);
+
+  useEffect(() => {
+    setUserID(getLocalStorage("user")._id);
+  }, []);
+
+  const sendPurchase = async () => {
+    addCartToUser(items, userID, input);
+  };
+
   return (
     <div className={styles.popup__box}>
       <div className={styles.box}>
@@ -21,13 +37,10 @@ export default function PurchaseMessage({ handleClose }) {
             type="number"
             min="10000"
             max="20000"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
-          <button>
-            <a
-              href="https://forms.office.com/Pages/ShareFormPage.aspx?id=TWbW27lO60aZ2FxDuhU8YdzCfclzGTBEn6GEFASMojRUNE8xQk1XSDdOTDk5QjdYQ1ZOS09MUUg4Ty4u&sharetoken=e2cndCxdIlh4O5lWMQgd&fbclid=IwAR2ReXWDUpNIkDbGM31t38Ft6t9iz3E0WstDGGx5wcIWzXCZoMAhiNXNkKA"
-              target="_blank"
-            >Submit</a>
-          </button>
+          <button onClick={sendPurchase}>Submit</button>
         </div>
 
         <p>

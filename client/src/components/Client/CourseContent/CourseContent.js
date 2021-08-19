@@ -61,7 +61,7 @@ function CourseContent({ courseId }) {
 
         <div className={styles.buy__course}>
           <ShoppingCartIcon className={styles.buy__course__icon} />
-          <p>Add to cart</p>
+          <p>Buy now !</p>
         </div>
       </div>
       {isOpen && <PreviewVideo handleClose={togglePopup} videoURL={course.previewUrl}/>}

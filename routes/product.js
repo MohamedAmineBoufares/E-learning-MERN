@@ -21,4 +21,6 @@ router.put(
 );
 router.delete('/:productId',autenticatateJWT, productController.delete);
 
+router.post('/new/course', productController.addCourseController);
+
 module.exports = router;

@@ -66,7 +66,7 @@ const Header = ({ history }) => {
                 </li>
                 <li className="nav-item">
                   <Link to="/signin" className="nav-link">
-                    <i className="fas fa-sign-in-alt"></i> Signin
+                    <i className="fas fa-sign-in-alt"></i> Login
                   </Link>
                 </li>
               </Fragment>
