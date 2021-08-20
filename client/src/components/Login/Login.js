@@ -18,8 +18,8 @@ const Login = () => {
     }
   }, [history]);
   const [formData, setFormData] = useState({
-    email: "aymen@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
     errorMsg: false,
     loading: false,
   });

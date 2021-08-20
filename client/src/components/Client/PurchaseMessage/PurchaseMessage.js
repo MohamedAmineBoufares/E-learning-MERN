@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import styles from "./PurchaseMessage.module.css";
-import { useSelector } from "react-redux";
 import { getLocalStorage } from "../../../helpers/localStorage";
-import { addCartToUser } from "../../../api/product";
+import { showErrorMsg, showSuccessMsg } from "../../../helpers/message";
+import { showLoading } from "../../../helpers/loading";
+
+// REDUX !
+import { useSelector, useDispatch } from "react-redux";
+import { clearMessages } from "../../../redux/actions/messageActions";
+import { sendCartToDB } from "../../../redux/actions/cartActions";
 
 export default function PurchaseMessage({ handleClose }) {
+  // Redux states
+  const { loading } = useSelector((state) => state.loading);
+  const { successMsg, errorMsg } = useSelector((state) => state.messages);
+  const items = useSelector((state) => state.cart.items);
+
+  const dispatch = useDispatch();
+
+  // states for the request
   const [userID, setUserID] = useState();
   const [input, setInput] = useState("");
 
-  const items = useSelector((state) => state.cart.items);
-
   useEffect(() => {
     setUserID(getLocalStorage("user")._id);
-  }, []);
+    dispatch(clearMessages());
+  }, [dispatch]);
 
   const sendPurchase = async () => {
-    addCartToUser(items, userID, input);
+    dispatch(sendCartToDB(items, userID, input));
   };
 
   return (
@@ -31,16 +43,22 @@ export default function PurchaseMessage({ handleClose }) {
           in this box here :
         </p>
         <div className={styles.transaction__number__container}>
-          <input
-            className={styles.transaction__number}
-            placeholder="Write transaction number here"
-            type="number"
-            min="10000"
-            max="20000"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button onClick={sendPurchase}>Submit</button>
+          {loading ? (
+            <div>{showLoading()}</div>
+          ) : (
+            <div>
+              <input
+                className={styles.transaction__number}
+                placeholder="Write transaction number here"
+                type="number"
+                min="10000"
+                max="20000"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              />
+              <button onClick={sendPurchase}>Submit</button>
+            </div>
+          )}
         </div>
 
         <p>
@@ -51,6 +69,10 @@ export default function PurchaseMessage({ handleClose }) {
         <p>
           We thank you for your patience, and we hope you enjoy this course 😄 .
         </p>
+      </div>
+      <div>
+        {errorMsg && showErrorMsg(errorMsg)}
+        {successMsg && showSuccessMsg(successMsg)}
       </div>
     </div>
   );

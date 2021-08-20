@@ -1,16 +1,5 @@
 import axios from "axios";
 
-const testing = [
-  {
-    courseName: "autra",
-    authorised: "false",
-  },
-  {
-    courseName: "autra2",
-    authorised: "true",
-  },
-];
-
 export const createProduct = async (data) => {
   const response = await axios.post("/api/product", data);
 

@@ -18,6 +18,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+  
   return (
     <section>
       <AdminHeader />

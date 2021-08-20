@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_FROM_CART, SEND_CART_TO_DB } from "../constants/cartConstants";
 
 const INITIAL_STATE = {
   items: [],

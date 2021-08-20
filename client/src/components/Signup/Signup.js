@@ -12,10 +12,10 @@ const Signup = () => {
   //formData : objets contenant les données (username,email... )
 
   const [formData, setFormData] = useState({
-    username: "aymen",
-    email: "aymen@gmail.com",
-    password: "123456",
-    password2: "123456",
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
     successMsg: false,
     errorMsg: false,
     loading: false,
