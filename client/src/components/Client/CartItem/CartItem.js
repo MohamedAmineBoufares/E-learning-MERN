@@ -6,11 +6,13 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForeverOutlined";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../../redux/actions/cartActions";
+import { getLocalStorage } from "../../../helpers/localStorage";
 
 function CartItem({ fileName, productName, productPrice, _id }) {
   const dispatch = useDispatch();
   const remove = () => {
-    dispatch(removeFromCart({_id}));
+    const userID = getLocalStorage("user")._id;
+    dispatch(removeFromCart(userID, { _id }, _id));
     // console.log("DONE");
   };
   return (

@@ -3,12 +3,15 @@ import { Link, withRouter } from "react-router-dom";
 import { isAuthenticated, logout } from "../helpers/auth";
 import { useSelector } from "react-redux";
 import { getCategories } from "../api/category";
+import { auth } from "../components/firebase";
 
 const Header = ({ history }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const favoriteItems = useSelector((state) => state.favorite.items);
   const handleLogout = (evt) => {
     logout(() => {
+      auth.signOut();
+      
       history.push("/signin");
     });
   };

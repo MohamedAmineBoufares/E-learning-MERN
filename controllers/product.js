@@ -110,23 +110,3 @@ exports.delete = async (req, res) => {
     });
   }
 };
-
-// Controller resonasable for adding a new course to the user
-//collection once the user buys a new one
-
-exports.addCourseController = async (req, res) => {
-  User.updateOne(
-    { _id: req.query.id },
-    { $push: { courses: req.body } },
-    (err, data) => {
-      if (err) {
-        console.log("Error adding course...");
-        console.log(err);
-
-        res.status(500).send(err);
-      } else {
-        res.status(201).send(data);
-      }
-    }
-  );
-};

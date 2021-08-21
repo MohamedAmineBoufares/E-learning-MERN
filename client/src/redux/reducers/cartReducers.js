@@ -1,4 +1,8 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, SEND_CART_TO_DB } from "../constants/cartConstants";
+import {
+  ADD_TO_CART,
+  GET_USER_CART,
+  REMOVE_FROM_CART,
+} from "../constants/cartConstants";
 
 const INITIAL_STATE = {
   items: [],
@@ -21,14 +25,19 @@ const cartReducers = (state = INITIAL_STATE, action) => {
       let newCart = [...state.items];
       if (index >= 0) {
         newCart.splice(index, 1);
-      }
-      else {
-        console.warn("NOOPE !")
+      } else {
+        console.warn("NOOPE !");
       }
 
       return {
         ...state,
         items: newCart,
+      };
+
+    case GET_USER_CART:
+      return {
+        ...state,
+        items: [...action.payload],
       };
 
     default:

@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Card.module.css";
 import FireIcon from "@material-ui/icons/WhatshotOutlined";
 import FavoriteIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
+import { getLocalStorage } from "../../../helpers/localStorage";
+import { showErrorMsg, showSuccessMsg } from "../../../helpers/message";
+import { showLoading } from "../../../helpers/loading";
+
+// REDUX !
+import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/actions/cartActions";
 import { addToFavorite } from "../../../redux/actions/favoriteActions";
+import { clearMessages } from "../../../redux/actions/messageActions";
 
 function Card({ product }) {
+  // Redux states
+  const { loading } = useSelector((state) => state.loading);
+  const { successMsg, errorMsg } = useSelector((state) => state.messages);
+
+  // states for the request
+  const [userID, setUserID] = useState();
+
   // Constes so I can recall them inside an object, later
   const productName = product.productName;
   const fileName = product.fileName;
@@ -17,7 +31,14 @@ function Card({ product }) {
   const _id = product._id;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setUserID(getLocalStorage("user")._id);
+    dispatch(clearMessages());
+  }, [dispatch]);
+
   const addCart = () => {
+    dispatch(clearMessages());
     const item = {
       fileName,
       productName,
@@ -26,7 +47,7 @@ function Card({ product }) {
     };
 
     // Sending the course to store
-    dispatch(addToCart(item));
+    dispatch(addToCart(item, userID));
   };
 
   const addFav = () => {
@@ -70,13 +91,19 @@ function Card({ product }) {
         <p className={styles.p}>{product.productPrice} DT</p>
 
         <span className={styles.price__icons}>
-          <IconButton onClick={addFav}>
-            <FavoriteIcon />
-          </IconButton>
+          {loading ? (
+            <div>{showLoading()}</div>
+          ) : (
+            <div>
+              <IconButton onClick={addFav}>
+                <FavoriteIcon />
+              </IconButton>
 
-          <IconButton onClick={addCart}>
-            <ShoppingCartIcon />
-          </IconButton>
+              <IconButton onClick={addCart}>
+                <ShoppingCartIcon />
+              </IconButton>
+            </div>
+          )}
         </span>
       </div>
     </div>

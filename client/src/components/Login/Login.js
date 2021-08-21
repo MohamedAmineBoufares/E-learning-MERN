@@ -6,7 +6,8 @@ import { showLoading } from "../../helpers/loading";
 import { setAuthentication, isAuthenticated } from "../../helpers/auth";
 import isEmpty from "validator/lib/isEmpty";
 import isEmail from "validator/lib/isEmail";
-import { signin } from "../../api/auth";
+import { signin, signinGoogle, signupGoogle } from "../../api/auth";
+import { auth, provider } from "../firebase";
 
 const Login = () => {
   let history = useHistory();
@@ -18,8 +19,8 @@ const Login = () => {
     }
   }, [history]);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "aymen@gmail.com",
+    password: "123456",
     errorMsg: false,
     loading: false,
   });
@@ -77,6 +78,42 @@ const Login = () => {
     }
   };
 
+  /*****connect with goole  */
+
+  // Function to Handle the Log-in with google process !
+
+  const logInWithGoogle = (data) => {
+    signinGoogle(data)
+      .then((response) => {
+        setAuthentication(response.data.token, response.data.user);
+
+        if (isAuthenticated() && isAuthenticated().role === 1) {
+          console.log("Redirecting to admin dashboard");
+          history.push("/admin/dashboard");
+        } else {
+          console.log("Redirecting to user dashboard");
+          history.push("/user/dashboard");
+        }
+      })
+      .catch((err) => {
+        console.log("signin api function error: ", err);
+      });
+  };
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(provider).then(() => {
+      const username = auth.currentUser.displayName;
+      const email = auth.currentUser.email;
+      const data = { username, email };
+      try {
+        signupGoogle(data).then(() => {
+          logInWithGoogle(data); // DRY
+        });
+      } finally {
+        logInWithGoogle(data); // DRY
+      }
+    });
+  };
+
   /****************************
    * VIEWS
    ***************************/
@@ -84,10 +121,14 @@ const Login = () => {
     <div className={styles.login__form}>
       <div className={styles.g__signin__button}>
         <div className={styles.logo__wrapper}>
-          <img src="https://developers.google.com/identity/images/g-logo.png" />
+          <img
+            src="https://developers.google.com/identity/images/g-logo.png"
+            alt="google icon"
+          />
         </div>
+        {/*here*/}
         <div className={styles.text__container}>
-          <div>Login with Google</div>
+          <div onClick={signInWithGoogle}>Login with Google</div>
         </div>
       </div>
 
