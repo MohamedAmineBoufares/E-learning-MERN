@@ -22,15 +22,14 @@ const UserSchema = new mongoose.Schema( //create new instance : usershema
       default: 0, //if the role of the user signed up =0 ===> user if role =1 ==> admin user
     },
 
-    courses: [
+    orders: [
       {
         course: [
           {
             courseName: String,
-            authorised: Boolean,
           },
         ],
-
+        authorised: Boolean,
         picRecipient: String,
       },
     ],

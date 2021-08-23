@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.1rem solid #f4a261;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.user__infos {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.6;
+  border-right: 0.1rem solid #f4a261;
+}
+
+.user__infos > p {
+  color: #264653;
+  max-width: 18rem;
+}
+
+.user__infos > h2 {
+  max-width: 18rem;
+}
+
+.user__courses {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 3rem;
+  line-height: 1.6;
+  padding-right: 1rem;
+  border-right: 0.1rem solid #f4a261;
+}
+
+.user__money {
+  display: flex;
+  flex-direction: column;
+  width: 6rem;
+  margin-left: 2rem;
+  padding-right: 1rem;
+  line-height: 1.6;
+  border-right: 0.1rem solid #f4a261;
+}
+
+.user__money > h3 {
+  color: #264653;
+}
+
+.user__download {
+  display: flex;
+  width: 10rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.6;
+  border-right: 0.1rem solid #f4a261;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.accept__btn,
+.refuse__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.accept__btn {
+  background-color: #2a9d8f;
+  margin-bottom: 2rem;
+  transition: 0.3s ease-in-out;
+}
+
+.refuse__btn {
+  background-color: #f4a261;
+  transition: 0.3s ease-in-out;
+}
+
+.accept__btn:hover {
+  background-color: #01b39e;
+}
+
+.refuse__btn:hover {
+  background-color: red;
+}

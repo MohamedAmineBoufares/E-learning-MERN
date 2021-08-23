@@ -70,15 +70,18 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
   }
 };
 
-export const sendCartToDB = (data, userID, src) => async (dispatch) => {
+export const sendCartToDB = (data, user, src) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
-    const response = await axios.post(`/api/cart/add?id=${userID}`, {
+    const response = await axios.post("/api/cart/add", {
+      userName: user.username,
+      userEmail: user.email,
+      userPhone: "",
       course: data.map(({ productName }) => ({
         courseName: productName,
-        authorised: "false",
       })),
+      authorised: "false",
       picRecipient: src,
     });
 

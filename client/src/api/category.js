@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const createCategory = async (formData) => {
     const config = {
         headers: {

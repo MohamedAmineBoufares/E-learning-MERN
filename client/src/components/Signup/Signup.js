@@ -6,11 +6,13 @@ import isEmpty from "validator/lib/isEmpty";
 import equals from "validator/lib/equals";
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { signup } from "../../api/auth";
+import { useHistory } from "react-router-dom";
 
 const Signup = () => {
   //setFormData c la méthode utilisée pour faire les changements des données for our component state
   //formData : objets contenant les données (username,email... )
 
+  let history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
     email: "",

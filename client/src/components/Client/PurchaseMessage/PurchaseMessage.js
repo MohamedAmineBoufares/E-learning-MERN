@@ -18,16 +18,17 @@ export default function PurchaseMessage({ handleClose }) {
   const dispatch = useDispatch();
 
   // states for the request
-  const [userID, setUserID] = useState();
+  const [user, setUser] = useState();
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    setUserID(getLocalStorage("user")._id);
+    setUser(getLocalStorage("user"));
     dispatch(clearMessages());
   }, [dispatch]);
 
   const sendPurchase = async () => {
-    dispatch(sendCartToDB(items, userID, input));
+    dispatch(sendCartToDB(items, user, input));
+    console.log(user)
   };
 
   return (

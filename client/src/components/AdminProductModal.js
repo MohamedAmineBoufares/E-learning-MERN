@@ -106,7 +106,7 @@ const AdminProductModal = () => {
    * RENDERS
    ********************************/
   return (
-    <div id="addFoodModal" className="modal" onClick={handleMessages}>
+    <div id="addCourseModal" className="modal" onClick={handleMessages}>
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           <form onSubmit={handleProductSubmit}>

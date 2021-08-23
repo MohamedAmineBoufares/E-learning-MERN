@@ -20,7 +20,8 @@ function Courses() {
     <div className={styles.container}>
       <h1 className={styles.courses__title}>Our courses</h1>
       <div className={styles.courses__cards}>
-        {courses.map(({ courseImageURL, productName, coursePrice, _id }, i) => (
+        {courses.map(
+          ({ courseImageURL, productName, coursePrice, _id }, i) => (
           <Card
             key={i}
             courseID={_id}
