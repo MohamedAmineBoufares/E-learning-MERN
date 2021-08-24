@@ -17,8 +17,6 @@ const cartReducers = (state = INITIAL_STATE, action) => {
       };
 
     case REMOVE_FROM_CART:
-      // return state.filter((item) => item._id !== action.payload._id);
-
       const index = state.items.findIndex(
         (item) => item._id === action.payload._id
       );

@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearMessages } from "../../../redux/actions/messageActions";
 import { sendCartToDB } from "../../../redux/actions/cartActions";
 
-export default function PurchaseMessage({ handleClose }) {
+export default function PurchaseMessage({ handleClose, total }) {
   // Redux states
   const { loading } = useSelector((state) => state.loading);
   const { successMsg, errorMsg } = useSelector((state) => state.messages);
@@ -27,7 +27,7 @@ export default function PurchaseMessage({ handleClose }) {
   }, [dispatch]);
 
   const sendPurchase = async () => {
-    dispatch(sendCartToDB(items, user, input));
+    dispatch(sendCartToDB(items, user, input, total));
     console.log(user)
   };
 

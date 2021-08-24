@@ -9,7 +9,6 @@ exports.addToCartController = async (req, res) => {
   Orders.create(orderData, (err, data) => {
     if (err) {
       console.log("Error adding course...");
-      console.log(err);
 
       res.status(500).send(err);
     } else {

@@ -4,9 +4,11 @@ import PurchaseMessage from "../PurchaseMessage/PurchaseMessage";
 import styles from "./CartTotal.module.css";
 
 function CartTotal() {
-  const items = useSelector((state) => state.cart.items);;
+  const items = useSelector((state) => state.cart.items);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  let total = 0;
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -16,9 +18,12 @@ function CartTotal() {
     <div className={styles.container}>
       <p>Total:</p>
       <h1>
-        {items && items.reduce((a, b) => {
-          return a + b.productPrice;
-        }, 0)} DT
+        {items &&
+          items.reduce((a, b) => {
+            total = a + b.productPrice;
+            return total;
+          }, 0)}{" "}
+        DT
       </h1>
       <div className={styles.checkout__btn} onClick={togglePopup}>
         Checkout
@@ -33,7 +38,7 @@ function CartTotal() {
           </form>
         </div>
       </div>
-      {isOpen && <PurchaseMessage handleClose={togglePopup} />}
+      {isOpen && <PurchaseMessage handleClose={togglePopup} total={total} />}
     </div>
   );
 }

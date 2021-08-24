@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   GET_USERS_ORDERS,
   ALLOW_USER_ORDER,
+  REMOVE_USER_ORDER,
 } from "../constants/adminConstants";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
@@ -14,8 +15,7 @@ export const getUsersOrders = () => async (dispatch) => {
     dispatch({ type: START_LOADING });
 
     const response = await axios.get("/api/admin/getcourses");
-    console.log(response);
-    
+
     dispatch({
       type: GET_USERS_ORDERS,
       payload: response.data,
@@ -40,3 +40,32 @@ export const getUsersOrders = () => async (dispatch) => {
     });
   }
 };
+
+export const allowOrder = (orderID) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await axios.post(`/api/admin/alloworder/${orderID}`);
+
+    dispatch({ type: STOP_LOADING });
+
+    dispatch({ type: REMOVE_USER_ORDER, payload: orderID });
+
+    dispatch({
+      type: SHOW_SUCCESS_MESSAGE,
+      payload: "Order Allowed",
+    });
+
+    return response;
+  } catch (err) {
+    console.log("allow Order api error: ", err);
+
+    dispatch({ type: STOP_LOADING });
+
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: "NOPE",
+    });
+  }
+};
+

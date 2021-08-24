@@ -15,25 +15,16 @@ function AdminOrdersModal() {
   const { loading } = useSelector((state) => state.loading);
   const { successMsg, errorMsg } = useSelector((state) => state.messages);
 
-  const orders = useSelector((state) => state.orders.orders[0]);
+  const orders = useSelector((state) => state.orders.orders);
 
   const dispatch = useDispatch();
-  /********************************
-   * COMPONENT STATE PROPERTIES
-   ********************************/
-  const [clientSideError, setClientSideError] = useState("");
 
-  /********************************
-   * EVENT HANDLERS
-   ********************************/
   const handleMessages = (evt) => {
     dispatch(clearMessages());
-    setClientSideError("");
   };
 
   useEffect(() => {
     dispatch(getUsersOrders());
-    console.log("Hello", orders);
   }, [dispatch]);
 
   return (
@@ -50,34 +41,32 @@ function AdminOrdersModal() {
               </button>
             </div>
             <div className="modal-body my-4">
-              {clientSideError && showErrorMsg(clientSideError)}
               {errorMsg && showErrorMsg(errorMsg)}
               {successMsg && showSuccessMsg(successMsg)}
 
-              {loading ? (
-                <div className="text-center">{showLoading()} </div>
-              ) : (
-                <Fragment>
-                  {orders &&
-                    orders.map(({ userName, userEmail, userPhone, _id, course }) => (
+              <Fragment>
+                {orders &&
+                  orders.map(
+                    ({
+                      userName,
+                      userEmail,
+                      userPhone,
+                      _id,
+                      course,
+                      total,
+                    }) => (
                       <ClientInfos
                         key={_id}
+                        orderID={_id}
                         userName={userName}
-                        userGsm="123"
-                        userMail="@mail"
+                        userGsm={userPhone}
+                        userMail={userEmail}
                         courses={course}
+                        total={total}
                       />
-                    ))}
-                </Fragment>
-              )}
-            </div>
-            <div className="modal-footer">
-              <button className="btn btn-secondary" data-dismiss="modal">
-                Close
-              </button>
-              <button type="submit" className="btn btn-warning text-white">
-                Submit
-              </button>
+                    )
+                  )}
+              </Fragment>
             </div>
           </form>
         </div>

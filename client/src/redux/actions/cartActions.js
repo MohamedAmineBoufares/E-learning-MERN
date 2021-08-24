@@ -70,7 +70,7 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
   }
 };
 
-export const sendCartToDB = (data, user, src) => async (dispatch) => {
+export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
@@ -78,11 +78,14 @@ export const sendCartToDB = (data, user, src) => async (dispatch) => {
       userName: user.username,
       userEmail: user.email,
       userPhone: "",
-      course: data.map(({ productName }) => ({
+      userID: user._id,
+      course: data.map(({ productName, _id }) => ({
+        courseID: _id,
         courseName: productName,
       })),
       authorised: "false",
       picRecipient: src,
+      total: total,
     });
 
     dispatch({ type: STOP_LOADING });
@@ -104,38 +107,6 @@ export const sendCartToDB = (data, user, src) => async (dispatch) => {
     });
   }
 };
-
-// export const sendCartItemToDB = (data, userID, src) => async (dispatch) => {
-//   try {
-//     dispatch({ type: START_LOADING });
-
-//     const response = await axios.post(`/api/cart/add?id=${userID}`, {
-//       course: data.map(({ productName }) => ({
-//         courseName: productName,
-//         authorised: "false",
-//       })),
-//       picRecipient: src,
-//     });
-
-//     dispatch({ type: STOP_LOADING });
-
-//     dispatch({
-//       type: SHOW_SUCCESS_MESSAGE,
-//       payload: "Mregel ye ROJLA !",
-//     });
-
-//     return response;
-//   } catch (err) {
-//     console.log("send chtraba9a api error: ", err);
-
-//     dispatch({ type: STOP_LOADING });
-
-//     dispatch({
-//       type: SHOW_ERROR_MESSAGE,
-//       payload: "NOPE !",
-//     });
-//   }
-// };
 
 export const getUserCart = (userID) => async (dispatch) => {
   try {
