@@ -7,7 +7,7 @@ import { showLoading } from "../../helpers/loading";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { clearMessages } from "../../redux/actions/messageActions";
-import { allowOrder } from "../../redux/actions/adminACtions";
+import { allowOrder, rejectOrder } from "../../redux/actions/adminACtions";
 
 function ClientInfos({
   userName,
@@ -20,7 +20,6 @@ function ClientInfos({
   orderID,
 }) {
   const { loading } = useSelector((state) => state.loading);
-  const { successMsg, errorMsg } = useSelector((state) => state.messages);
 
   const dispatch = useDispatch();
 
@@ -30,6 +29,10 @@ function ClientInfos({
 
   const submitOrder = () => {
     dispatch(allowOrder(orderID));
+  };
+
+  const declineOrder = () => {
+    dispatch(rejectOrder(orderID));
   };
 
   return (
@@ -71,7 +74,9 @@ function ClientInfos({
                 Accept
               </div>
 
-              <div className={styles.refuse__btn}>Refuse</div>
+              <div className={styles.refuse__btn} onClick={declineOrder}>
+                Refuse
+              </div>
             </div>
           )}
         </div>

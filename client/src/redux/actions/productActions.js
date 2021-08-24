@@ -1,6 +1,7 @@
 import axios from "axios";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
+  CLEAR_MESSAGES,
   SHOW_ERROR_MESSAGE,
   SHOW_SUCCESS_MESSAGE,
 } from "../constants/messageConstants";
@@ -21,6 +22,12 @@ export const createProduct = (formData) => async (dispatch) => {
       payload: response.data.successMessage,
     });
 
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+
     dispatch({
       type: CREATE_PRODUCT,
       payload: response.data.product,
@@ -32,6 +39,12 @@ export const createProduct = (formData) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
@@ -51,6 +64,12 @@ export const getProducts = () => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
@@ -70,6 +89,12 @@ export const getProduct = (productId) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
@@ -89,5 +114,11 @@ export const deleteProduct = (productId) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };

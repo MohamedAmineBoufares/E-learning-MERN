@@ -51,6 +51,7 @@ function Card({ product }) {
   };
 
   const addFav = () => {
+    dispatch(clearMessages());
     const item = {
       fileName,
       productName,
@@ -59,7 +60,7 @@ function Card({ product }) {
     };
 
     // Sending the course to store
-    dispatch(addToFavorite(item));
+    dispatch(addToFavorite(item, userID));
   };
 
   return (

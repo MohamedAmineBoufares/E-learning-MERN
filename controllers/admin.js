@@ -13,7 +13,18 @@ exports.getPayments = async (req, res) => {
 
 exports.allowOrder = async (req, res) => {
   const orderID = req.params.orderid;
-  Orders.updateOne({_id: orderID}, { authorised: true }, (err, data) => {
+  Orders.updateOne({ _id: orderID }, { authorised: true }, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+};
+
+exports.rejectOrder = async (req, res) => {
+  const orderID = req.params.orderid;
+  Orders.findOneAndDelete({ _id: orderID }, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {

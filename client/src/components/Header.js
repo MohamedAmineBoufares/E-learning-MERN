@@ -11,7 +11,7 @@ const Header = ({ history }) => {
   const handleLogout = (evt) => {
     logout(() => {
       auth.signOut();
-      
+
       history.push("/signin");
     });
   };
@@ -108,22 +108,45 @@ const Header = ({ history }) => {
                   <Link to="#" className="nav-link">
                     <i className="fas fa-search"></i>
                   </Link>
-
-                  {/* <Link to='/user/dashboard' className='nav-link'>
-                                                                      
-                                                                      <i className='fas fa-home'></i> Dashboard
-                                                               </Link> */}
                 </li>
                 <li className="nav-item">
                   <Link to="/cart" className="nav-link" aria-current="page">
-                    <i className="fas fa-shopping-cart fa-1x"></i>
-                    <h3>{cartItems && cartItems.length}</h3>
+                    <i className="fas fa-shopping-cart position-relative">
+                      <span
+                        className="position-absolute"
+                        style={{
+                          padding: "3px 6px",
+                          background: "#ed143dc2",
+                          borderRadius: "50%",
+                          top: "-10px",
+                          right: "-10px",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {cartItems && cartItems.length}
+                      </span>
+                    </i>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="#" className="nav-link" aria-current="page">
-                    <i className="far fa-heart "></i>
-                    <h3>{favoriteItems && favoriteItems.length}</h3>
+                    <i className="fas fa-heart position-relative">
+                      <span
+                        className="position-absolute"
+                        style={{
+                          padding: "3px 6px",
+                          background: "#ed143dc2",
+                          borderRadius: "50%",
+                          top: "-10px",
+                          right: "-10px",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {favoriteItems && favoriteItems.length}
+                      </span>
+                    </i>
                   </Link>
                 </li>
               </Fragment>

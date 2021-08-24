@@ -6,6 +6,7 @@ import {
 } from "../constants/cartConstants";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
+  CLEAR_MESSAGES,
   SHOW_ERROR_MESSAGE,
   SHOW_SUCCESS_MESSAGE,
 } from "../constants/messageConstants";
@@ -29,6 +30,12 @@ export const addToCart = (data, userID) => async (dispatch) => {
       payload: "Mregel ye ROJLA !",
     });
 
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+
     return response;
   } catch (error) {
     console.log("cant add course !");
@@ -38,6 +45,12 @@ export const addToCart = (data, userID) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: "NOPE !",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
@@ -56,6 +69,12 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
       payload: "Mregel ye ROJLA !",
     });
 
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+
     return response;
   } catch (err) {
     console.log("cant remove course !");
@@ -67,6 +86,12 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: "NOPE !",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
@@ -95,6 +120,12 @@ export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
       payload: "Mregel ye ROJLA !",
     });
 
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+
     return response;
   } catch (err) {
     console.log("send chtraba9a api error: ", err);
@@ -105,27 +136,44 @@ export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
       type: SHOW_ERROR_MESSAGE,
       payload: "NOPE !",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };
 
 export const getUserCart = (userID) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
+    
     const response = await axios.get(`/api/cart/user?id=${userID}`);
+    
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: GET_USER_CART,
       payload: response.data.cart,
     });
-    console.log(response);
-
+    
+  
     return response;
   } catch (err) {
     console.log("get CART api error: ", err);
+    
     dispatch({ type: STOP_LOADING });
+    
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: "Can't get user cart",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
   }
 };

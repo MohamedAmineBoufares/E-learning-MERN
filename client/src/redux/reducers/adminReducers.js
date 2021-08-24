@@ -15,33 +15,26 @@ const adminReducers = (state = INITIAL_STATE, action) => {
         ...state,
         orders: [...action.payload],
       };
-    case ALLOW_USER_ORDER:
+
+    case REMOVE_USER_ORDER:
+      const index = state.orders.findIndex(
+        (order) => order._id === action.payload
+      );
+      let newOrders = [...state.orders];
+      if (index >= 0) {
+        newOrders.splice(index, 1);
+      } else {
+        console.warn("NOOPE !");
+      }
+
       return {
         ...state,
-        orders: [action.payload],
+        orders: newOrders,
       };
-
-      case REMOVE_USER_ORDER:
-        
-        const index = state.orders.findIndex(
-          (order) => order._id === action.payload
-        );
-        let newOrders = [...state.orders];
-        if (index >= 0) {
-          newOrders.splice(index, 1);
-        } else {
-          console.warn("NOOPE !");
-        }
-  
-        return {
-          ...state,
-          orders: newOrders,
-        };
-
 
     default:
       return state;
   }
 };
 
-export default adminReducers
+export default adminReducers;
