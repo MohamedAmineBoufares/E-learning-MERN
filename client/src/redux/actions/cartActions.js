@@ -104,9 +104,11 @@ export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
       userEmail: user.email,
       userPhone: "",
       userID: user._id,
-      course: data.map(({ productName, _id }) => ({
+      course: data.map(({ productName, _id, fileName, productPrice }) => ({
         courseID: _id,
         courseName: productName,
+        courseSrc: fileName,
+        coursePrice: productPrice,
       })),
       authorised: "false",
       picRecipient: src,
@@ -148,23 +150,22 @@ export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
 export const getUserCart = (userID) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    
+
     const response = await axios.get(`/api/cart/user?id=${userID}`);
-    
+
     dispatch({ type: STOP_LOADING });
 
     dispatch({
       type: GET_USER_CART,
       payload: response.data.cart,
     });
-    
-  
+
     return response;
   } catch (err) {
     console.log("get CART api error: ", err);
-    
+
     dispatch({ type: STOP_LOADING });
-    
+
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: "Can't get user cart",

@@ -11,7 +11,7 @@ router.post(
 
 router.post(
   "/add/cart/item",
-  autenticatateJWT,
+  // autenticatateJWT,
   cartController.addCartItemController
 );
 

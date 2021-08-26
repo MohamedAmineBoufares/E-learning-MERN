@@ -11,6 +11,7 @@ import { getProducts } from "../redux/actions/productActions";
 import { getUserCart } from "../redux/actions/cartActions";
 import { getLocalStorage } from "../helpers/localStorage";
 import { getUserFavorite } from "../redux/actions/favoriteActions";
+import { getUserCourses } from "../redux/actions/userActions";
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const UserDashboard = () => {
     dispatch(getProducts());
     dispatch(getUserCart(userID));
     dispatch(getUserFavorite(userID));
+    dispatch(getUserCourses(userID));
   }, [dispatch]);
 
   return (

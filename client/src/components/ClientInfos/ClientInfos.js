@@ -18,6 +18,7 @@ function ClientInfos({
   srcRecep,
   total,
   orderID,
+  userID
 }) {
   const { loading } = useSelector((state) => state.loading);
 
@@ -28,7 +29,7 @@ function ClientInfos({
   }, [dispatch]);
 
   const submitOrder = () => {
-    dispatch(allowOrder(orderID));
+    dispatch(allowOrder(orderID, userID, courses));
   };
 
   const declineOrder = () => {

@@ -42,6 +42,14 @@ const UserSchema = new mongoose.Schema( //create new instance : usershema
       },
     ],
 
+    courses: [
+      {
+        courseName: String,
+        courseID: String,
+        fileName: String,
+      },
+    ],
+
     favortie: [
       {
         productName: String,

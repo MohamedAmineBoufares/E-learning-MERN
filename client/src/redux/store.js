@@ -8,6 +8,7 @@ import productReducer from "./reducers/productReducers";
 import cartReducers from "./reducers/cartReducers";
 import favoriteReducers from "./reducers/favoriteReducers";
 import adminReducers from "./reducers/adminReducers";
+import userReducers from "./reducers/userReducers";
 
 const reducer = combineReducers({
   loading: loadingReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   cart: cartReducers,
   favorite: favoriteReducers,
   orders: adminReducers,
+  courses: userReducers,
 });
 
 const initialState = {};

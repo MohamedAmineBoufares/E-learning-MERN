@@ -10,8 +10,9 @@ const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
-const favoritesRoutes = require('./routes/favorites')
+const favoritesRoutes = require("./routes/favorites");
 const adminRoutes = require("./routes/admin");
+const userRoutes = require("./routes/user");
 
 // middleware
 app.use(cors());
@@ -24,8 +25,9 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/cart", cartRoutes);
-app.use('/api/favortie', favoritesRoutes)
+app.use("/api/favortie", favoritesRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/user", userRoutes);
 
 connectDB();
 

@@ -1,19 +1,21 @@
 import React from "react";
 import styles from "./ProgressBar.module.css";
-import FlagIcon from "@material-ui/icons/FlagOutlined";
+import { Link } from "react-router-dom";
 
-function ProgressBar( { percentage }) {
+function ProgressBar({ bgImage, courseName, courseID }) {
   return (
-    <div className={styles.container}>
-      <div className={styles.infos}>
-        <h2 className={styles.infos__num}> { percentage !== 0 ? percentage + ' %' : ''   } </h2>
-        <FlagIcon fontSize="large" style={{ color: "#E76F51" }} />
+    <div
+      className={styles.container}
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div className={styles.left}>
+        <h1>{courseName}</h1>
       </div>
-
-      <div className={styles.bar__container}>
-          <div className={styles.bar} style={{width: `${ percentage }%` }}>
-          </div>
-      </div>
+      <Link to="/course_video" className={styles.link}>
+        <div className={styles.right}>
+          <h1>Resume learning</h1>
+        </div>
+      </Link>
     </div>
   );
 }

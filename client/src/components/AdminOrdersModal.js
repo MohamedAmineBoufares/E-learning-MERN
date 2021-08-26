@@ -51,6 +51,7 @@ function AdminOrdersModal() {
                       userName,
                       userEmail,
                       userPhone,
+                      userID,
                       _id,
                       course,
                       total,
@@ -63,6 +64,7 @@ function AdminOrdersModal() {
                         userMail={userEmail}
                         courses={course}
                         total={total}
+                        userID={userID}
                       />
                     )
                   )}

@@ -49,11 +49,18 @@ export const getUsersOrders = () => async (dispatch) => {
   }
 };
 
-export const allowOrder = (orderID) => async (dispatch) => {
+export const allowOrder = (orderID, userID, courses) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
     const response = await axios.post(`/api/admin/alloworder/${orderID}`);
+    const sendCourse = await axios.post(`/api/admin/send/${userID}`, {
+      courses: courses.map(({ courseID, courseName, courseSrc }) => ({
+        courseName: courseName,
+        coursetID: courseID,
+        fileName: courseSrc,
+      })),
+    });
 
     dispatch({ type: STOP_LOADING });
 

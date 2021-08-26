@@ -9,6 +9,8 @@ const OrdersSchema = new mongoose.Schema({
     {
       courseID: String,
       courseName: String,
+      courseSrc: String,
+      coursePrice: String,
     },
   ],
   authorised: Boolean,

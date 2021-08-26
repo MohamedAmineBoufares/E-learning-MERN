@@ -135,7 +135,7 @@ exports.signinWithGoogleController = async (req, res) => {
 
         res.json({
           token,
-          user: { _id, username, role },
+          user: { _id, username, email,role },
         });
       }
     );
