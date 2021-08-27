@@ -7,7 +7,6 @@ import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { getLocalStorage } from "../../../helpers/localStorage";
-import { showErrorMsg, showSuccessMsg } from "../../../helpers/message";
 import { showLoading } from "../../../helpers/loading";
 
 // REDUX !
@@ -19,7 +18,6 @@ import { clearMessages } from "../../../redux/actions/messageActions";
 function Card({ product }) {
   // Redux states
   const { loading } = useSelector((state) => state.loading);
-  const { successMsg, errorMsg } = useSelector((state) => state.messages);
 
   // states for the request
   const [userID, setUserID] = useState();
@@ -28,6 +26,8 @@ function Card({ product }) {
   const productName = product.productName;
   const fileName = product.fileName;
   const productPrice = product.productPrice;
+  const videoUrl = product.videoUrl;
+  const previewUrl = product.previewUrl;
   const _id = product._id;
 
   const dispatch = useDispatch();
@@ -38,11 +38,12 @@ function Card({ product }) {
   }, [dispatch]);
 
   const addCart = () => {
-    dispatch(clearMessages());
     const item = {
       fileName,
       productName,
       productPrice,
+      videoUrl,
+      previewUrl,
       _id,
     };
 
@@ -51,11 +52,12 @@ function Card({ product }) {
   };
 
   const addFav = () => {
-    dispatch(clearMessages());
     const item = {
       fileName,
       productName,
       productPrice,
+      videoUrl,
+      previewUrl,
       _id,
     };
 

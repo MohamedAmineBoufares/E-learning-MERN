@@ -22,39 +22,25 @@ const UserSchema = new mongoose.Schema( //create new instance : usershema
       default: 0, //if the role of the user signed up =0 ===> user if role =1 ==> admin user
     },
 
-    orders: [
-      {
-        course: [
-          {
-            courseName: String,
-          },
-        ],
-        authorised: Boolean,
-        picRecipient: String,
-      },
-    ],
-
     cart: [
       {
+        productID:String,
         productName: String,
         productPrice: Number,
         fileName: String,
-      },
-    ],
-
-    courses: [
-      {
-        courseName: String,
-        courseID: String,
-        fileName: String,
+        videoUrl: String,
+        previewUrl: String,
       },
     ],
 
     favortie: [
       {
+        productID:String,
         productName: String,
         productPrice: Number,
         fileName: String,
+        videoUrl: String,
+        previewUrl: String,
       },
     ],
   },

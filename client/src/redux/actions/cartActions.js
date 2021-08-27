@@ -16,9 +16,12 @@ export const addToCart = (data, userID) => async (dispatch) => {
     dispatch({ type: START_LOADING });
 
     const response = await axios.post(`/api/cart/add/cart/item?id=${userID}`, {
+      productID: data._id,
       productName: data.productName,
       productPrice: data.productPrice,
       fileName: data.fileName,
+      videoUrl: data.videoUrl,
+      previewUrl: data.previewUrl,
     });
 
     dispatch({ type: ADD_TO_CART, payload: data });
@@ -98,18 +101,31 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
 export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
+    console.log(data);
 
     const response = await axios.post("/api/cart/add", {
       userName: user.username,
       userEmail: user.email,
       userPhone: "",
       userID: user._id,
-      course: data.map(({ productName, _id, fileName, productPrice }) => ({
-        courseID: _id,
-        courseName: productName,
-        courseSrc: fileName,
-        coursePrice: productPrice,
-      })),
+      course: data.map(
+        ({
+          productName,
+          productID,
+          fileName,
+          productPrice,
+          videoUrl,
+          previewUrl,
+        }) => ({
+          courseID: productID,
+          courseName: productName,
+          courseSrc: fileName,
+          coursePrice: productPrice,
+          videoURL: videoUrl,
+          previewURL: previewUrl,
+          courseFile: "",
+        })
+      ),
       authorised: "false",
       picRecipient: src,
       total: total,

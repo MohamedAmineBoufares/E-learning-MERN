@@ -21,13 +21,12 @@ const UserDashboard = () => {
     dispatch(getProducts());
     dispatch(getUserCart(userID));
     dispatch(getUserFavorite(userID));
-    dispatch(getUserCourses(userID));
+    
   }, [dispatch]);
 
   return (
     <section>
       <Progress />
-
       <UserBody />
       <Contact />
     </section>
@@ -35,11 +34,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-/* const UserDashboard = () => {
-
-return (
-    <Header />
-)
-}
-
-export default UserDashboard; */

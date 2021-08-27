@@ -77,6 +77,9 @@ export const getProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const response = await axios.get(`/api/product/${productId}`);
+    
+    console.log("yello !" ,response)
+    
     dispatch({ type: STOP_LOADING });
     dispatch({
       type: GET_PRODUCT,

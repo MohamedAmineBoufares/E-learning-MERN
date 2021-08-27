@@ -17,9 +17,12 @@ export const addToFavorite = (data, userID) => async (dispatch) => {
     const response = await axios.post(
       `/api/favortie/add/favortie/item?id=${userID}`,
       {
+        productID: data._id,
         productName: data.productName,
         productPrice: data.productPrice,
         fileName: data.fileName,
+        videoUrl: data.videoUrl,
+        previewUrl: data.previewUrl,
       }
     );
 

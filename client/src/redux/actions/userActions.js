@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER_COURSES } from "../constants/userConstants";
+import { GET_COURSE, GET_USER_COURSES } from "../constants/userConstants";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
   CLEAR_MESSAGES,
@@ -49,3 +49,28 @@ export const getUserCourses = (userID) => async (dispatch) => {
     }, 2000);
   }
 };
+
+export const getCourse = (courseID) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const response = await axios.get(`/api/product/${courseID}`);
+    dispatch({ type: STOP_LOADING });
+    dispatch({
+      type: GET_COURSE,
+      payload: response.data,
+    });
+  } catch (err) {
+    console.log("getProducts api error: ", err);
+    dispatch({ type: STOP_LOADING });
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: err.response.data.errorMessage,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+  }
+}

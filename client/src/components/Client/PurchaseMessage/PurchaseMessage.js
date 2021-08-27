@@ -28,7 +28,7 @@ export default function PurchaseMessage({ handleClose, total }) {
 
   const sendPurchase = async () => {
     dispatch(sendCartToDB(items, user, input, total));
-    console.log(user)
+    setInput("")
   };
 
   return (
