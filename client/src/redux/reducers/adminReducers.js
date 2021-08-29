@@ -1,6 +1,5 @@
 import {
   GET_USERS_ORDERS,
-  ALLOW_USER_ORDER,
   REMOVE_USER_ORDER,
 } from "../constants/adminConstants";
 

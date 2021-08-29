@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
@@ -15,19 +15,9 @@ import CoursePriview from "../pages/Client/CoursePriview";
 import CourseVideo from "../pages/Client/CourseVideo";
 import Course from "../pages/Client/Course";
 import Cart from "../pages/Client/Cart";
-
-import { useDispatch } from "react-redux";
-import { getUserCourses } from "../redux/actions/userActions";
-import { getLocalStorage } from "../helpers/localStorage";
-
+import CourseRoute from "./CourseRoute";
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const userID = getLocalStorage("user")._id;
-
-    dispatch(getUserCourses(userID));
-  })
   return (
     <BrowserRouter>
       <Header />
@@ -51,11 +41,15 @@ const App = () => {
           />
 
           {/* Course Video */}
-          <Route path="/course_video/:courseID">
-            <div className="App">
-              <CourseVideo />
-            </div>
-          </Route>
+          {<UserRoute path="/course_video/:courseID" component={CourseVideo} />}
+
+          {/* <Route path="/course_video/:courseID">
+            { (
+              <div className="App">
+                <CourseVideo />
+              </div>
+            )}
+          </Route> */}
 
           {/* Video Privew */}
           <Route path="/video_preview">

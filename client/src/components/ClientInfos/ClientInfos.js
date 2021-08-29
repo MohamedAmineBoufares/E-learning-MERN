@@ -29,11 +29,11 @@ function ClientInfos({
   }, [dispatch]);
 
   const submitOrder = () => {
-    dispatch(allowOrder(orderID, userID, courses));
+    dispatch(allowOrder(orderID, userMail));
   };
 
   const declineOrder = () => {
-    dispatch(rejectOrder(orderID));
+    dispatch(rejectOrder(orderID, userMail));
   };
 
   return (

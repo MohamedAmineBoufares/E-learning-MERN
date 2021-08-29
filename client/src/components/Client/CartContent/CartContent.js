@@ -23,7 +23,7 @@ function CartContent() {
   useEffect(() => {
     dispatch(getUserCart(userID));
     dispatch(getUserFavorite(userID));
-  }, []);
+  }, [dispatch, userID]);
 
   return (
     <div className={styles.container}>

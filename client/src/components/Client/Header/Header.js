@@ -5,9 +5,6 @@ import FavoriteIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Avatar, IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-/* import { selectItems } from "../../../features/cart/cartSlice";
-import { selectFav } from "../../../features/favorite/favoriteSlice"; */
 
 function Header() {
   /* const items = useSelector(selectItems)

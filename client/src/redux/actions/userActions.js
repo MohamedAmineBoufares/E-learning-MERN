@@ -1,6 +1,10 @@
 import axios from "axios";
 
-import { GET_COURSE, GET_USER_COURSES } from "../constants/userConstants";
+import {
+  AUTHORISED,
+  GET_COURSE,
+  GET_USER_COURSES,
+} from "../constants/userConstants";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
   CLEAR_MESSAGES,
@@ -11,10 +15,8 @@ import {
 export const getUserCourses = (userID) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    
-    const response = await axios.get(`/api/user/get/orders/${userID}`);
 
-    console.log(response);
+    const response = await axios.get(`/api/user/get/orders/${userID}`);
 
     dispatch({ type: GET_USER_COURSES, payload: response.data });
 
@@ -73,4 +75,38 @@ export const getCourse = (courseID) => async (dispatch) => {
       });
     }, 2000);
   }
-}
+};
+
+export const setAuthorised = (userID, courseID) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await axios.get(
+      `/api/user/get/authorised/${userID}/${courseID}`
+    );
+
+    console.log("AUTH !", response.data[0].authorised);
+
+    dispatch({ type: STOP_LOADING });
+
+    dispatch({
+      type: AUTHORISED,
+      payload: response.data[0].authorised,
+    });
+  } catch (err) {
+    console.log("get Auth api error: ", err);
+
+    dispatch({ type: STOP_LOADING });
+
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: "Nope !",
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+  }
+};

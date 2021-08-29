@@ -7,10 +7,12 @@ import { getProduct } from "../../redux/actions/productActions";
 
 function Course(props) {
   const courseId = props.match.params._id;
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getProduct(courseId));
-  }, [dispatch]);
+  }, [dispatch, courseId]);
 
   return (
     <div>

@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const nodemailer = require("nodemailer");
 
 const connectDB = require("./database/db");
 
@@ -13,6 +14,7 @@ const cartRoutes = require("./routes/cart");
 const favoritesRoutes = require("./routes/favorites");
 const adminRoutes = require("./routes/admin");
 const userRoutes = require("./routes/user");
+const emailRoutes = require("./routes/email");
 
 // middleware
 app.use(cors());
@@ -28,6 +30,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/favortie", favoritesRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/email", emailRoutes);
 
 connectDB();
 

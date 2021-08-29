@@ -76,18 +76,20 @@ export const getProducts = () => async (dispatch) => {
 export const getProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
+
     const response = await axios.get(`/api/product/${productId}`);
-    
-    console.log("yello !" ,response)
-    
+
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: GET_PRODUCT,
       payload: response.data,
     });
   } catch (err) {
     console.log("getProducts api error: ", err);
+
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
@@ -104,15 +106,20 @@ export const getProduct = (productId) => async (dispatch) => {
 export const deleteProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
+
     const response = await axios.delete(`/api/product/${productId}`);
+
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: DELETE_PRODUCT,
       payload: response.data,
     });
   } catch (err) {
     console.log("deleteProduct api error: ", err);
+
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,

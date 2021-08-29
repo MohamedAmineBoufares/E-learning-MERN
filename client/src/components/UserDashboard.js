@@ -13,15 +13,18 @@ import { getLocalStorage } from "../helpers/localStorage";
 import { getUserFavorite } from "../redux/actions/favoriteActions";
 import { getUserCourses } from "../redux/actions/userActions";
 
+import { useSelector } from "react-redux";
+
 const UserDashboard = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const userID = getLocalStorage("user")._id;
     dispatch(getCategories());
     dispatch(getProducts());
     dispatch(getUserCart(userID));
     dispatch(getUserFavorite(userID));
-    
+    dispatch(getUserCourses(userID));
   }, [dispatch]);
 
   return (

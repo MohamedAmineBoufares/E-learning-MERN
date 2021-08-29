@@ -49,17 +49,16 @@ export const getUsersOrders = () => async (dispatch) => {
   }
 };
 
-export const allowOrder = (orderID, userID, courses) => async (dispatch) => {
+export const allowOrder = (orderID, userMail) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
     const response = await axios.post(`/api/admin/alloworder/${orderID}`);
-    const sendCourse = await axios.post(`/api/admin/send/${userID}`, {
-      courses: courses.map(({ courseID, courseName, courseSrc }) => ({
-        courseName: courseName,
-        coursetID: courseID,
-        fileName: courseSrc,
-      })),
+
+    const email = await axios.post("/api/email/send", {
+      userEmail: userMail,
+      emailSubject: "Your order was allowed",
+      emailContent: "We are happy that your order was allowed, ENJOY !",
     });
 
     dispatch({ type: STOP_LOADING });
@@ -96,11 +95,17 @@ export const allowOrder = (orderID, userID, courses) => async (dispatch) => {
   }
 };
 
-export const rejectOrder = (orderID) => async (dispatch) => {
+export const rejectOrder = (orderID, userMail) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
     const response = await axios.post(`/api/admin/rejectorder/${orderID}`);
+
+    const email = await axios.post("/api/email/send", {
+      userEmail: userMail,
+      emailSubject: "Your order was rejected",
+      emailContent: "We are sorry that your order was rejected",
+    });
 
     dispatch({ type: STOP_LOADING });
 

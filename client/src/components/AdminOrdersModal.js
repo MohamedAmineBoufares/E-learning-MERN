@@ -1,6 +1,5 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { showErrorMsg, showSuccessMsg } from "../helpers/message";
-import { showLoading } from "../helpers/loading";
 import ClientInfos from "../components/ClientInfos/ClientInfos";
 
 // redux
@@ -12,7 +11,6 @@ function AdminOrdersModal() {
   /********************************
    * REDUX GLOBAL STATE PROPERTIES
    ********************************/
-  const { loading } = useSelector((state) => state.loading);
   const { successMsg, errorMsg } = useSelector((state) => state.messages);
 
   const orders = useSelector((state) => state.orders.orders);
