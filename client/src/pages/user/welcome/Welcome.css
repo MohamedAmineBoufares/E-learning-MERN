@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap');
+
+.welcome__container {
+  margin-top: 5rem;
+  height: 100vh;
+  background: url("../../../components/assets/welcome_bg.png") center / cover
+    no-repeat;
+  padding: 0 2rem;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+}
+
+.start__learning {
+  margin-top: 15rem;
+}

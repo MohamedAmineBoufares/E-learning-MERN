@@ -7,8 +7,8 @@ import AdminProductModal from "./AdminProductModal";
 import AdminBody from "./AdminBody";
 //redux
 import { useDispatch } from "react-redux";
-import { getCategories } from "../redux/actions/categoryActions";
-import { getProducts } from "../redux/actions/productActions";
+import { getCategories } from "../../redux/actions/categoryActions";
+import { getProducts } from "../../redux/actions/productActions";
 import AdminOrdersModal from "./AdminOrdersModal";
 
 const AdminDashboard = () => {
