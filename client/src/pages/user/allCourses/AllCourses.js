@@ -11,29 +11,44 @@ function AllCourses() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 3,
+    slidesToScroll: 1,responsive: [
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
   };
+
   return (
-    <div className="col all__courses__container">
+    <div className="col">
       <div class="row">
-        <div class="col-sm-12">
-          <h1 className="what__to__learn mb-5">What to learn next ?</h1>
+        <div class="col">
+          <h1 className="col-sm-12 mb-5  what__to__learn">What to learn next ?</h1>
         </div>
       </div>
 
-      <div class="row justify-content-center bg-danger">
-        <div class="col col-sm-8 ">
+      <div class="row justify-content-center">
+        <div class="col col-sm-10">
           <Slider {...settings}>
-            <div className="row container row-cols-2">
-              <CourseCard />
-              <CourseCard />
-            </div>
+            <CourseCard/>
+            <CourseCard/>
+            <CourseCard/>
 
-            <div className="row row row-cols-2">
-              <CourseCard />
-              <CourseCard />
-            </div>
+            <CourseCard/>
+            <CourseCard/>
+            <CourseCard/>
           </Slider>
         </div>
       </div>

@@ -11,9 +11,9 @@ function Courses() {
         </div>
       </div>
 
-      <div class="row justify-content-center">
-        <div class="col col-sm-10">
-          <div className="row container row-cols-sm-3">
+      <div class="row justify-content-sm-center">
+        <div class="container">
+          <div className="row justify-content-sm-start row-cols-sm-3">
             <CourseCard />
             <CourseCard />
             <CourseCard />

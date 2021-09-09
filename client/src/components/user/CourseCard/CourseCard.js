@@ -10,12 +10,12 @@ function CourseCard() {
           src="https://top-sponsoring-tunisie.com/wp-content/uploads/2020/03/instagram-e-commerce-integration.jpg"
           alt="Card cap"
         />
-        <div class="card-body card__infos">
+        <div class="card-body col-sm-12 card__infos">
           <h2 class="card-title">Course Title</h2>
           <p class="card-text">Course description</p>
-          <a href="#" class="btn btn-primary button__lets__resume">
+          <button class="btn btn-primary button__lets__resume">
             Let's learn
-          </a>
+          </button>
         </div>
       </div>
     </div>
