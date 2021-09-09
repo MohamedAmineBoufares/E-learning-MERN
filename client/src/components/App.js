@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import Header from "./user/header/Header";
 import Welcome from "../pages/user/welcome/Welcome";
+import Courses from "../pages/user/courses/Courses";
+import AllCourses from "../pages/user/allCourses/AllCourses";
 
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Header from "./Header";
@@ -22,8 +24,10 @@ import Welcome from "../pages/user/welcome/Welcome";
 const App = () => {
   return (
     <div>
-      <Header/>
+      <Header />
       <Welcome />
+      <Courses />
+      <AllCourses/>
     </div>
   );
 };
