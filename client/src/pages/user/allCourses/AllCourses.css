@@ -1,6 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap");
-
 .what__to__learn {
   font-family: "Roboto", sans-serif;
   color: #001340;
+}
+
+.slick-prev::before, .slick-next::before {
+  background-color: black;
+  border-radius: 50%;
 }

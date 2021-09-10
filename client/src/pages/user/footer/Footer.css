@@ -1,0 +1,14 @@
+
+.footer__container {
+  background-color: #001340;
+  color: #fff;
+}
+
+.first__row {
+  border-bottom: solid 0.1rem #fff;
+}
+
+.contacts__container {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}

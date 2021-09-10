@@ -4,6 +4,8 @@ import Header from "./user/header/Header";
 import Welcome from "../pages/user/welcome/Welcome";
 import Courses from "../pages/user/courses/Courses";
 import AllCourses from "../pages/user/allCourses/AllCourses";
+import Recommended from "../pages/user/recommended/Recommended";
+import Footer from "../pages/user/footer/Footer";
 
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Header from "./Header";
@@ -28,6 +30,8 @@ const App = () => {
       <Welcome />
       <Courses />
       <AllCourses/>
+      <Recommended/>
+      <Footer/>
     </div>
   );
 };

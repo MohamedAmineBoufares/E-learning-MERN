@@ -1,0 +1,14 @@
+.checked {
+  color: #ffc100;
+}
+
+.buy__this {
+  background-color: #f38e0d;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.buy__this:hover {
+    background-color: #ff9b17;
+    color: #fff;
+}

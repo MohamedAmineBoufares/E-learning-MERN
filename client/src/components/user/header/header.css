@@ -5,10 +5,9 @@
 
 .form-control {
   outline: none;
-  border: none;
   background-color: transparent;
+  border-radius: 2rem;
 }
-
 
 a,
 a:hover {
