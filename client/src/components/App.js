@@ -21,26 +21,31 @@ import Header from "./user/header/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CourseInfos from "../pages/user/courseInfos/CourseInfos";
 import FeedLogedIn from "../pages/user/feedLogedIn/FeedLogedIn";
+import PreviewVideoPopUp from "./user/previewVideoPopUp/PreviewVideoPopUp";
+import PaymentPopUp from "./user/paymentPopUp/PaymentPopUp";
 
 const App = () => {
   return (
     <div>
       <Router>
-      <Header />
+        <Header />
         <Switch>
-          
           {/* Course infos */}
           <Route path="/courseInfos">
-            <CourseInfos/>
+            <CourseInfos />
           </Route>
 
           {/* Feed when user loged-in */}
 
           <Route path="/">
-            <FeedLogedIn/>
+            <FeedLogedIn />
           </Route>
         </Switch>
       </Router>
+
+      {/* Pop-ups */}
+      <PreviewVideoPopUp />
+      <PaymentPopUp />
     </div>
   );
 };

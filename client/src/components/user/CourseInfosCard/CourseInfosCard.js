@@ -13,11 +13,20 @@ function CourseInfosCard() {
         <div class="card-body course__infos__card__container">
           <h2 class="card-title">Course Price</h2>
           <div className="d-flex flex-column">
-            <button class="btn mb-3 course__infos__card__buy__now">
+            <button
+              class="btn mb-3 course__infos__card__buy__now"
+              data-toggle="modal"
+              data-target="#paymentPopUp"
+            >
               <i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
               Buy now
             </button>
-            <button class="btn mb-3 course__infos__watch__preview">
+
+            <button
+              class="btn mb-3 course__infos__watch__preview"
+              data-toggle="modal"
+              data-target="#previewVideoModal"
+            >
               <i class="fa fa-play mr-2" aria-hidden="true"></i>
               Watch preview
             </button>

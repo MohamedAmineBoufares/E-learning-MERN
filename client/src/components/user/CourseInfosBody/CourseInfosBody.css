@@ -13,7 +13,7 @@
   min-height: 25rem;
 }
 
-@media (min-width: 1199.98px) {
+@media (min-width: 640px) {
   .course__infos__card {
     position: absolute;
     top: 0;

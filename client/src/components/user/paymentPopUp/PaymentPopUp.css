@@ -1,0 +1,10 @@
+.payment__pop__up__validate__btn {
+  background-color: #f38e0d;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.payment__pop__up__validate__btn:hover {
+  background-color: #ff9b17;
+  color: #fff;
+}
