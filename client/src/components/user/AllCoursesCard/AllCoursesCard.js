@@ -1,6 +1,8 @@
 import React from "react";
 import "./AllCoursesCard.css";
 
+import { Link } from "react-router-dom";
+
 function AllCoursesCard() {
   return (
     <div className="col mb-5">
@@ -20,16 +22,22 @@ function AllCoursesCard() {
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
           </p>
+          <div className="d-flex justify-content-between mb-2">
+            <button className="btn d-flex align-items-center buy__this">
+              <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>Buy
+              this course
+            </button>
+            
+              <Link to="/courseInfos" className="btn d-flex align-items-center see__more">
+                See more
+              </Link>
+            
+          </div>
 
-          <button class="btn d-flex align-items-center buy__this mb-2">
-            <i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>Buy this
-            course
-          </button>
-
-          <button class="btn d-flex align-items-center">
+          <button className="btn d-flex align-items-center">
             <i class="fa fa-heart mr-2" aria-hidden="true"></i>Add to favorites
           </button>
-          <button class="btn d-flex align-items-center mb-2">
+          <button className="btn d-flex align-items-center mb-2">
             <i class="fa fa-play mr-2" aria-hidden="true"></i>Watch preview
           </button>
         </div>

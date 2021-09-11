@@ -1,0 +1,34 @@
+.course__infos__container {
+  color: #fff;
+}
+
+@media screen and (max-width: 575.98px) {
+  .course__infos__container {
+    margin-top: 8rem;
+  }
+}
+
+.course__infos__text {
+  background-color: #194072;
+  min-height: 25rem;
+}
+
+@media (min-width: 1199.98px) {
+  .course__infos__card {
+    position: absolute;
+    top: 0;
+  }
+}
+
+.course__infos__what__youll__learn {
+  color: #000;
+  border: #194072 0.2rem solid;
+}
+
+.course__infos__what__youll__learn_ul {
+  list-style-type: none;
+}
+
+.course__infos__what__youll__learn_ul > li::before {
+  content: "✓";
+}

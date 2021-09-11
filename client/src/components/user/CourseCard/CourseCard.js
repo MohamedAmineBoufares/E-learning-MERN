@@ -11,9 +11,9 @@ function CourseCard() {
           alt="Card cap"
         />
         <div class="card-body col-sm-12 card__infos">
-          <h2 class="card-title">Course Title</h2>
-          <p class="card-text">Course description</p>
-          <button class="btn btn-primary button__lets__resume">
+          <h2 class="card-title card__infos__course__title">Course Title</h2>
+          <p class="card-text card__infos__course__description">Course description</p>
+          <button class="btn button__lets__resume">
             Let's learn
           </button>
         </div>

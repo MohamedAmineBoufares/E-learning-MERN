@@ -1,11 +1,11 @@
 import React from "react";
-import CourseCard from "../../../components/user/CourseCard/CourseCard";
+import CourseCard from "../CourseCard/CourseCard";
 import "./AllCourses.css";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import AllCoursesCard from "../../../components/user/AllCoursesCard/AllCoursesCard";
+import AllCoursesCard from "../AllCoursesCard/AllCoursesCard";
 
 function AllCourses() {
   const settings = {

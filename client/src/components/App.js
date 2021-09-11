@@ -1,11 +1,6 @@
 import React from "react";
 import "./App.css";
 import Header from "./user/header/Header";
-import Welcome from "../pages/user/welcome/Welcome";
-import Courses from "../pages/user/courses/Courses";
-import AllCourses from "../pages/user/allCourses/AllCourses";
-import Recommended from "../pages/user/recommended/Recommended";
-import Footer from "../pages/user/footer/Footer";
 
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Header from "./Header";
@@ -23,15 +18,29 @@ import Footer from "../pages/user/footer/Footer";
 // import Course from "../pages/Client/Course";
 // import Cart from "../pages/Client/Cart";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import CourseInfos from "../pages/user/courseInfos/CourseInfos";
+import FeedLogedIn from "../pages/user/feedLogedIn/FeedLogedIn";
+
 const App = () => {
   return (
     <div>
+      <Router>
       <Header />
-      <Welcome />
-      <Courses />
-      <AllCourses/>
-      <Recommended/>
-      <Footer/>
+        <Switch>
+          
+          {/* Course infos */}
+          <Route path="/courseInfos">
+            <CourseInfos/>
+          </Route>
+
+          {/* Feed when user loged-in */}
+
+          <Route path="/">
+            <FeedLogedIn/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

@@ -9,6 +9,15 @@
 }
 
 .buy__this:hover {
-    background-color: #ff9b17;
-    color: #fff;
+  background-color: #ff9b17;
+  color: #fff;
+}
+
+.see__more {
+  transition: all 0.2s;
+}
+
+.see__more:hover {
+  color: #fff;
+  background-color: #ff5670;
 }

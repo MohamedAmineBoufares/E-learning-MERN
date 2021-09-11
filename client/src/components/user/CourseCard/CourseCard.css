@@ -5,7 +5,18 @@
   color: #fff;
 }
 
-.card__infos > h2,
-p {
+.card__infos__course__title,
+.card__infos__course__description {
   color: #001340;
+}
+
+.button__lets__resume {
+  background-color: #9080ab;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.button__lets__resume:hover {
+  color: #fff;
+  background-color: #685191;
 }
