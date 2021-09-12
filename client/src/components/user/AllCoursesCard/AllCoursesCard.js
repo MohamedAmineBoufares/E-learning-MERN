@@ -27,17 +27,23 @@ function AllCoursesCard() {
               <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>Buy
               this course
             </button>
-            
-              <Link to="/courseInfos" className="btn d-flex align-items-center see__more">
-                See more
-              </Link>
-            
+
+            <Link
+              to="/courseInfos"
+              className="btn d-flex align-items-center see__more"
+            >
+              See more
+            </Link>
           </div>
 
           <button className="btn d-flex align-items-center">
             <i class="fa fa-heart mr-2" aria-hidden="true"></i>Add to favorites
           </button>
-          <button className="btn d-flex align-items-center mb-2">
+          <button
+            className="btn d-flex align-items-center mb-2"
+            data-toggle="modal"
+            data-target="#previewVideoModal"
+          >
             <i class="fa fa-play mr-2" aria-hidden="true"></i>Watch preview
           </button>
         </div>

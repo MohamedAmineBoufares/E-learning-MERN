@@ -3,7 +3,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <div class="col footer__container">
+    <div class="col mt-5 footer__container">
       <div class="row first__row">
         <div class="col-sm-12 mt-3 d-flex justify-content-center align-items-center navbar-brand">
           <h2>Logo</h2>

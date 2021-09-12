@@ -7,3 +7,7 @@
   background-color: black;
   border-radius: 50%;
 }
+
+.all__courses__container {
+  min-height: 100vh;
+}

@@ -18,9 +18,9 @@ import Header from "./user/header/Header";
 // import Course from "../pages/Client/Course";
 // import Cart from "../pages/Client/Cart";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CourseInfos from "../pages/user/courseInfos/CourseInfos";
-import FeedLogedIn from "../pages/user/feedLogedIn/FeedLogedIn";
+import Feed from "../pages/user/feed/Feed";
 import PreviewVideoPopUp from "./user/previewVideoPopUp/PreviewVideoPopUp";
 import PaymentPopUp from "./user/paymentPopUp/PaymentPopUp";
 
@@ -29,16 +29,18 @@ const App = () => {
     <div>
       <Router>
         <Header />
+
         <Switch>
           {/* Course infos */}
+
           <Route path="/courseInfos">
             <CourseInfos />
           </Route>
 
-          {/* Feed when user loged-in */}
+          {/* Feed */}
 
           <Route path="/">
-            <FeedLogedIn />
+            <Feed />
           </Route>
         </Switch>
       </Router>

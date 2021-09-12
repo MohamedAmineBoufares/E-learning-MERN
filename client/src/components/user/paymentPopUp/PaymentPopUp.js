@@ -65,7 +65,7 @@ function PaymentPopUp() {
             >
               Close
             </button>
-            {send ? (
+            {send && (
               <button
                 type="button"
                 class="btn payment__pop__up__validate__btn jus"
@@ -73,8 +73,6 @@ function PaymentPopUp() {
               >
                 Validate
               </button>
-            ) : (
-              ""
             )}
           </div>
         </div>

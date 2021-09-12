@@ -1,0 +1,9 @@
+.feed__back__container {
+    min-height: 100vh;
+}
+
+.feed__back__container__cards {
+    background-color: #78B6C9;
+    min-height: 25rem;
+    border-radius: 2rem;
+}
