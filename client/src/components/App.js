@@ -1,21 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./user/header/Header";
 
-// import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import Header from "./Header";
-// import Home from "./Home";
-// import Signup from "./Signup/Signup";
-// import Login from "./Login/Login";
-// import UserDashboard from "./UserDashboard";
 // import AdminDashboard from "./AdminDashboard";
 // import AdminEditProduct from "./AdminEditProduct";
 // import UserRoute from "./UserRoute";
 // import AdminRoute from "./AdminRoute";
 // import NotFound from "./NotFound";
-// import CoursePriview from "../pages/Client/CoursePriview";
-// import CourseVideo from "../pages/Client/CourseVideo";
-// import Course from "../pages/Client/Course";
+
 // import Cart from "../pages/Client/Cart";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -23,23 +15,47 @@ import CourseInfos from "../pages/user/courseInfos/CourseInfos";
 import Feed from "../pages/user/feed/Feed";
 import PreviewVideoPopUp from "./user/previewVideoPopUp/PreviewVideoPopUp";
 import PaymentPopUp from "./user/paymentPopUp/PaymentPopUp";
+import Login from "../pages/login/Login";
+import Signup from "../pages/signup/Signup";
+
+//redux
+import { useDispatch } from "react-redux";
+import { getCategories } from "../redux/actions/categoryActions";
+import { getProducts } from "../redux/actions/productActions";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <div>
       <Router>
-        <Header />
-
         <Switch>
+          {/* Log-in */}
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          {/* Sign-up */}
+          <Route path="/signup">
+            <Signup />
+          </Route>
+
           {/* Course infos */}
 
           <Route path="/courseInfos">
+            <Header />
             <CourseInfos />
           </Route>
 
           {/* Feed */}
 
           <Route path="/">
+            <Header />
             <Feed />
           </Route>
         </Switch>

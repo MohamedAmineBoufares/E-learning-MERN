@@ -6,7 +6,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// redux
+import { useSelector } from "react-redux";
+
 function AllCourses() {
+  const { products } = useSelector((state) => state.products);
+
   const settings = {
     dots: true,
     infinite: false,
@@ -37,13 +42,13 @@ function AllCourses() {
   return (
     <div className="col mt-5 all__courses__container">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col">
           <h1 className="what__to__learn">What to learn next ?</h1>
         </div>
       </div>
 
       <div className="row mb-5 justify-content-center">
-        <div class="input-group col-5 justify-content-center">
+        <div class="input-group col-sm-5 justify-content-center">
           <select class="custom-select" id="inputGroupSelect04">
             <option selected>All courses</option>
             <option value="1">Marketing</option>
@@ -61,10 +66,10 @@ function AllCourses() {
       <div class="row justify-content-sm-center">
         <div class="col col-sm-10">
           <Slider {...settings}>
-            <AllCoursesCard />
-            <AllCoursesCard />
-            <AllCoursesCard />
-            <AllCoursesCard />
+          {products &&
+            products.map((product) => (
+              <AllCoursesCard key={product._id} product={product} />
+            ))}
           </Slider>
         </div>
       </div>

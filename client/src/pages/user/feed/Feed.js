@@ -7,12 +7,14 @@ import Footer from "../../../components/user/footer/Footer";
 import WhyJoinUS from "../../../components/user/WhyJoinUS/WhyJoinUS";
 import FeedBack from "../../../components/user/feedBack/FeedBack";
 
+import { isAuthenticated } from "../../../helpers/auth";
+
 function Feed() {
   return (
     <div>
       <Welcome />
       <WhyJoinUS />
-      <Courses />
+      {isAuthenticated() && isAuthenticated().role === 0 && <Courses />}
       <AllCourses />
       <Recommended />
       <FeedBack />

@@ -1,0 +1,55 @@
+.Signinbtn {
+  background-color: #f38e0d;
+  color: #fff;
+  font-family: "Montserrat";
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+
+.Signinbtn:hover {
+  color: #fff;
+  background-color: #ff9b17;
+}
+
+.login__google {
+  border: 0.1rem solid #0056D1;
+}
+
+.signinForm {
+  text-align: center;
+}
+
+.txt1 {
+  font-family: "Montserrat";
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.txt2 {
+  font-family: "MyriadPro-Regular";
+  font-size: 14px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.or__title {
+  color: rgb(165, 165, 165);
+  display: flex;
+  flex-direction: row;
+}
+
+.or__title::before,
+.or__title::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 2px solid rgb(165, 165, 165);
+  margin: auto;
+}
+
+.forum_inputs {
+  margin-top: 2rem;
+}

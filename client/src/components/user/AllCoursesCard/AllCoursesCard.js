@@ -3,18 +3,28 @@ import "./AllCoursesCard.css";
 
 import { Link } from "react-router-dom";
 
-function AllCoursesCard() {
+function AllCoursesCard({ product }) {
+  
+  // Constes so I can recall them inside an object, later
+  const productName = product.productName;
+  const fileName = product.fileName;
+  const productPrice = product.productPrice;
+  const videoUrl = product.videoUrl;
+  const previewUrl = product.previewUrl;
+  const _id = product._id;
+
   return (
     <div className="col mb-5">
       <div class="card">
         <img
           class="card-img-top"
-          src="http://webi.io/wp-content/uploads/2016/05/fb-learn-how-to-setup-facebook-marketing-ads-in-20-min.png"
-          alt="Card cap"
+          src={`/server/uploads/${product.fileName}`}
+          alt={product.productName}
+          title={product.productName}
         />
         <div class="card-body col-sm-12">
-          <h4 className="card-text">Course Price</h4>
-          <h2 class="card-title">Course Title</h2>
+          <h4 className="card-text">{product.productPrice} DT</h4>
+          <h2 class="card-title">{product.productName}</h2>
           <p class="card-text d-flex justify-content-around w-50">
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
