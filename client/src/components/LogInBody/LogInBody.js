@@ -10,6 +10,7 @@ import isEmpty from "validator/lib/isEmpty";
 import isEmail from "validator/lib/isEmail";
 import { signin, signinGoogle, signupGoogle } from "../../api/auth";
 import { auth, provider } from "../firebase";
+import { getLocalStorage } from "../../helpers/localStorage";
 
 function LogInBody() {
   let history = useHistory();
@@ -66,7 +67,8 @@ function LogInBody() {
             history.push("/admin/dashboard");
           } else {
             console.log("Redirecting to user dashboard");
-            history.push("/user/dashboard");
+            history.push("/");
+            console.log(getLocalStorage());
           }
         })
         .catch((err) => {
@@ -89,13 +91,9 @@ function LogInBody() {
       .then((response) => {
         setAuthentication(response.data.token, response.data.user);
 
-        if (isAuthenticated() && isAuthenticated().role === 1) {
-          console.log("Redirecting to admin dashboard");
-          history.push("/admin/dashboard");
-        } else {
-          console.log("Redirecting to user dashboard");
-          history.push("/");
-        }
+        console.log("Redirecting to user dashboard");
+        console.log(getLocalStorage());
+        history.push("/");
       })
       .catch((err) => {
         console.log("signin api function error: ", err);

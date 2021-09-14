@@ -15,10 +15,22 @@ a:hover {
   color: inherit;
 }
 
+@media only screen and (min-width: 1000px) {
+  .items__dot {
+    position: absolute;
+    color: #fff;
+    font-size: 0.8rem;
+    background-color: #ed143dc2;
+    top: 0;
+    font-weight: 900;
+  }
+}
 
 .items__dot {
+  
   color: #fff;
-  font-size: small;
+  font-size: 0.8rem;
+  background-color: #ed143dc2;
+  
   font-weight: 900;
-  background-color: rgb(248, 87, 87);
 }

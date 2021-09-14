@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
 import "./CourseInfosCard.css";
 
-function CourseInfosCard() {
+function CourseInfosCard({ coursePrice, videoSrc }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => {
+    setIsOpen(true);
+    console.log(isOpen)
+  };
   return (
     <div className="col mb-5">
       <div class="card">
@@ -11,7 +17,7 @@ function CourseInfosCard() {
           alt="Card cap"
         />
         <div class="card-body course__infos__card__container">
-          <h2 class="card-title">Course Price</h2>
+          <h2 class="card-title">{coursePrice} DT</h2>
           <div className="d-flex flex-column">
             <button
               class="btn mb-3 course__infos__card__buy__now"
@@ -26,8 +32,9 @@ function CourseInfosCard() {
               class="btn mb-3 course__infos__watch__preview"
               data-toggle="modal"
               data-target="#previewVideoModal"
+              onClick={togglePopup}
             >
-              <i class="fa fa-play mr-2" aria-hidden="true"></i>
+              <i class="fa fa-play mr-2" aria-hidden="true" ></i>
               Watch preview
             </button>
           </div>
@@ -59,6 +66,9 @@ function CourseInfosCard() {
           </div>
         </div>
       </div>
+      {isOpen && (
+        <PreviewVideoPopUp videoSrc={videoSrc}/>
+      )}
     </div>
   );
 }

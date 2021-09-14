@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AllCoursesCard.css";
 
 import { Link } from "react-router-dom";
 
+import { getLocalStorage } from "../../../helpers/localStorage";
+
+// REDUX !
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/actions/cartActions";
+import { addToFavorite } from "../../../redux/actions/favoriteActions";
+import { clearMessages } from "../../../redux/actions/messageActions";
+import { isAuthenticated } from "../../../helpers/auth";
+import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
+import PaymentPopUp from "../paymentPopUp/PaymentPopUp";
+
 function AllCoursesCard({ product }) {
-  
+  const dispatch = useDispatch();
+
+  const [userID, setUserID] = useState();
+
   // Constes so I can recall them inside an object, later
   const productName = product.productName;
   const fileName = product.fileName;
@@ -12,6 +26,40 @@ function AllCoursesCard({ product }) {
   const videoUrl = product.videoUrl;
   const previewUrl = product.previewUrl;
   const _id = product._id;
+
+  useEffect(() => {
+    if (isAuthenticated() && isAuthenticated().role === 0) {
+      setUserID(getLocalStorage("user")._id);
+    }
+  }, []);
+
+  const addCart = () => {
+    const item = {
+      fileName,
+      productName,
+      productPrice,
+      videoUrl,
+      previewUrl,
+      _id,
+    };
+
+    // Sending the course to store
+    dispatch(addToCart(item, userID));
+  };
+
+  const addFav = () => {
+    const item = {
+      fileName,
+      productName,
+      productPrice,
+      videoUrl,
+      previewUrl,
+      _id,
+    };
+
+    // Sending the course to store
+    dispatch(addToFavorite(item, userID));
+  };
 
   return (
     <div className="col mb-5">
@@ -33,28 +81,24 @@ function AllCoursesCard({ product }) {
             <span class="fa fa-star"></span>
           </p>
           <div className="d-flex justify-content-between mb-2">
-            <button className="btn d-flex align-items-center buy__this">
-              <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>Buy
-              this course
+            <button
+              className="btn d-flex align-items-center buy__this"
+              onClick={addCart}
+            >
+              <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
+              Buy/Add this course
             </button>
 
             <Link
-              to="/courseInfos"
+              to={`/courseInfos/${_id}`}
               className="btn d-flex align-items-center see__more"
             >
               See more
             </Link>
           </div>
 
-          <button className="btn d-flex align-items-center">
+          <button className="btn d-flex align-items-center" onClick={addFav}>
             <i class="fa fa-heart mr-2" aria-hidden="true"></i>Add to favorites
-          </button>
-          <button
-            className="btn d-flex align-items-center mb-2"
-            data-toggle="modal"
-            data-target="#previewVideoModal"
-          >
-            <i class="fa fa-play mr-2" aria-hidden="true"></i>Watch preview
           </button>
         </div>
       </div>

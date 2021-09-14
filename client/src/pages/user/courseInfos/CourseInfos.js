@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CourseInfosBody from "../../../components/user/CourseInfosBody/CourseInfosBody";
 
-function CourseInfos() {
+import { useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import { getProduct } from "../../../redux/actions/productActions";
+
+function CourseInfos(props) {
+  const courseID = props.match.params._id;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct(courseID));
+  }, [dispatch, courseID]);
+
   return (
     <div>
-      <CourseInfosBody/>
+      <CourseInfosBody courseID={courseID}/>
     </div>
   );
 }
 
-export default CourseInfos;
+export default withRouter(CourseInfos);

@@ -19,12 +19,21 @@ import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
 
 //redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../redux/actions/categoryActions";
 import { getProducts } from "../redux/actions/productActions";
+import { isAuthenticated } from "../helpers/auth";
+
+import { showErrorMsg, showSuccessMsg } from "../helpers/message";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const oneCourse = useSelector((state) => state.products.oneProd);
+
+  if (isAuthenticated()) {
+    console.log("Seleeeeeeeeeeem");
+  }
 
   useEffect(() => {
     dispatch(getCategories());
@@ -47,7 +56,7 @@ const App = () => {
 
           {/* Course infos */}
 
-          <Route path="/courseInfos">
+          <Route path="/courseInfos/:_id">
             <Header />
             <CourseInfos />
           </Route>
@@ -62,7 +71,8 @@ const App = () => {
       </Router>
 
       {/* Pop-ups */}
-      <PreviewVideoPopUp />
+      {/* {oneCourse && <PreviewVideoPopUp videoSrc={oneCourse.previewUrl} />} */}
+
       <PaymentPopUp />
     </div>
   );

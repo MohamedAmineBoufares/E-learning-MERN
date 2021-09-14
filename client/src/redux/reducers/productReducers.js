@@ -7,6 +7,7 @@ import {
 
 const INITIAL_STATE = {
   products: [],
+  oneProd: []
 };
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -22,7 +23,8 @@ const productReducer = (state = INITIAL_STATE, action) => {
 
     case GET_PRODUCT:
       return {
-        product: action.payload,
+        products: [...state.products],
+        oneProd: action.payload,
       };
 
     case DELETE_PRODUCT:

@@ -6,6 +6,7 @@ import isEmpty from "validator/lib/isEmpty";
 import equals from "validator/lib/equals";
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { signup } from "../../api/auth";
+import { getLocalStorage } from "../../helpers/localStorage";
 
 function SignUpBody() {
   const [formData, setFormData] = useState({
@@ -74,6 +75,8 @@ function SignUpBody() {
             loading: false,
             successMsg: response.data.successMessage,
           });
+
+          console.log(getLocalStorage())
         })
         .catch((err) => {
           console.log("Axios signup error: ", err);

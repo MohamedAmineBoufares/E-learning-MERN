@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import "./header.css";
 
@@ -7,16 +7,18 @@ import { logout } from "../../../helpers/auth";
 
 import { isAuthenticated } from "../../../helpers/auth";
 
+import { useSelector } from "react-redux";
+
 function Header() {
-  const [test, setTest] = useState(false);
-  const history = useHistory();
+  const cartItems = useSelector((state) => state.cart.items);
+  const favoriteItems = useSelector((state) => state.favorite.items);
 
   const logOut = () => {
     logout(() => {
       auth.signOut();
     });
 
-    setTest(!test);
+    window.location.reload();
   };
 
   return (
@@ -54,8 +56,9 @@ function Header() {
               <li class="nav-item ">
                 <a class="nav-link" href="./aboutus.html">
                   <i class="fa fa-heart fa-lg" aria-hidden="true"></i>
-                  <span className="ml-3 d-inline d-sm-none">Favorites</span>
-                  <span className="rounded-circle pr-1 pl-1 items__dot">1</span>
+                  <span className="ml-3 d-inline d-sm-none mr-2">Favorites</span>
+                  <span className="rounded-circle pr-1 pl-1 items__dot">
+                  {favoriteItems && favoriteItems.length}</span>
                 </a>
               </li>
 
@@ -63,7 +66,7 @@ function Header() {
                 <a class="nav-link" href="#">
                   <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                   <span className="ml-3 d-inline d-sm-none mr-2">Cart</span>
-                  <span className="rounded-circle pr-1 pl-1 items__dot">1</span>
+                  <span className="rounded-circle pr-1 pl-1 items__dot">{cartItems && cartItems.length}</span>
                 </a>
               </li>
 
@@ -85,7 +88,10 @@ function Header() {
                   <span className="ml-3 d-inline d-sm-none">Profile</span>
                 </button>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="dropdownMenuButton"
+                >
                   <button
                     class="dropdown-item d-flex align-items-center"
                     onClick={logOut}

@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CourseInfosCard from "../CourseInfosCard/CourseInfosCard";
-import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
 import "./CourseInfosBody.css";
 
-function CourseInfosBody() {
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../../../redux/actions/productActions";
+import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
+
+function CourseInfosBody({ courseID }) {
+  const course = useSelector((state) => state.products.oneProd);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct(courseID));
+  }, [dispatch, courseID]);
   return (
     <div class="col mt-sm-5 course__infos__container">
       <div class="row course__infos__text">
         <div class="col-sm-8 pt-5">
           <div className="container">
-            <h1>Course Name</h1>
-            <p>Course description</p>
+            {course && <h1>{course.productName}</h1>}
+            {course && <p>{course.productDesc}</p>}
             <p>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -24,7 +33,12 @@ function CourseInfosBody() {
 
       <div className="row d-flex justify-content-sm-end">
         <div class="col-sm-4 mt-5 course__infos__card">
-          <CourseInfosCard />
+          {course && (
+            <CourseInfosCard
+              coursePrice={course.productPrice}
+              videoSrc={course.previewUrl}
+            />
+          )}
         </div>
       </div>
 
@@ -42,6 +56,7 @@ function CourseInfosBody() {
           </div>
         </div>
       </div>
+  
     </div>
   );
 }
