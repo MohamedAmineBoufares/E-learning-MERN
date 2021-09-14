@@ -3,10 +3,7 @@ const User = require("../models/User");
 const fs = require("fs");
 
 exports.create = async (req, res) => {
-  console.log("req.body: ", req.body);
-  console.log("req.file: ", req.file);
-  console.log("req.user: ", req.user);
-
+  
   const { filename } = req.file;
   const {
     productName,

@@ -13,7 +13,6 @@ import Header from "./user/header/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CourseInfos from "../pages/user/courseInfos/CourseInfos";
 import Feed from "../pages/user/feed/Feed";
-import PreviewVideoPopUp from "./user/previewVideoPopUp/PreviewVideoPopUp";
 import PaymentPopUp from "./user/paymentPopUp/PaymentPopUp";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
@@ -25,15 +24,10 @@ import { getProducts } from "../redux/actions/productActions";
 import { isAuthenticated } from "../helpers/auth";
 
 import { showErrorMsg, showSuccessMsg } from "../helpers/message";
+import Cart from "../pages/user/cart/Cart";
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const oneCourse = useSelector((state) => state.products.oneProd);
-
-  if (isAuthenticated()) {
-    console.log("Seleeeeeeeeeeem");
-  }
 
   useEffect(() => {
     dispatch(getCategories());
@@ -61,6 +55,13 @@ const App = () => {
             <CourseInfos />
           </Route>
 
+          {/* Cart */}
+
+          <Route path="/cart">
+            <Header />
+            <Cart />
+          </Route>
+
           {/* Feed */}
 
           <Route path="/">
@@ -69,11 +70,6 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-
-      {/* Pop-ups */}
-      {/* {oneCourse && <PreviewVideoPopUp videoSrc={oneCourse.previewUrl} />} */}
-
-      <PaymentPopUp />
     </div>
   );
 };
