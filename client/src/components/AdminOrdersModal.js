@@ -30,7 +30,7 @@ function AdminOrdersModal() {
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           <form>
-            <div className="modal-header bg-warning text-white">
+            <div className="modal-header bg-info text-white">
               <h5 className="modal-title">View Orders</h5>
               <button className="close" data-dismiss="modal">
                 <span>

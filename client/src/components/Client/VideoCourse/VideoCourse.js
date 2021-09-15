@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
-import styles from "./VideoCourse.module.css";
 import { useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProduct } from "../../../redux/actions/productActions";
+import "./VideoCourse.css"
 
 import { showLoading } from "../../../helpers/loading";
 import { setAuthorised } from "../../../redux/actions/userActions";
 
 import { getLocalStorage } from "../../../helpers/localStorage";
+import Footer from "../../footer/Footer";
+
 
 function VideoCourse(props) {
   const courseID = props.match.params.courseID;
@@ -34,28 +36,35 @@ function VideoCourse(props) {
         <div>{showLoading()}</div>
       ) : (
         course && (
-          <div className={styles.container}>
-            <h1>{course.productName}</h1>
+          <div>
+            <Link to="/user/dashboard">
+              <span className="fas fa-arrow-left">Go Back</span>
+            </Link>
+            <p className="prod__name">{course.productName}</p>
             {authorised ? (
               <div>
-                <video
-                  controls
-                  controlsList="nodownload"
-                  poster="https://ampjar.com/wp-content/uploads/2019/06/ig-sponsored-hero@2x-970x577.png"
-                >
-                  <source src={course.videoUrl} type="video/mp4" />
-                  Sorry this video can't be diplayed at the moment, due to
-                  server issues or your browser does'nt support the video's
-                  format
-                </video>
-                <div className={styles.download__btn}>Download course PDF</div>
-              </div>
+                <div className="video">
+                  <div className="embed-responsive embed-responsive-16by9">
+                    <iframe className="embed-responsive-item" 
+                            src={course.videoUrl} 
+                            type="video/mp4" 
+                            allowfullscreen>
+                    </iframe>
+                  </div>
+                </div>
+              
+                <p className="about__course">About this course</p>
+                  <p className="prod__desc">{course.productDesc}</p>
+                  <div className="download__btn">Download course PDF</div>
+                </div>
+           
             ) : (
               <h1>Sorry not sorry !</h1>
             )}
           </div>
         )
       )}
+      <Footer />
     </div>
   );
 }

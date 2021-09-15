@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import styles from "./Signup.module.css";
-
 import isEmail from "validator/lib/isEmail";
 import isEmpty from "validator/lib/isEmpty";
 import equals from "validator/lib/equals";
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { signup } from "../../api/auth";
+import { Button} from "reactstrap";
+import "./Signup.css";
+import Footer from "../footer/Footer"
 
 const Signup = () => {
-  //setFormData c la méthode utilisée pour faire les changements des données for our component state
-  //formData : objets contenant les données (username,email... )
 
   const [formData, setFormData] = useState({
     username: "",
@@ -28,6 +27,7 @@ const Signup = () => {
     password2,
     successMsg,
     errorMsg,
+    
   } = formData;
 
   /*******************************************
@@ -80,7 +80,7 @@ const Signup = () => {
             email: "",
             password: "",
             password2: "",
-            loadind: false,
+            loading: false,
             successMsg: response.data.successMessage,
           });
         })
@@ -98,83 +98,117 @@ const Signup = () => {
   /*******************************************
    *VIEWS
    *******************************************/
-  const showSignupForm = () => (
-    <div className={styles.signup__form} onSubmit={handleSubmit} noValidate>
-      <form>
-        <h1 className={styles.h1}>Sign Up</h1>
-        <div className={styles.content}>
-          <div className={styles.input__field}>
-            <input
-              className={styles.input}
-              name="username"
-              value={username}
-              type="text"
-              placeholder="Username"
-              autocomplete="nope"
-              onChange={handleChange}
-            />
-          </div>
+   const showSignupForm = () => (
+      <form className='signupForm' onSubmit= {handleSubmit} noValidate>
+        <h3 className="text1" >Signup and start Learning!</h3>
+        {/* <div className="ligne">—————————————————————————</div> */}
+                {/* username */ }
+                <div className='form-group input-group'>
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>
+                            <i className='fa fa-user'></i>
+                        </span>
+                </div>
+                <input
+                  className='form-control'
+                    name="username"
+                    value={username}
+                    type="text"
+                    placeholder="Username"
+                    autocomplete="nope"
+                    onChange={handleChange}    
+                />
+                </div>
+            {/* email */}
+            <div className='form-group input-group'>
+                <div className=' input-group-prepend'>
+                    <span className='input-group-text'>
+                        <i className='fa fa-envelope'></i>
+                    </span>
+                </div>
+            
+                <input
+                    className='form-control'
+                    name="email"
+                    value={email}
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="nope"
+                    onChange={handleChange}
 
-          <div className={styles.input__field}>
-            <input
-              className={styles.input}
-              name="email"
-              value={email}
-              type="email"
-              placeholder="Email"
-              autocomplete="nope"
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.input__field}>
-            <input
-              className={styles.input}
-              name="password"
-              type="password"
-              value={password}
-              placeholder="Password"
-              autocomplete="new-password"
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.input__field}>
-            <input
-              className={styles.input}
-              type="password"
-              name="password2"
-              value={password2}
-              placeholder="Retype password"
-              autocomplete="new-password"
-              onChange={handleChange}
-            />
-          </div>
-          <a href="#" className={styles.link}>
-            Already have an account ? Sign In
-          </a>
-          <div className={styles.action}>
-            <button className={styles.button}>Sign up</button>
-          </div>
-        </div>
-      </form>
-    </div>
+                />
+            </div>
+            {/* password */}
+            <div className='form-group input-group'>
+                <div className='input-group-prepend'>
+                    <span className='input-group-text'>
+                        <i className='fa fa-lock'></i>
+                    </span>
+                </div>
+                <input
+                    className='form-control'
+                    name="password"
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    onChange={handleChange}
+                />
+            </div>
+            {/* password2 */}
+            <div className='form-group input-group'>
+                <div className='input-group-prepend'>
+                    <span className='input-group-text'>
+                        <i className='fa fa-lock'></i>
+                    </span>
+                </div>
+                <input
+                    className='form-control'
+                    type="password"
+                    name="password2"
+                    value={password2}
+                    placeholder="Retype password"
+                    autocomplete="new-password"
+                    onChange={handleChange}
+                />
+            </div>
+                {/* signup button */}
+                <div className='form-group'>
+                  <Button className="Signupbtn" type="submit">Sign up</Button>
+                </div>
+
+                <div className="text2">By signing up, you agree to our 
+            <a href="#"> Terms </a>
+            of Use and 
+            <a href="#"> Privacy Policy.</a>
+            </div>
+
+            <div className="ligne">—————————————————————————</div>
+                  
+            <div className="text3">Already have an account ? 
+              <a href="/signin"> Log In</a>
+            </div>       
+        </form>
   );
 
-  return (
-    <div className={styles.container}>
-      {/* <Head>
-        <title>E-Learning | Sign-up</title>
-      </Head> */}
-
-      <div className={styles.left}>
-        <h1 className={styles.Text}>Welcome, To our PLateform</h1>
-      </div>
-
-      <div className={styles.right}>
-        {errorMsg && showErrorMsg(errorMsg)}
-        {successMsg && showSuccessMsg(successMsg)}
-        {showSignupForm()}
-      </div>
+  return (  
+    <div>
+        <div className='row px-5'> 
+            <div className='forum_inputs col-md-4 mx-auto align-self-center'> 
+                {successMsg && showSuccessMsg(successMsg)}
+                {errorMsg && showErrorMsg(errorMsg)}
+                {showSignupForm()}  
+                
+            </div>                  
+    </div>  
+    <Footer />
     </div>
+
+
+
+
+
+
   );
 };
 export default Signup;

@@ -77,17 +77,6 @@ const Header = ({ history }) => {
 
             {isAuthenticated() && isAuthenticated().role === 0 && (
               <Fragment>
-                {/* dropDown for categories user dash */}
-                {/*  <div class="dropdown">
-                                                               <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                      Categories
-                                                               </button>
-                                                               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                      <a className="dropdown-item" href="#">Action</a>
-                                                                      <a className="dropdown-item" href="#">Another action</a>
-                                                                      <a className="dropdown-item" href="#">Something else here</a>
-                                                               </div>
-                                                        </div> */}
 
                 <div className="form-row">
                   <select

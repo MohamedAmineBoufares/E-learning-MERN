@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Login.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { showErrorMsg } from "../../helpers/message";
-import { showLoading } from "../../helpers/loading";
+import { showErrorMsg} from "../../helpers/message";
 import { setAuthentication, isAuthenticated } from "../../helpers/auth";
 import isEmpty from "validator/lib/isEmpty";
 import isEmail from "validator/lib/isEmail";
 import { signin, signinGoogle, signupGoogle } from "../../api/auth";
 import { auth, provider } from "../firebase";
+import { Button} from "reactstrap";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import "./Login.css"
+import Footer from "../footer/Footer"
 
 const Login = () => {
   let history = useHistory();
@@ -114,74 +116,76 @@ const Login = () => {
     });
   };
 
-  /****************************
-   * VIEWS
-   ***************************/
-  const showSigninForm = () => (
-    <div className={styles.login__form}>
-      <div className={styles.g__signin__button}>
-        <div className={styles.logo__wrapper}>
-          <img
-            src="https://developers.google.com/identity/images/g-logo.png"
-            alt="google icon"
-          />
-        </div>
-        {/*here*/}
-        <div className={styles.text__container}>
-          <div onClick={signInWithGoogle}>Login with Google</div>
-        </div>
-      </div>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <h1 className={styles.h1}>Login</h1>
-        <div className={styles.content}>
-          <div className={styles.input__field}>
-            <input
-              name="email"
-              value={email}
-              className={styles.input}
-              type="email"
-              placeholder="Email"
-              onChange={handleChange}
-            />
+  /*******************************************
+   *VIEWS
+   *******************************************/
+    const showSigninForm = () => (
+      <form className='signinForm' onSubmit= {handleSubmit} noValidate>
+        <h3 className="txt1">Welcome Back!</h3>
+          {/* email */}
+          <div className='form-group input-group'>
+              <div className=' input-group-prepend'>
+                  <span className='input-group-text'>
+                      <i className='fa fa-envelope'></i>
+                  </span>
+              </div>
+          
+              <input
+                  name="email"
+                  value={email}
+                  type="email"
+                  placeholder="Email"
+                  onChange={handleChange} 
+                  className='form-control'          
+              />
           </div>
-          <div className={styles.input__field}>
-            <input
-              name="password"
-              value={password}
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-              onChange={handleChange}
-            />
+          {/* password */}
+          <div className='form-group input-group'>
+              <div className='input-group-prepend'>
+                  <span className='input-group-text'>
+                      <i className='fa fa-lock'></i>
+                  </span>
+              </div>
+              <input
+                  name="password"
+                  value={password}
+                  type="password"
+                  placeholder="Password"
+                  onChange={handleChange} 
+                  className='form-control'
+                  
+              />
           </div>
+          
+              {/* signin button */}
+              <div className='form-group'>
+              <Button className="Signinbtn" type="submit">Log in</Button>
+              </div>
 
-          <p className={styles.link}>
-            Don't have an account? <Link to="/signup">Register Here</Link>
-          </p>
-          <div className={styles.action}>
-            <button className={styles.button} type="submit">
-              Login
-            </button>
-          </div>
-        </div>
+              <div className="or">———————————Or————————————</div>
+              <GoogleLoginButton className="mt-2 mb-3" onClick={signInWithGoogle} />
+
+              <div className="txt2">Don't have an account?
+                <a href="/signup"> Sign up</a>
+              </div>
       </form>
-    </div>
   );
 
-  /********************************************* RENDER ********************************************/
+
   return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <h1 className={styles.Text}>Welcome, To our PLateform</h1>
-      </div>
-      <div className={styles.right}>
-        {errorMsg && showErrorMsg(errorMsg)}
-        {loading && <div className="text-center pb-4">{showLoading()}</div>}
-        {showSigninForm()}
-      </div>
+    <div>
+    <div className='row px-5'> 
+            <div className='forum_inputs col-md-4 mx-auto align-self-center'> 
+    
+      {errorMsg && showErrorMsg(errorMsg)}
+      {showSigninForm()}
     </div>
-  );
+    </div>
+    <Footer />
+    </div>
+
+);
 };
 
 export default Login;

@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,3 +103,38 @@
 .refuse__btn:hover {
   background-color: red;
 }
+ */
+
+ .accept__btn,
+.refuse__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+
+}
+.accept__btn {
+  background-color: #F28D0D;
+  margin-bottom: 2rem;
+  transition: 0.3s ease-in-out;
+} 
+.refuse__btn {
+  background-color: #E34042;
+  transition: 0.3s ease-in-out;
+}
+.accept__btn:hover {
+  background-color: #fca636;
+}
+
+.refuse__btn:hover {
+  background-color: red;
+}
+.download{
+
+  text-align: center
+}
+

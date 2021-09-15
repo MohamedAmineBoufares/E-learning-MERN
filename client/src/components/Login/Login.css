@@ -1,0 +1,45 @@
+
+.Signinbtn{
+  background-color:#F38E0D;
+  border: none;
+  text-align: center;
+  font-size:30px;
+  font-family:'Montserrat';
+  width: 100%;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+ 
+}
+
+.signinForm{
+  text-align: center;
+}
+
+.txt1{
+  font-family:'Montserrat';
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.txt2{
+  font-family:'MyriadPro-Regular';
+  font-size: 14px ;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-bottom: 4rem;
+  
+}
+
+.or{
+    color:rgb(199, 197, 197)
+    
+}
+
+.forum_inputs{
+
+  margin-top: 2rem;
+
+}
