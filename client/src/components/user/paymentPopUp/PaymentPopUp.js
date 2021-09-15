@@ -1,34 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PaymentPopUp.css";
+import { getLocalStorage } from "../../../helpers/localStorage";
+import { isAuthenticated } from "../../../helpers/auth";
 
-function PaymentPopUp() {
-  const [send, setSend] = useState(false);
+// Redux 
+
+import { useSelector, useDispatch } from "react-redux";
+import { sendCartToDB } from "../../../redux/actions/cartActions";
+
+
+function PaymentPopUp({ total }) {
+
+// Redux states
+const { loading } = useSelector((state) => state.loading);
+const items = useSelector((state) => state.cart.items);
+
+  const [send, setSend] = useState(true);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      setUserName(getLocalStorage("user").username);
+    }
+  },[setUserName]);
 
   const sendData = () => {
-    setSend(!send);
+    setSend(true);
   };
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="paymentPopUp"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
+      aria-labelledby="paymentPopUp"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
+      <div
+        className="modal-dialog modal-dialog-centered modal-lg"
+        role="document"
+      >
+        <div className="modal-content">
+          <div className="modal-body">
             {send ? (
               <div className="container">
-                <h3>Dear UsermName,</h3>
+                <h3>Dear {userName},</h3>
                 <p>
                   In order to buy this course, all you need to do is to{" "}
                   <strong>
                     visit the neareast the post office to your house
                   </strong>{" "}
-                  and send money to this account number{" "}
+                  and send money,{" "}
+                  <strong style={{ color: "red" }}>{total + " DT"}</strong>, to
+                  this account number{" "}
                   <span style={{ color: "#F38E0D" }}>“ 123456789217 “</span> .
                   <br /> After doing that, all you need to do is writing the
                   transaction number in this box here :

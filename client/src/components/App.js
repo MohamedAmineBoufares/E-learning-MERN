@@ -1,30 +1,32 @@
 import React, { useEffect } from "react";
 import "./App.css";
+
+// Components
+
 import Header from "./user/header/Header";
 
 // import AdminDashboard from "./AdminDashboard";
 // import AdminEditProduct from "./AdminEditProduct";
-// import UserRoute from "./UserRoute";
-// import AdminRoute from "./AdminRoute";
 // import NotFound from "./NotFound";
 
-// import Cart from "../pages/Client/Cart";
+// Pages
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CourseInfos from "../pages/user/courseInfos/CourseInfos";
 import Feed from "../pages/user/feed/Feed";
-import PaymentPopUp from "./user/paymentPopUp/PaymentPopUp";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
+import Cart from "../pages/user/cart/Cart";
+
+// Routes
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../redux/actions/categoryActions";
 import { getProducts } from "../redux/actions/productActions";
-import { isAuthenticated } from "../helpers/auth";
 
 import { showErrorMsg, showSuccessMsg } from "../helpers/message";
-import Cart from "../pages/user/cart/Cart";
+import UserRoute from "./user/UserRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,10 +59,7 @@ const App = () => {
 
           {/* Cart */}
 
-          <Route path="/cart">
-            <Header />
-            <Cart />
-          </Route>
+          <UserRoute exact path="/cart" component={Cart}/>
 
           {/* Feed */}
 

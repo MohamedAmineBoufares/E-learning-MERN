@@ -13,7 +13,7 @@ function CartItem({ fileName, productName, productPrice, _id }) {
   const remove = () => {
     const userID = getLocalStorage("user")._id;
     dispatch(removeFromCart(userID, { _id }, _id));
-    // console.log("DONE");
+    
   };
   return (
     <div className={styles.item__infos}>

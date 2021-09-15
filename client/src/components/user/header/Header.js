@@ -54,27 +54,32 @@ function Header() {
           {isAuthenticated() && isAuthenticated().role === 0 ? (
             <ul class="navbar-nav">
               <li class="nav-item ">
-                <a class="nav-link" href="./aboutus.html">
+                <div class="nav-link">
                   <i class="fa fa-heart fa-lg" aria-hidden="true"></i>
-                  <span className="ml-3 d-inline d-sm-none mr-2">Favorites</span>
+                  <span className="ml-3 d-inline d-sm-none mr-2">
+                    Favorites
+                  </span>
                   <span className="rounded-circle pr-1 pl-1 items__dot">
-                  {favoriteItems && favoriteItems.length}</span>
-                </a>
+                    {favoriteItems && favoriteItems.length}
+                  </span>
+                </div>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" to="/cart">
                   <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                   <span className="ml-3 d-inline d-sm-none mr-2">Cart</span>
-                  <span className="rounded-circle pr-1 pl-1 items__dot">{cartItems && cartItems.length}</span>
-                </a>
+                  <span className="rounded-circle pr-1 pl-1 items__dot">
+                    {cartItems && cartItems.length}
+                  </span>
+                </Link>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="./contactus.html">
+                <div className="nav-link">
                   <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
                   <span className="ml-3 d-inline d-sm-none">Notification</span>
-                </a>
+                </div>
               </li>
 
               <div className="dropdown">
