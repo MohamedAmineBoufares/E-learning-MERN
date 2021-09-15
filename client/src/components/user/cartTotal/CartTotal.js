@@ -34,13 +34,18 @@ function CartTotal() {
         </div>
 
         <div className="card-footer d-flex justify-content-end align-items-center">
-          <button class="btn btn-primary d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#paymentPopUp" onClick={togglePopup}>
-            <i class="fa fa-shopping-cart fa-lg mr-2" aria-hidden="true"></i>
+          <button
+            class="btn btn-primary d-flex justify-content-center align-items-center"
+            data-toggle="modal"
+            data-target="#paymentPopUp"
+            onClick={togglePopup}
+          >
+            <i class="fas fa-credit-card fa-lg mr-2" aria-hidden="true"></i>
             Chekout
           </button>
         </div>
       </div>
-      {isOpen && <PaymentPopUp total={totalPrice}/>}
+      {isOpen && <PaymentPopUp total={totalPrice} />}
     </div>
   );
 }

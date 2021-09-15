@@ -85,7 +85,7 @@ function AllCoursesCard({ product }) {
               className="btn d-flex align-items-center buy__this"
               onClick={addCart}
             >
-              <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
+              <i className="fas fa-cart-plus mr-2" aria-hidden="true"></i>
               Buy/Add this course
             </button>
 
