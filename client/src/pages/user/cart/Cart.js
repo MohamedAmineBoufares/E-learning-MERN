@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserCart } from "../../../redux/actions/cartActions";
 import { getLocalStorage } from "../../../helpers/localStorage";
 import { isAuthenticated } from "../../../helpers/auth";
+import CartWithItems from "../../../components/user/cartWithItems/CartWithItems";
+import EmptyCart from "../../../components/emptyCart/EmptyCart";
 
 function Cart() {
   // Redux states
@@ -24,29 +26,8 @@ function Cart() {
   }, [dispatch]);
 
   return (
-    <div className="col pb-5" style={{ margin: "8rem 0" }}>
-      <div className="row">
-        <div className="col-sm-8 ord">
-          {items &&
-            items.map(({ fileName, productName, productPrice, _id }) => (
-              <CartItem
-                key={_id}
-                fileName={fileName}
-                productName={productName}
-                productPrice={productPrice}
-                _id={_id}
-              />
-            ))}
-        </div>
-        <div
-          className="col-sm-4 
-          d-sm-flex justify-content-sm-center 
-          align-items-sm-center order-sm-last 
-          order-first mb-3"
-        >
-          <CartTotal />
-        </div>
-      </div>
+    <div className="col pb-5" style={{ marginTop: "8rem" }}>
+      {items.length !== 0 ? <CartWithItems /> : <EmptyCart />}
     </div>
   );
 }
