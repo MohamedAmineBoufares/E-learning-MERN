@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  CLEAR_CART,
   GET_USER_CART,
   REMOVE_FROM_CART,
 } from "../constants/cartConstants";
@@ -31,6 +32,9 @@ const cartReducers = (state = INITIAL_STATE, action) => {
         ...state,
         items: newCart,
       };
+
+    case CLEAR_CART:
+      return { items: [] };
 
     case GET_USER_CART:
       return {

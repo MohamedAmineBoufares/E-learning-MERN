@@ -19,6 +19,8 @@ import Signup from "../pages/signup/Signup";
 import Cart from "../pages/user/cart/Cart";
 
 // Routes
+import UserRoute from "./user/UserRoute";
+import AdminRoute from "./admin/AdminRoute";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +28,7 @@ import { getCategories } from "../redux/actions/categoryActions";
 import { getProducts } from "../redux/actions/productActions";
 
 import { showErrorMsg, showSuccessMsg } from "../helpers/message";
-import UserRoute from "./user/UserRoute";
+import AdminDashboard from "./admin/AdminDashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,7 +61,15 @@ const App = () => {
 
           {/* Cart */}
 
-          <UserRoute exact path="/cart" component={Cart}/>
+          <UserRoute exact path="/cart" component={Cart} />
+
+          {/* Admin Dashboard */}
+
+          <AdminRoute
+            exact
+            path="/admin/dashboard"
+            component={AdminDashboard}
+          />
 
           {/* Feed */}
 

@@ -8,12 +8,12 @@ import PaymentPopUp from "../paymentPopUp/PaymentPopUp";
 function CartTotal() {
   const items = useSelector((state) => state.cart.items);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(0);
 
   let totalPrice = 0;
 
   const togglePopup = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(isOpen + 1);
   };
 
   return (
@@ -45,7 +45,7 @@ function CartTotal() {
           </button>
         </div>
       </div>
-      {isOpen && <PaymentPopUp total={totalPrice} />}
+      {isOpen !== 0 && <PaymentPopUp total={totalPrice} />}
     </div>
   );
 }

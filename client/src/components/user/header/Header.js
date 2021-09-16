@@ -24,11 +24,11 @@ function Header() {
   return (
     <nav class="navbar navbar-light navbar-expand-sm fixed-top ">
       <div class="container col-sm-12">
-        <a class="navbar-brand col-auto col-lg-3" href="./Header.js">
+        <a class="navbar-brand col-auto col-sm-2" href="./Header.js">
           Logo
         </a>
 
-        <form className="form-inline justify-content-sm-center col-auto col-lg-6">
+        <form className="form-inline justify-content-sm-center col-sm-4">
           <div className="form-group has-search">
             <input type="text" class="form-control" placeholder="Search" />
           </div>
@@ -44,43 +44,52 @@ function Header() {
         </button>
 
         <div
-          class="collapse navbar-collapse col-lg-3 col-auto justify-content-sm-center"
+          class="collapse navbar-collapse col-sm-3 justify-content-sm-center"
           id="Navbar"
         >
-          <a class="nav-link" href="#">
-            All Courses
-          </a>
+          {isAuthenticated().role === 0 && (
+            <a class="nav-link col-sm-5" href="#">
+              All Courses
+            </a>
+          )}
 
-          {isAuthenticated() && isAuthenticated().role === 0 ? (
+          {isAuthenticated() ? (
             <ul class="navbar-nav">
-              <li class="nav-item ">
-                <div class="nav-link">
-                  <i class="fa fa-heart fa-lg" aria-hidden="true"></i>
-                  <span className="ml-3 d-inline d-sm-none mr-2">
-                    Favorites
-                  </span>
-                  <span className="rounded-circle pr-1 pl-1 items__dot">
-                    {favoriteItems && favoriteItems.length}
-                  </span>
-                </div>
-              </li>
+              {isAuthenticated().role === 0 && (
+                <li class="nav-item ">
+                  <div class="nav-link">
+                    <i class="fa fa-heart fa-lg" aria-hidden="true"></i>
+                    <span className="ml-3 d-inline d-sm-none mr-2">
+                      Favorites
+                    </span>
+                    <span className="rounded-circle pr-1 pl-1 items__dot">
+                      {favoriteItems && favoriteItems.length}
+                    </span>
+                  </div>
+                </li>
+              )}
+              {isAuthenticated().role === 0 && (
+                <li class="nav-item">
+                  <Link class="nav-link" to="/cart">
+                    <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                    <span className="ml-3 d-inline d-sm-none mr-2">Cart</span>
+                    <span className="rounded-circle pr-1 pl-1 items__dot">
+                      {cartItems && cartItems.length}
+                    </span>
+                  </Link>
+                </li>
+              )}
 
-              <li class="nav-item">
-                <Link class="nav-link" to="/cart">
-                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                  <span className="ml-3 d-inline d-sm-none mr-2">Cart</span>
-                  <span className="rounded-circle pr-1 pl-1 items__dot">
-                    {cartItems && cartItems.length}
-                  </span>
-                </Link>
-              </li>
-
-              <li class="nav-item">
-                <div className="nav-link">
-                  <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
-                  <span className="ml-3 d-inline d-sm-none">Notification</span>
-                </div>
-              </li>
+              {isAuthenticated().role === 0 && (
+                <li class="nav-item">
+                  <div className="nav-link">
+                    <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
+                    <span className="ml-3 d-inline d-sm-none">
+                      Notification
+                    </span>
+                  </div>
+                </li>
+              )}
 
               <div className="dropdown">
                 <button
@@ -107,14 +116,19 @@ function Header() {
               </div>
             </ul>
           ) : (
-            <div className="col">
-              <Link to="/login">
-                <button className="btn btn-primary">Log-in</button>
-              </Link>
-              <Link to="/signup">
-                <button className="btn">Sign-up</button>
-              </Link>
-            </div>
+            <ul class="navbar-nav col-sm-12">
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  <button className="btn btn-primary">Log-in</button>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">
+                  <button className="btn">Sign-up</button>
+                </Link>
+              </li>
+            </ul>
           )}
         </div>
       </div>

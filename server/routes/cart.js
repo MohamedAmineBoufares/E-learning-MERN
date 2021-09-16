@@ -17,5 +17,6 @@ router.post(
 
 router.get("/user", cartController.getUserCart);
 router.post("/remove/:userid/:itemid", cartController.removeFromCart);
+router.post("/empty/:userid", cartController.emptyCart);
 
 module.exports = router;

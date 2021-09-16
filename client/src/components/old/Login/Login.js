@@ -15,7 +15,7 @@ const Login = () => {
     if (isAuthenticated() && isAuthenticated().role === 1) {
       history.push("/admin/dashboard");
     } else if (isAuthenticated() && isAuthenticated().role === 0) {
-      history.push("/user/dashboard");
+      history.push("/feed");
     }
   }, [history]);
   const [formData, setFormData] = useState({

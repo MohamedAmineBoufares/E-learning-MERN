@@ -1,6 +1,8 @@
 import axios from "axios";
+import { sendOrder, uploadPic } from "../../api/order";
 import {
   ADD_TO_CART,
+  CLEAR_CART,
   GET_USER_CART,
   REMOVE_FROM_CART,
 } from "../constants/cartConstants";
@@ -98,38 +100,18 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
   }
 };
 
-export const sendCartToDB = (data, user, src, total) => async (dispatch) => {
+export const sendCartToDB = (data, user, src, total, phoneNumber) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
-    console.log(data);
 
-    const response = await axios.post("/api/cart/add", {
-      userName: user.username,
-      userEmail: user.email,
-      userPhone: "",
-      userID: user._id,
-      course: data.map(
-        ({
-          productName,
-          productID,
-          fileName,
-          productPrice,
-          videoUrl,
-          previewUrl,
-        }) => ({
-          courseID: productID,
-          courseName: productName,
-          courseSrc: fileName,
-          coursePrice: productPrice,
-          videoURL: videoUrl,
-          previewURL: previewUrl,
-          courseFile: "",
-        })
-      ),
-      authorised: "false",
-      picRecipient: src,
-      total: total,
-    });
+    dispatch({ type: START_LOADING });
+    
+    const response = await axios.post(`/api/cart/empty/${user._id}`);
+
+    const uploadCloudinary = await uploadPic(src);
+
+    const pic = uploadCloudinary.data.secure_url
+
+    sendOrder(data, user, pic, total, phoneNumber);
 
     dispatch({ type: STOP_LOADING });
 

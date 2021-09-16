@@ -7,7 +7,7 @@ const AdminBody = () => {
   const { products } = useSelector((state) => state.products);
 
   return (
-    <div className="container">
+    <div className="container pb-2">
       <div className="row">
         <div className="card-deck">
           {products &&

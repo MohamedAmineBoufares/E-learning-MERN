@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from "react";
 import isEmpty from "validator/lib/isEmpty";
-import { showErrorMsg, showSuccessMsg } from "../helpers/message";
-import { showLoading } from "../helpers/loading";
+import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
+import { showLoading } from "../../helpers/loading";
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { clearMessages } from "../redux/actions/messageActions";
-import { createProduct } from "../redux/actions/productActions";
+import { clearMessages } from "../../redux/actions/messageActions";
+import { createProduct } from "../../redux/actions/productActions";
 
 const AdminProductModal = () => {
   /********************************

@@ -91,9 +91,11 @@ function LogInBody() {
       .then((response) => {
         setAuthentication(response.data.token, response.data.user);
 
-        console.log("Redirecting to user dashboard");
-        console.log(getLocalStorage());
-        history.push("/");
+        if (isAuthenticated() && isAuthenticated().role === 0) {
+          console.log("Redirecting to user dashboard");
+          console.log(getLocalStorage());
+          history.push("/");
+        }
       })
       .catch((err) => {
         console.log("signin api function error: ", err);
@@ -119,67 +121,71 @@ function LogInBody() {
    *VIEWS
    *******************************************/
   const showSigninForm = () => (
-    <form className="signinForm" onSubmit={handleSubmit} noValidate>
-      <h3 className="txt1">Welcome Back !</h3>
-      {/* email */}
-      <div className="form-group input-group">
-        <div className=" input-group-prepend">
-          <span className="input-group-text">
-            <i className="fa fa-envelope"></i>
-          </span>
+    <div>
+      <form className="signinForm" onSubmit={handleSubmit} noValidate>
+        <h3 className="txt1">Welcome Back !</h3>
+        {/* email */}
+        <div className="form-group input-group">
+          <div className=" input-group-prepend">
+            <span className="input-group-text">
+              <i className="fa fa-envelope"></i>
+            </span>
+          </div>
+
+          <input
+            name="email"
+            value={email}
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        {/* password */}
+        <div className="form-group input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text">
+              <i className="fa fa-lock"></i>
+            </span>
+          </div>
+          <input
+            name="password"
+            value={password}
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="form-control"
+          />
         </div>
 
-        <input
-          name="email"
-          value={email}
-          type="email"
-          placeholder="Email"
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
-      {/* password */}
-      <div className="form-group input-group">
-        <div className="input-group-prepend">
-          <span className="input-group-text">
-            <i className="fa fa-lock"></i>
-          </span>
+        {/* signin button */}
+        <div className="form-group">
+          <button className="btn mt-3 mb-3 w-100 Signinbtn" type="submit">
+            Log in
+          </button>
         </div>
-        <input
-          name="password"
-          value={password}
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
+      </form>
 
-      {/* signin button */}
-      <div className="form-group">
-        <button className="btn mt-3 mb-3 w-100 Signinbtn" type="submit">
-          Log in
+      <div className="d-flex flex-column">
+        <p className="or__title">OR</p>
+        <button
+          className="btn mt-3 mb-3 w-100 login__google"
+          onClick={signInWithGoogle}
+        >
+          <span>
+            <img className="mr-5" src={google} width="25" alt="google icon" />
+          </span>
+          continue with Google
         </button>
-      </div>
 
-      <p className="or__title">OR</p>
-      <button
-        className="btn mt-3 mb-3 w-100 login__google"
-        onClick={signInWithGoogle}
-      >
-        <span>
-          <img className="mr-5" src={google} width="25" alt="google icon" />
-        </span>
-        continue with Google
-      </button>
-
-      <div className="txt2">
-        Don't have an account?{" "}
-        <a href="/signup">
-          <strong>Sign up</strong>
-        </a>
+        <div className="txt2 text-center">
+          Don't have an account?{" "}
+          <a href="/signup">
+            <strong>Sign up</strong>
+          </a>
+        </div>
       </div>
-    </form>
+    </div>
   );
 
   return (

@@ -16,15 +16,6 @@ function Cart() {
   const { loading } = useSelector((state) => state.loading);
   const items = useSelector((state) => state.cart.items);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      const userID = getLocalStorage("user")._id;
-      dispatch(getUserCart(userID));
-    }
-  }, [dispatch]);
-
   return (
     <div className="col pb-5" style={{ marginTop: "8rem" }}>
       {items.length !== 0 ? <CartWithItems /> : <EmptyCart />}
