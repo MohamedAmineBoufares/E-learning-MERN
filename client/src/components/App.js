@@ -29,6 +29,7 @@ import { getProducts } from "../redux/actions/productActions";
 
 import { showErrorMsg, showSuccessMsg } from "../helpers/message";
 import AdminDashboard from "./admin/AdminDashboard";
+import CourseVideo from "../pages/user/courseVideo/CourseVideo";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,10 @@ const App = () => {
           {/* Cart */}
 
           <UserRoute exact path="/cart" component={Cart} />
+
+          {/* Course Video */}
+
+          <UserRoute exact path="/course/video/:courseID" component={CourseVideo} />
 
           {/* Admin Dashboard */}
 

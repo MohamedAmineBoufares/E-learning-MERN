@@ -21,6 +21,8 @@ export const addToCart = (data, userID) => async (dispatch) => {
       productID: data._id,
       productName: data.productName,
       productPrice: data.productPrice,
+      productDesc: data.productDesc,
+      productCategory: data.productCategory,
       fileName: data.fileName,
       videoUrl: data.videoUrl,
       previewUrl: data.previewUrl,
@@ -41,7 +43,7 @@ export const addToCart = (data, userID) => async (dispatch) => {
       });
     }, 2000);
 
-    return response;
+    //return response;
   } catch (error) {
     console.log("cant add course !");
     dispatch({ type: STOP_LOADING });
@@ -100,50 +102,52 @@ export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
   }
 };
 
-export const sendCartToDB = (data, user, src, total, phoneNumber) => async (dispatch) => {
-  try {
+export const sendCartToDB =
+  (data, user, src, total, phoneNumber) => async (dispatch) => {
+    try {
+      dispatch({ type: START_LOADING });
 
-    dispatch({ type: START_LOADING });
-    
-    const response = await axios.post(`/api/cart/empty/${user._id}`);
+      const response = await axios.post(`/api/cart/empty/${user._id}`);
 
-    const uploadCloudinary = await uploadPic(src);
+      console.log(data.productID);
 
-    const pic = uploadCloudinary.data.secure_url
+      const uploadCloudinary = await uploadPic(src, "UserRecepients");
 
-    sendOrder(data, user, pic, total, phoneNumber);
+      const pic = uploadCloudinary.data.secure_url;
 
-    dispatch({ type: STOP_LOADING });
+      sendOrder(data, user, pic, total, phoneNumber);
 
-    dispatch({
-      type: SHOW_SUCCESS_MESSAGE,
-      payload: "Mregel ye ROJLA !",
-    });
+      dispatch({ type: STOP_LOADING });
 
-    setTimeout(() => {
       dispatch({
-        type: CLEAR_MESSAGES,
+        type: SHOW_SUCCESS_MESSAGE,
+        payload: "Mregel ye ROJLA !",
       });
-    }, 2000);
 
-    return response;
-  } catch (err) {
-    console.log("send chtraba9a api error: ", err);
+      setTimeout(() => {
+        dispatch({
+          type: CLEAR_MESSAGES,
+        });
+      }, 2000);
 
-    dispatch({ type: STOP_LOADING });
+      return response;
+    } catch (err) {
+      console.log("send chtraba9a api error: ", err);
 
-    dispatch({
-      type: SHOW_ERROR_MESSAGE,
-      payload: "NOPE !",
-    });
+      dispatch({ type: STOP_LOADING });
 
-    setTimeout(() => {
       dispatch({
-        type: CLEAR_MESSAGES,
+        type: SHOW_ERROR_MESSAGE,
+        payload: "NOPE !",
       });
-    }, 2000);
-  }
-};
+
+      setTimeout(() => {
+        dispatch({
+          type: CLEAR_MESSAGES,
+        });
+      }, 2000);
+    }
+  };
 
 export const getUserCart = (userID) => async (dispatch) => {
   try {

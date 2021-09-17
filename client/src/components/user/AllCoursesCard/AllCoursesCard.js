@@ -25,6 +25,8 @@ function AllCoursesCard({ product }) {
   const productPrice = product.productPrice;
   const videoUrl = product.videoUrl;
   const previewUrl = product.previewUrl;
+  const productDesc = product.productDesc;
+  const productCategory = product.productCategory.category;
   const _id = product._id;
 
   useEffect(() => {
@@ -40,6 +42,8 @@ function AllCoursesCard({ product }) {
       productPrice,
       videoUrl,
       previewUrl,
+      productDesc,
+      productCategory,
       _id,
     };
 
@@ -54,6 +58,8 @@ function AllCoursesCard({ product }) {
       productPrice,
       videoUrl,
       previewUrl,
+      productDesc,
+      productCategory,
       _id,
     };
 
@@ -66,7 +72,7 @@ function AllCoursesCard({ product }) {
       <div class="card">
         <img
           class="card-img-top"
-          src={`/server/uploads/${product.fileName}`}
+          src={`/uploads/${fileName}`}
           alt={product.productName}
           title={product.productName}
         />

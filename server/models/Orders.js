@@ -11,6 +11,8 @@ const OrdersSchema = new mongoose.Schema({
       courseName: String,
       courseSrc: String,
       coursePrice: String,
+      courseDesc: String,
+      courseCategory: String,
       videoURL: String,
       previewURL: String,
       courseFile: String,

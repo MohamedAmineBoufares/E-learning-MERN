@@ -14,12 +14,16 @@ export const addToFavorite = (data, userID) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
+    console.log(data._id)
+
     const response = await axios.post(
       `/api/favortie/add/favortie/item?id=${userID}`,
       {
         productID: data._id,
         productName: data.productName,
         productPrice: data.productPrice,
+        productDesc: data.productDesc,
+        productCategory: data.productCategory,
         fileName: data.fileName,
         videoUrl: data.videoUrl,
         previewUrl: data.previewUrl,
@@ -33,7 +37,7 @@ export const addToFavorite = (data, userID) => async (dispatch) => {
       payload: "Mregel ye ROJLA !",
     });
 
-    return response;
+    //return response;
   } catch (error) {
     console.log("cant add to favorites !");
     dispatch({ type: STOP_LOADING });

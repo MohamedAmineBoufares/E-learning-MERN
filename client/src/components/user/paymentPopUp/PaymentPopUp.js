@@ -16,7 +16,6 @@ function PaymentPopUp({ total }) {
 
   const dispatch = useDispatch();
 
-  const [send, setSend] = useState(true);
   const [userName, setUserName] = useState("");
 
   // states for the request

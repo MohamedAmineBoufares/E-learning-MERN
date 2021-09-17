@@ -67,66 +67,22 @@ function ClientInfos({
       </div>
 
       <div className="card-footer">
-        <button href="#" class="btn btn-info mr-3">
-          Accept
-        </button>
+        {loading ? (
+          <div>{showLoading()}</div>
+        ) : (
+          <div>
+            <button href="#" class="btn btn-info mr-3" onClick={submitOrder}>
+              Accept
+            </button>
 
-        <button class="btn btn-outline-danger">Refuse</button>
+            <button class="btn btn-outline-danger" onClick={declineOrder}>
+              Refuse
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default ClientInfos;
-
-{
-  /* <table className="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Students</th>
-          <th scope="col">Courses</th>
-          <th scope="col">To Pay</th>
-          <th scope="col">Payment reciept</th>
-          <th scope="col">Process</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <th scope="row">
-            <h5>{userName}</h5>
-            <h6>{userMail}</h6>
-            <h6>{userGsm}</h6>
-          </th>
-
-          <ul>
-            {courses && courses.map(({ courseName }) => <li>{courseName}</li>)}
-          </ul>
-
-          <th>
-            <h3>{total} DT</h3>
-          </th>
-
-          <a className="download" href={srcRecep} download>
-            donwload
-          </a>
-
-          <th>
-            {loading ? (
-              <div>{showLoading()}</div>
-            ) : (
-              <div className="col d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={submitOrder}>
-                  Accept
-                </button>
-
-                <button className="btn" onClick={declineOrder}>
-                  Refuse
-                </button>
-              </div>
-            )}
-          </th>
-        </tr>
-      </tbody>
-    </table> */
-}

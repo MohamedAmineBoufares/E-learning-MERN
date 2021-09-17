@@ -1,4 +1,5 @@
 import axios from "axios";
+import { uploadPic } from "../../api/order";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import {
   CLEAR_MESSAGES,
@@ -15,8 +16,17 @@ import {
 export const createProduct = (formData) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
+
+    const src = formData.productImage;
+
+    const uploadCloudinary = await uploadPic(src, "CourseThumbnails");
+
+    const pic = uploadCloudinary.data.secure_url;
+
     const response = await axios.post("/api/product", formData);
+    
     dispatch({ type: STOP_LOADING });
+
     dispatch({
       type: SHOW_SUCCESS_MESSAGE,
       payload: response.data.successMessage,
