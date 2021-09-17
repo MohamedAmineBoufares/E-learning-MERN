@@ -27,10 +27,16 @@ a:hover {
 }
 
 .items__dot {
-  
   color: #fff;
   font-size: 0.8rem;
   background-color: #ed143dc2;
-  
+
   font-weight: 900;
+}
+
+.fav__drop__down {
+  max-height: 18rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }

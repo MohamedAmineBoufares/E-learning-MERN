@@ -9,6 +9,8 @@ import { isAuthenticated } from "../../../helpers/auth";
 
 import { useSelector } from "react-redux";
 
+import FavCard from "../favCard/FavCard";
+
 function Header() {
   const cartItems = useSelector((state) => state.cart.items);
   const favoriteItems = useSelector((state) => state.favorite.items);
@@ -48,16 +50,21 @@ function Header() {
           id="Navbar"
         >
           {isAuthenticated().role === 0 && (
-            <a class="nav-link col-sm-5" href="#">
+            <Link to="/feed" class="nav-link col-sm-5">
               All Courses
-            </a>
+            </Link>
           )}
 
           {isAuthenticated() ? (
             <ul class="navbar-nav">
               {isAuthenticated().role === 0 && (
-                <li class="nav-item ">
-                  <div class="nav-link">
+                <div class="dropdown">
+                  <button
+                    class="nav-link btn"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
                     <i class="fa fa-heart fa-lg" aria-hidden="true"></i>
                     <span className="ml-3 d-inline d-sm-none mr-2">
                       Favorites
@@ -65,8 +72,23 @@ function Header() {
                     <span className="rounded-circle pr-1 pl-1 items__dot">
                       {favoriteItems && favoriteItems.length}
                     </span>
+                  </button>
+
+                  <div
+                    class="dropdown-menu dropdown-menu-right fav__drop__down"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    {favoriteItems &&
+                      favoriteItems.map(({ productName, productID,fileName, _id }) => (
+                        <FavCard
+                          key={_id}
+                          courseName={productName}
+                          courseID={productID}
+                          courseSrc={fileName}
+                        />
+                      ))}
                   </div>
-                </li>
+                </div>
               )}
               {isAuthenticated().role === 0 && (
                 <li class="nav-item">
