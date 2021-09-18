@@ -13,13 +13,14 @@ function CartWithItems() {
   return (
     <div className="row">
       <div className="col-sm-8">
-        {items.map(({ fileName, productName, productPrice, _id }) => (
+        {items.map(({ fileName, productName, productPrice, _id, productID }) => (
           <CartItem
             key={_id}
             fileName={fileName}
             productName={productName}
             productPrice={productPrice}
             _id={_id}
+            productID={productID}
           />
         ))}
       </div>

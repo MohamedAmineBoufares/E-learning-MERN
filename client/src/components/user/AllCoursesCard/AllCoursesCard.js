@@ -9,15 +9,15 @@ import { getLocalStorage } from "../../../helpers/localStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/actions/cartActions";
 import { addToFavorite } from "../../../redux/actions/favoriteActions";
-import { clearMessages } from "../../../redux/actions/messageActions";
 import { isAuthenticated } from "../../../helpers/auth";
-import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
-import PaymentPopUp from "../paymentPopUp/PaymentPopUp";
+
 
 function AllCoursesCard({ product }) {
   const dispatch = useDispatch();
+  
 
   const [userID, setUserID] = useState();
+
 
   // Constes so I can recall them inside an object, later
   const productName = product.productName;
@@ -30,10 +30,13 @@ function AllCoursesCard({ product }) {
   const _id = product._id;
 
   useEffect(() => {
+    
     if (isAuthenticated() && isAuthenticated().role === 0) {
       setUserID(getLocalStorage("user")._id);
     }
   }, []);
+
+  
 
   const addCart = () => {
     const item = {

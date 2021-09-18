@@ -19,7 +19,7 @@ const cartReducers = (state = INITIAL_STATE, action) => {
 
     case REMOVE_FROM_CART:
       const index = state.items.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item.productID === action.payload
       );
       let newCart = [...state.items];
       if (index >= 0) {

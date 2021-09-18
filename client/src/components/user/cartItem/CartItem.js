@@ -7,13 +7,13 @@ import { isAuthenticated } from "../../../helpers/auth";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 
-function CartItem({ fileName, productName, productPrice, _id }) {
+function CartItem({ fileName, productName, productPrice, _id, productID }) {
   const dispatch = useDispatch();
 
   const remove = () => {
     if (isAuthenticated()) {
       const userID = getLocalStorage("user")._id;
-      dispatch(removeFromCart(userID, { _id }, _id));
+      dispatch(removeFromCart(userID, productID));
     }
   };
 

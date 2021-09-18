@@ -28,7 +28,15 @@ export const addToCart = (data, userID) => async (dispatch) => {
       previewUrl: data.previewUrl,
     });
 
-    dispatch({ type: ADD_TO_CART, payload: data });
+    dispatch({ type: ADD_TO_CART, payload: 
+      {productID: data._id,
+      productName: data.productName,
+      productPrice: data.productPrice,
+      productDesc: data.productDesc,
+      productCategory: data.productCategory,
+      fileName: data.fileName,
+      videoUrl: data.videoUrl,
+      previewUrl: data.previewUrl,} });
 
     dispatch({ type: STOP_LOADING });
 
@@ -61,13 +69,13 @@ export const addToCart = (data, userID) => async (dispatch) => {
   }
 };
 
-export const removeFromCart = (userID, _id, itemID) => async (dispatch) => {
+export const removeFromCart = (userID, itemID) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
     const response = await axios.post(`/api/cart/remove/${userID}/${itemID}`);
 
-    dispatch({ type: REMOVE_FROM_CART, payload: _id });
+    dispatch({ type: REMOVE_FROM_CART, payload: itemID });
 
     dispatch({ type: STOP_LOADING });
 

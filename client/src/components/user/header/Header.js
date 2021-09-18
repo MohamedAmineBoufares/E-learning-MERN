@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import "./header.css";
@@ -10,10 +10,18 @@ import { isAuthenticated } from "../../../helpers/auth";
 import { useSelector } from "react-redux";
 
 import FavCard from "../favCard/FavCard";
+import EmptyFav from "../../emptyFav/EmptyFav";
 
 function Header() {
   const cartItems = useSelector((state) => state.cart.items);
   const favoriteItems = useSelector((state) => state.favorite.items);
+  const allCourses = useSelector((state) => state.products.products);
+
+  const [filtredProduct, setFiltredProducts] = useState([]);
+
+  useEffect(() => {
+    setFiltredProducts(allCourses);
+  }, [allCourses]);
 
   const logOut = () => {
     logout(() => {
@@ -23,6 +31,17 @@ function Header() {
     window.location.reload();
   };
 
+  const handleSearch = (e) => {
+    let value = e.target.value.toLowerCase();
+    let result = [allCourses];
+
+    result = allCourses.filter((data) => {
+      return data.productName.toLowerCase().search(value) !== -1;
+    });
+
+    setFiltredProducts(result);
+  };
+
   return (
     <nav class="navbar navbar-light navbar-expand-sm fixed-top ">
       <div class="container col-sm-12">
@@ -30,11 +49,25 @@ function Header() {
           Logo
         </a>
 
-        <form className="form-inline justify-content-sm-center col-sm-4">
-          <div className="form-group has-search">
-            <input type="text" class="form-control" placeholder="Search" />
+        <div className="dropdown form-group">
+          <input
+            className="form-control"
+            type="text"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            placeholder="Search course"
+            onChange={(e) => handleSearch(e)}
+          ></input>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {filtredProduct.map(({ productName, _id }) => (
+              <Link className="dropdown-item" to={`/courseInfos/${_id}`}>
+                {productName}
+              </Link>
+            ))}
           </div>
-        </form>
+        </div>
 
         <button
           class="navbar-toggler"
@@ -78,15 +111,21 @@ function Header() {
                     class="dropdown-menu dropdown-menu-right fav__drop__down"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    {favoriteItems &&
-                      favoriteItems.map(({ productName, productID,fileName, _id }) => (
-                        <FavCard
-                          key={_id}
-                          courseName={productName}
-                          courseID={productID}
-                          courseSrc={fileName}
-                        />
-                      ))}
+                    {favoriteItems.length !== 0 ? (
+                      favoriteItems.map(
+                        ({ productName, productID, fileName, _id }) => (
+                          <FavCard
+                            key={_id}
+                            courseName={productName}
+                            courseID={productID}
+                            courseSrc={fileName}
+                            _id={_id}
+                          />
+                        )
+                      )
+                    ) : (
+                      <EmptyFav />
+                    )}
                   </div>
                 </div>
               )}

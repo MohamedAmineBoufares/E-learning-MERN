@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AllCourses.css";
 import AllCoursesCard from "../AllCoursesCard/AllCoursesCard";
 
@@ -10,7 +10,33 @@ import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from "react-redux";
 
 function AllCourses() {
-  const { products } = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.products);
+  const categories = useSelector((state) => state.categories.categories);
+
+  const [filtredProduct, setFiltredProducts] = useState([]);
+
+  // const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    setFiltredProducts(products);
+  }, [products]);
+
+  const handleSearch = (e) => {
+    const filter = e.target.value;
+    let result = [products];
+
+    if (filter === "all") {
+      setFiltredProducts(products);
+    } else {
+      result = products.filter((data) => {
+        return (
+          data.productCategory.category.toLowerCase().search(filter) !== -1
+        );
+      });
+
+      setFiltredProducts(result);
+    }
+  };
 
   const settings = {
     dots: true,
@@ -49,27 +75,29 @@ function AllCourses() {
 
       <div className="row mb-5 justify-content-center">
         <div class="input-group col-sm-5 justify-content-center">
-          <select class="custom-select" id="inputGroupSelect04">
-            <option selected>All courses</option>
-            <option value="1">Marketing</option>
-            <option value="2">Spnosoring</option>
-            <option value="3">Freelancing</option>
+          <select
+            class="custom-select"
+            id="inputGroupSelect04"
+            onChange={(e) => handleSearch(e)}
+          >
+            <option selected value="all">
+              All courses
+            </option>
+            {categories.map(({ category }) => (
+              <option value={category.toLowerCase()}>{category}</option>
+            ))}
           </select>
-          <div class="input-group-append">
-            <button class="btn btn-danger" type="button">
-              Select
-            </button>
-          </div>
+         
         </div>
       </div>
 
       <div class="row justify-content-sm-center">
         <div class="col col-sm-10">
           <Slider {...settings}>
-          {products &&
-            products.map((product) => (
-              <AllCoursesCard key={product._id} product={product} />
-            ))}
+            {products &&
+              filtredProduct.map((product) => (
+                <AllCoursesCard key={product._id} product={product} />
+              ))}
           </Slider>
         </div>
       </div>

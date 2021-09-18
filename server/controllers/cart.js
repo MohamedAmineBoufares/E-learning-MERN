@@ -47,7 +47,7 @@ exports.getUserCart = async (req, res) => {
 exports.removeFromCart = async (req, res) => {
   User.updateOne(
     { _id: req.params.userid },
-    { $pull: { cart: { _id: req.params.itemid } } },
+    { $pull: { cart: { productID: req.params.itemid } } },
     (err, data) => {
       if (err) {
         res.status(500).send(err);

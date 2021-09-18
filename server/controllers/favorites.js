@@ -1,8 +1,5 @@
 const User = require("../models/User");
 
-// Controller resonasable for adding a new course to the user
-//collection once the user buys a new one
-
 exports.addFavController = async (req, res) => {
   User.updateOne(
     { _id: req.query.id },
@@ -28,4 +25,19 @@ exports.getUserFavorite = async (req, res) => {
       res.status(200).send(data);
     }
   });
+};
+
+exports.removeFromFav = async (req, res) => {
+  console.log("Hello");
+  User.updateOne(
+    { _id: req.params.userid },
+    { $pull: { favortie: { productID: req.params.itemid } } },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  );
 };

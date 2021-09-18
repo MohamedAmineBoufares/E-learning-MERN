@@ -27,7 +27,7 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/cart", cartRoutes);
-app.use("/api/favortie", favoritesRoutes);
+app.use("/api/favorite", favoritesRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/email", emailRoutes);
