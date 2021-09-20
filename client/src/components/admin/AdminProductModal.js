@@ -1,7 +1,12 @@
 import React, { Fragment, useState } from "react";
+
+import { v4 as uuidv4 } from "uuid";
+
 import isEmpty from "validator/lib/isEmpty";
+
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { showLoading } from "../../helpers/loading";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { clearMessages } from "../../redux/actions/messageActions";
@@ -19,6 +24,10 @@ const AdminProductModal = () => {
   /********************************
    * COMPONENT STATE PROPERTIES
    ********************************/
+
+  const [inputFields, setInputFields] = useState([
+    { id: uuidv4(), chapterName: "", chapterURL: "" },
+  ]);
   const [clientSideError, setClientSideError] = useState("");
   const [productData, setProductData] = useState({
     productImage: null,
@@ -66,40 +75,69 @@ const AdminProductModal = () => {
   const handleProductSubmit = (evt) => {
     evt.preventDefault();
 
-    if (productImage === null) {
-      setClientSideError("Please select a thumbnail");
-    } else if (
-      isEmpty(productName) ||
-      isEmpty(productDesc) ||
-      isEmpty(productPrice) ||
-      isEmpty(videoUrl) ||
-      isEmpty(previewUrl)
-    ) {
-      setClientSideError("All fields are required");
-    } else if (isEmpty(productCategory)) {
-      setClientSideError("Please select a category");
-    } else {
-      let formData = new FormData();
+    console.log("Hola !", inputFields);
 
-      formData.append("productImage", productImage);
-      formData.append("productName", productName);
-      formData.append("productDesc", productDesc);
-      formData.append("productPrice", productPrice);
-      formData.append("productCategory", productCategory);
-      formData.append("videoUrl", videoUrl);
-      formData.append("previewUrl", previewUrl);
+    // if (productImage === null) {
+    //   setClientSideError("Please select a thumbnail");
+    // } else if (
+    //   isEmpty(productName) ||
+    //   isEmpty(productDesc) ||
+    //   isEmpty(productPrice) ||
+    //   isEmpty(videoUrl) ||
+    //   isEmpty(previewUrl)
+    // ) {
+    //   setClientSideError("All fields are required");
+    // } else if (isEmpty(productCategory)) {
+    //   setClientSideError("Please select a category");
+    // } else {
+    //   let formData = new FormData();
 
-      dispatch(createProduct(formData));
-      setProductData({
-        productImage: null,
-        productName: "",
-        productDesc: "",
-        productPrice: "",
-        productCategory: "",
-        videoUrl: "",
-        previewUrl: "",
-      });
-    }
+    //   formData.append("productImage", productImage);
+    //   formData.append("productName", productName);
+    //   formData.append("productDesc", productDesc);
+    //   formData.append("productPrice", productPrice);
+    //   formData.append("productCategory", productCategory);
+    //   formData.append("videoUrl", videoUrl);
+    //   formData.append("previewUrl", previewUrl);
+
+    //   dispatch(createProduct(formData));
+    //   setProductData({
+    //     productImage: null,
+    //     productName: "",
+    //     productDesc: "",
+    //     productPrice: "",
+    //     productCategory: "",
+    //     videoUrl: "",
+    //     previewUrl: "",
+    //   });
+    // }
+  };
+
+  const handleChangeInput = (id, event) => {
+    const newInputFields = inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    setInputFields(newInputFields);
+  };
+
+  const handleAddFields = () => {
+    setInputFields([
+      ...inputFields,
+      { id: uuidv4(), chapterName: "", chapterURL: "" },
+    ]);
+  };
+
+  const handleRemoveFields = (id) => {
+    const values = [...inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    setInputFields(values);
   };
 
   /********************************
@@ -126,7 +164,7 @@ const AdminProductModal = () => {
               {loading ? (
                 <div className="text-center">{showLoading()} </div>
               ) : (
-                <Fragment>
+                <div className="container">
                   <div className="custom-file mb-2">
                     <input
                       type="file"
@@ -137,7 +175,7 @@ const AdminProductModal = () => {
                     <label className="custom-file-label">Choose File</label>
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group mt-2">
                     <label className="text-secondary">Name</label>
                     <input
                       type="text"
@@ -148,29 +186,30 @@ const AdminProductModal = () => {
                     />
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group mt-2">
                     <label className="text-secondary">Description</label>
                     <textarea
                       rows="3"
-                      className="form-control"
+                      className="form-control p-3"
                       name="productDesc"
                       value={productDesc}
                       onChange={handleProductChange}
                     ></textarea>
-
-                    <div className="form-group">
-                      <label className="text-secondary">Price</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="productPrice"
-                        value={productPrice}
-                        onChange={handleProductChange}
-                      />
-                    </div>
                   </div>
 
-                  <div className="form-row">
+                  <div className="form-group mt-2">
+                    <label className="text-secondary">Price</label>
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control"
+                      name="productPrice"
+                      value={productPrice}
+                      onChange={handleProductChange}
+                    />
+                  </div>
+
+                  <div className="form-row mt-2">
                     <label className="text-secondary">Category</label>
                     <select
                       className="custom-select mr-sm-2"
@@ -187,30 +226,65 @@ const AdminProductModal = () => {
                     </select>
                   </div>
 
-                  <div className="form-group" rows="3">
-                    <label className="text-secondary">video URL</label>
+                  <div className="form-group mt-2">
+                    <label className="text-secondary">video Preview URL</label>
                     <input
                       type="text"
                       className="form-control"
-                      name="videoUrl"
-                      value={videoUrl}
+                      name="previewUrl"
+                      value={previewUrl}
                       onChange={handleProductChange}
                     />
-
-                    <div className="form-group">
-                      <label className="text-secondary">
-                        video Preview URL
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="previewUrl"
-                        value={previewUrl}
-                        onChange={handleProductChange}
-                      />
-                    </div>
                   </div>
-                </Fragment>
+
+                  <div className="form-group" rows="3">
+                    <h4>Add course chapters</h4>
+                    {inputFields.map(({ id, chapterName, chapterURL }, i) => (
+                      <div key={id}>
+                        <label className="text-secondary mt-2">
+                          Chapter {i + 1} name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="chapterName"
+                          value={chapterName}
+                          onChange={(e) => handleChangeInput(id, e)}
+                        />
+
+                        <label className="text-secondary mt-2">
+                          Chapter {i + 1} URL
+                        </label>
+
+                        <div className="d-flex">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="chapterURL"
+                            value={chapterURL}
+                            onChange={(e) => handleChangeInput(id, e)}
+                          />
+                          <button
+                            className="btn"
+                            onClick={() => handleRemoveFields(id)}
+                            title="Remove this chapter"
+                            disabled={inputFields.length === 1}
+                            style={{ display: i+1 === 1 ? "none" : "block" }}
+                          >
+                            <i
+                              class="fa fa-minus-circle"
+                              aria-hidden="true"
+                            ></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    <button className="btn mt-2" onClick={handleAddFields}>
+                      <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>
+                      Add a new chapter
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
             <div className="modal-footer">
