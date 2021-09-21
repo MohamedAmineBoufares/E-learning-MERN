@@ -85,8 +85,6 @@ export const setAuthorised = (userID, courseID) => async (dispatch) => {
       `/api/user/get/authorised/${userID}/${courseID}`
     );
 
-    console.log("AUTH !", response.data[0].authorised);
-
     dispatch({ type: STOP_LOADING });
 
     dispatch({

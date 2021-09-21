@@ -72,12 +72,13 @@ function AllCoursesCard({ product }) {
 
   return (
     <div className="col mb-5">
-      <div class="card">
+      <div class="card card__all__courses__container">
         <img
           class="card-img-top"
-          src={`/uploads/${fileName}`}
+          src={fileName}
           alt={product.productName}
           title={product.productName}
+          height="200"
         />
         <div class="card-body col-sm-12">
           <h4 className="card-text">{product.productPrice} DT</h4>

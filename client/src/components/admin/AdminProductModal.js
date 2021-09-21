@@ -28,7 +28,11 @@ const AdminProductModal = () => {
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), chapterName: "", chapterURL: "" },
   ]);
+
   const [clientSideError, setClientSideError] = useState("");
+
+  const [coursePDF, setCoursePDF] = useState("");
+
   const [productData, setProductData] = useState({
     productImage: null,
     productName: "",
@@ -75,42 +79,51 @@ const AdminProductModal = () => {
   const handleProductSubmit = (evt) => {
     evt.preventDefault();
 
-    console.log("Hola !", inputFields);
+    if (productImage === null) {
+      setClientSideError("Please select a thumbnail");
+    } else if (
+      isEmpty(productName) ||
+      isEmpty(productDesc) ||
+      isEmpty(productPrice) ||
+      isEmpty(previewUrl)
+    ) {
+      setClientSideError("All fields are required");
+    } else if (isEmpty(productCategory)) {
+      setClientSideError("Please select a category");
+    } else {
+      // let formData = new FormData();
 
-    // if (productImage === null) {
-    //   setClientSideError("Please select a thumbnail");
-    // } else if (
-    //   isEmpty(productName) ||
-    //   isEmpty(productDesc) ||
-    //   isEmpty(productPrice) ||
-    //   isEmpty(videoUrl) ||
-    //   isEmpty(previewUrl)
-    // ) {
-    //   setClientSideError("All fields are required");
-    // } else if (isEmpty(productCategory)) {
-    //   setClientSideError("Please select a category");
-    // } else {
-    //   let formData = new FormData();
+      // formData.append("productImage", productImage);
+      // formData.append("productName", productName);
+      // formData.append("productDesc", productDesc);
+      // formData.append("productPrice", productPrice);
+      // formData.append("productCategory", productCategory);
+      // // formData.append("chapters", inputFields);
+      // formData.append("previewUrl", previewUrl);
 
-    //   formData.append("productImage", productImage);
-    //   formData.append("productName", productName);
-    //   formData.append("productDesc", productDesc);
-    //   formData.append("productPrice", productPrice);
-    //   formData.append("productCategory", productCategory);
-    //   formData.append("videoUrl", videoUrl);
-    //   formData.append("previewUrl", previewUrl);
+      const dataToSend = {
+        productImage,
+        productName,
+        productDesc,
+        productPrice,
+        productCategory,
+        previewUrl,
+        inputFields,
+        coursePDF,
+      };
 
-    //   dispatch(createProduct(formData));
-    //   setProductData({
-    //     productImage: null,
-    //     productName: "",
-    //     productDesc: "",
-    //     productPrice: "",
-    //     productCategory: "",
-    //     videoUrl: "",
-    //     previewUrl: "",
-    //   });
-    // }
+      dispatch(createProduct(dataToSend));
+      setProductData({
+        productImage: null,
+        productName: "",
+        productDesc: "",
+        productPrice: "",
+        productCategory: "",
+        videoUrl: "",
+        previewUrl: "",
+      });
+      setCoursePDF("");
+    }
   };
 
   const handleChangeInput = (id, event) => {
@@ -147,7 +160,7 @@ const AdminProductModal = () => {
     <div id="addCourseModal" className="modal" onClick={handleMessages}>
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
-          <form onSubmit={handleProductSubmit}>
+          <div>
             <div className="modal-header bg-warning text-white">
               <h5 className="modal-title">Add Course</h5>
               <button className="close" data-dismiss="modal">
@@ -227,6 +240,17 @@ const AdminProductModal = () => {
                   </div>
 
                   <div className="form-group mt-2">
+                    <label className="text-secondary">Course PDF link</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="coursePDF"
+                      value={coursePDF}
+                      onChange={(e) => setCoursePDF(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="form-group mt-2">
                     <label className="text-secondary">video Preview URL</label>
                     <input
                       type="text"
@@ -269,7 +293,7 @@ const AdminProductModal = () => {
                             onClick={() => handleRemoveFields(id)}
                             title="Remove this chapter"
                             disabled={inputFields.length === 1}
-                            style={{ display: i+1 === 1 ? "none" : "block" }}
+                            style={{ display: i + 1 === 1 ? "none" : "block" }}
                           >
                             <i
                               class="fa fa-minus-circle"
@@ -291,11 +315,15 @@ const AdminProductModal = () => {
               <button className="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
-              <button type="submit" className="btn btn-warning text-white">
+              <button
+                type="submit"
+                className="btn btn-warning text-white"
+                onClick={handleProductSubmit}
+              >
                 Submit
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

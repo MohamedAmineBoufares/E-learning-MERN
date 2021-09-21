@@ -26,7 +26,6 @@ function Feed() {
       dispatch(getUserCart(userID));
       dispatch(getUserFavorite(userID));
       dispatch(getUserCourses(userID));
-      console.log("Hola !");
     }
   }, [dispatch]);
   return (

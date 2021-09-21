@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CourseVideo.css";
 
 import { withRouter, Link } from "react-router-dom";
@@ -23,6 +23,8 @@ function CourseVideo(props) {
 
   const dispatch = useDispatch();
 
+  const [courseURL, setCourseURL] = useState({});
+
   useEffect(() => {
     if (isAuthenticated()) {
       const userID = getLocalStorage("user")._id;
@@ -30,6 +32,15 @@ function CourseVideo(props) {
       dispatch(getProduct(courseID));
     }
   }, [dispatch, courseID]);
+
+  const iFrame = () => (
+    <iframe
+      title="Course Video"
+      className="embed-responsive-item"
+      src={courseURL.chapterVideo}
+      type="video/mp4"
+    ></iframe>
+  );
 
   return (
     <div className="col mt-5 pb-5">
@@ -53,19 +64,21 @@ function CourseVideo(props) {
             <div className="col">
               <div className="row justify-content-center">
                 <div className="embed-responsive embed-responsive-16by9 mb-4 w-75">
-                  {course && (
-                    <iframe
-                      title="Course Video"
-                      className="embed-responsive-item"
-                      src={course.videoUrl}
-                      type="video/mp4"
-                    ></iframe>
-                  )}
+                  {course && iFrame()}
                 </div>
               </div>
 
               <div className="row justify-content-center mb-3">
-                <button className="btn btn-primary">Download course PDF</button>
+                {course && (
+                  <a
+                    className="btn btn-primary"
+                    href={course.coursePDF}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download course PDF
+                  </a>
+                )}
               </div>
 
               <div className="col border border-dark pt-2">
@@ -76,6 +89,27 @@ function CourseVideo(props) {
                 <div className="row m-2">
                   {course && <p>{course.productDesc}</p>}
                 </div>
+                <div className="row m-2">
+                  <h3>Course chapters</h3>
+                </div>
+                <ul className="col m-2">
+                  {course &&
+                    course.chapters.map(
+                      ({ _id, chapterName, chapterVideo }) => (
+                        <li key={_id}>
+                          <button
+                            className="btn"
+                            href="#"
+                            onClick={() =>
+                              setCourseURL({ chapterName, chapterVideo })
+                            }
+                          >
+                            {chapterName}
+                          </button>
+                        </li>
+                      )
+                    )}
+                </ul>
               </div>
             </div>
           ) : (

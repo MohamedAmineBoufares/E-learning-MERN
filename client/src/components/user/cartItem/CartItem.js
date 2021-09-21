@@ -25,7 +25,7 @@ function CartItem({ fileName, productName, productPrice, _id, productID }) {
             <div className="col-sm-3 d-flex justify-content-center">
               <img
                 width="200"
-                src="https://elearningindustry.com/wp-content/uploads/2020/12/how-to-improve-your-elearning-course-cover-design.png"
+                src={fileName}
                 alt="course cover"
               />
             </div>

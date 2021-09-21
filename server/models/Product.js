@@ -26,16 +26,22 @@ const ProductSchema = new mongoose.Schema({
     ref: "Category",
     required: true,
   },
-  videoUrl: {
-    type: "String",
-    required: true,
-    trim: true,
-  },
+  
+  chapters: [
+    {
+      id: String,
+      chapterName: String,
+      chapterVideo: String,
+    },
+  ],
+
   previewUrl: {
     type: "String",
     required: true,
     trim: true,
   },
+
+  coursePDF: String,
 });
 
 const Product = mongoose.model("Product", ProductSchema);

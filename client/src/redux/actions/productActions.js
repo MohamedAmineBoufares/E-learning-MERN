@@ -13,18 +13,21 @@ import {
   DELETE_PRODUCT,
 } from "../constants/productConstants";
 
-export const createProduct = (formData) => async (dispatch) => {
+export const createProduct = (data) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
-    const src = formData.productImage;
+    const src = data.productImage;
 
-    const uploadCloudinary = await uploadPic(src, "CourseThumbnails");
+    const uploadCloudinaryPIC = await uploadPic(src, "CourseThumbnails");
+    const pic = uploadCloudinaryPIC.data.secure_url;
 
-    const pic = uploadCloudinary.data.secure_url;
+    data.productImage = pic;
 
-    const response = await axios.post("/api/product", formData);
-    
+    console.log("AFTER! ", data);
+
+    const response = await axios.post("/api/product", data);
+
     dispatch({ type: STOP_LOADING });
 
     dispatch({
