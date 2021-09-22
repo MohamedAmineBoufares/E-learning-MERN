@@ -8,7 +8,7 @@ const Card = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="col-md-4 my-3">
+    <div className="col-sm-8 my-3">
       <div className="card h-100">
         <a href="#!">
           <img

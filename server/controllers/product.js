@@ -80,14 +80,38 @@ exports.read = async (req, res) => {
 exports.update = async (req, res) => {
   const productId = req.params.productId;
 
-  req.body.fileName = req.file.filename;
+  const {
+    productImage,
+    productName,
+    productDesc,
+    productPrice,
+    productCategory,
+    previewUrl,
+    chapters,
+    coursePDF,
+  } = req.body;
+  console.log(req.body)
 
-  const oldProduct = await Product.findByIdAndUpdate(productId, req.body);
-
-  fs.unlink(`uploads/${oldProduct.fileName}`, (err) => {
-    if (err) throw err;
-    console.log("Image successfully deleted from the filesystem");
+  await Product.findOneAndUpdate(productId, {
+    fileName: productImage,
+    productName: productName,
+    productDesc: productDesc,
+    productPrice: productPrice,
+    productCategory: productCategory,
+    videoUrl: "",
+    chapters: chapters.map(({ id, chapterName, chapterVideo }) => ({
+      id: id,
+      chapterName: chapterName,
+      chapterVideo: chapterVideo,
+    })),
+    previewUrl: previewUrl,
+    coursePDF: coursePDF,
   });
+
+  // fs.unlink(`uploads/${oldProduct.fileName}`, (err) => {
+  //   if (err) throw err;
+  //   console.log("Image successfully deleted from the filesystem");
+  // });
 
   res.json({
     successMessage: "Product successfully updated",

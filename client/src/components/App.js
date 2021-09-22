@@ -5,10 +5,6 @@ import "./App.css";
 
 import Header from "./user/header/Header";
 
-// import AdminDashboard from "./AdminDashboard";
-// import AdminEditProduct from "./AdminEditProduct";
-// import NotFound from "./NotFound";
-
 // Pages
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,6 +13,7 @@ import Feed from "../pages/user/feed/Feed";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
 import Cart from "../pages/user/cart/Cart";
+import AdminEditProduct from "../components/admin/AdminEditProduct"
 
 // Routes
 import UserRoute from "./user/UserRoute";
@@ -75,6 +72,8 @@ const App = () => {
             path="/admin/dashboard"
             component={AdminDashboard}
           />
+
+          <AdminRoute exact path="/admin/edit/product/:productId" component={AdminEditProduct}/>
 
           {/* Feed */}
 

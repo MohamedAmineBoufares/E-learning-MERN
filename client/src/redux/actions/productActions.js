@@ -6,6 +6,7 @@ import {
   SHOW_ERROR_MESSAGE,
   SHOW_SUCCESS_MESSAGE,
 } from "../constants/messageConstants";
+
 import {
   CREATE_PRODUCT,
   GET_PRODUCTS,
@@ -136,6 +137,53 @@ export const deleteProduct = (productId) => async (dispatch) => {
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: err.response.data.errorMessage,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+  }
+};
+
+export const updateProduct = (productId, data) => async (dispatch) => {
+  try {
+
+    console.log("data", data)
+    dispatch({ type: START_LOADING });
+
+    const src = data.productImage;
+
+    const uploadCloudinaryPIC = await uploadPic(src, "CourseThumbnails");
+    const pic = uploadCloudinaryPIC.data.secure_url;
+
+    data.productImage = pic;
+
+    console.log("AFTER! ", data);
+
+    const response = await axios.put(`/api/product/${productId}`, data);
+
+    dispatch({ type: STOP_LOADING });
+
+    dispatch({
+      type: SHOW_SUCCESS_MESSAGE,
+      payload: "Product updated",
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_MESSAGES,
+      });
+    }, 2000);
+
+    return response;
+  } catch (err) {
+    console.log("updateProduct api error: ", err);
+    dispatch({ type: STOP_LOADING });
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: "Error updating product",
     });
 
     setTimeout(() => {
