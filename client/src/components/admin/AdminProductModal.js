@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import "./Admin.css"
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -161,7 +162,7 @@ const AdminProductModal = () => {
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           <div>
-            <div className="modal-header bg-warning text-white">
+            <div className="modal-header text-white add__prod__modal">
               <h5 className="modal-title">Add Course</h5>
               <button className="close" data-dismiss="modal">
                 <span>

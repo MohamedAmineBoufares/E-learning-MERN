@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PreviewVideoPopUp from "../previewVideoPopUp/PreviewVideoPopUp";
 import "./CourseInfosCard.css";
 
-function CourseInfosCard({ coursePrice, videoSrc }) {
+function CourseInfosCard({ coursePrice, videoSrc, coursePIC }) {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
     setIsOpen(true);
@@ -13,7 +13,7 @@ function CourseInfosCard({ coursePrice, videoSrc }) {
       <div class="card">
         <img
           class="card-img-top"
-          src="https://top-sponsoring-tunisie.com/wp-content/uploads/2020/03/instagram-e-commerce-integration.jpg"
+          src={coursePIC}
           alt="Card cap"
         />
         <div class="card-body course__infos__card__container">

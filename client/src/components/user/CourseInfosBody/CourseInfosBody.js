@@ -20,13 +20,13 @@ function CourseInfosBody({ courseID }) {
           <div className="container">
             {course && <h1>{course.productName}</h1>}
             {course && <p>{course.productDesc}</p>}
-            <p>
+            {/* <p>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
@@ -37,6 +37,7 @@ function CourseInfosBody({ courseID }) {
             <CourseInfosCard
               coursePrice={course.productPrice}
               videoSrc={course.previewUrl}
+              coursePIC={course.fileName}
             />
           )}
         </div>
@@ -45,18 +46,19 @@ function CourseInfosBody({ courseID }) {
       <div class="row">
         <div class="col-sm-8 pt-5">
           <div className="container course__infos__what__youll__learn p-4">
-            <h1 className="text-center mb-4">What you will learn</h1>
-            <ul className="row row-cols-2 course__infos__what__youll__learn_ul">
-              <li>One</li>
-              <li>Two</li>
-              <li>Three</li>
-              <li>Four</li>
-              <li>Five</li>
-            </ul>
+            <h1 className="text-center mb-4">Course chapters</h1>
+            {course && (
+              <ol className="row row-cols-1">
+                {course.chapters.map(({ chapterName }, i) => (
+                  <li key={i} className="mb-3">
+                    {chapterName}
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
         </div>
       </div>
-  
     </div>
   );
 }

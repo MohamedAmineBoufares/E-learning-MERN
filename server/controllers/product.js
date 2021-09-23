@@ -90,8 +90,7 @@ exports.update = async (req, res) => {
     chapters,
     coursePDF,
   } = req.body;
-  console.log(req.body)
-
+  
   await Product.findOneAndUpdate(productId, {
     fileName: productImage,
     productName: productName,

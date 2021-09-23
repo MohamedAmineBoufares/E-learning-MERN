@@ -83,13 +83,13 @@ function AllCoursesCard({ product }) {
         <div class="card-body col-sm-12">
           <h4 className="card-text">{product.productPrice} DT</h4>
           <h2 class="card-title">{product.productName}</h2>
-          <p class="card-text d-flex justify-content-around w-50">
+          {/* <p class="card-text d-flex justify-content-around w-50">
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
-          </p>
+          </p> */}
           <div className="d-flex justify-content-between mb-2">
             <button
               className="btn d-flex align-items-center buy__this"

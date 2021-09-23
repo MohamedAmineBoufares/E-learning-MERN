@@ -8,18 +8,19 @@ const Card = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="col-sm-8 my-3">
+    <div className="col-md-4 my-3">
       <div className="card h-100">
         <a href="#!">
           <img
             className="img-fluid w-100"
             src={product.fileName}
             alt="product"
+            height="200"
           />
         </a>
 
         <div className="card-body text-center">
-          <h5>{product.productName}</h5>
+          <h5 className="card-text">{product.productName}</h5>
           <hr />
           <h6 className="mb-3">
             <span className="text-secondary mr-2">

@@ -9,19 +9,19 @@ import "slick-carousel/slick/slick-theme.css";
 import { isAuthenticated } from "../../../helpers/auth";
 import { getLocalStorage } from "../../../helpers/localStorage";
 
+import arrowDown from "../../assets/down-arrow.svg";
+
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUserCourses } from "../../../redux/actions/userActions";
 
 function Courses() {
-
   const [userName, setUserName] = useState("");
 
   // Redux states
   const dispatch = useDispatch();
 
   const courses = useSelector((state) => state.courses.courses);
-
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -70,18 +70,35 @@ function Courses() {
       <div class="row justify-content-sm-center">
         <div class="col col-sm-10">
           <Slider {...settings}>
-          {courses &&
-          courses.map(({ course }) => {
-            return course.map(({ courseName, courseID, _id, courseDesc, courseSrc }) => (
-              <CourseCard
-                courseName={courseName}
-                courseID={courseID}
-                courseDesc={courseDesc}
-                courseSrc={courseSrc}
-                key={_id}
-              />
-            ));
-          })}
+            {courses && courses.length !== 0 ? (
+              courses.map(({ course }) => {
+                return course.map(
+                  ({ courseName, courseID, _id, courseDesc, courseSrc }) => (
+                    <CourseCard
+                      courseName={courseName}
+                      courseID={courseID}
+                      courseDesc={courseDesc}
+                      courseSrc={courseSrc}
+                      key={_id}
+                    />
+                  )
+                );
+              })
+            ) : (
+              <div className="container d-flex flex-column align-items-center">
+                <h1>Well, seems you don't have any course</h1>
+                <h4 className="mb-5 mt-4">
+                  You can scroll down and see our courses and, of course, buy one. 
+                </h4>
+                <img
+                  className="img-fluid"
+                  src={arrowDown}
+                  alt="arrow down icon"
+                  title="an arrow down"
+                  width="50"
+                />
+              </div>
+            )}
           </Slider>
         </div>
       </div>

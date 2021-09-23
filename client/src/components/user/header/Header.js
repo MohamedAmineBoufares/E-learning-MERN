@@ -102,9 +102,11 @@ function Header() {
                     <span className="ml-3 d-inline d-sm-none mr-2">
                       Favorites
                     </span>
-                    <span className="rounded-circle pr-1 pl-1 items__dot">
-                      {favoriteItems && favoriteItems.length}
-                    </span>
+                    {favoriteItems && favoriteItems.length !== 0 && (
+                      <span className="rounded-circle pr-1 pl-1 items__dot">
+                        {favoriteItems.length}
+                      </span>
+                    )}
                   </button>
 
                   <div
@@ -113,13 +115,27 @@ function Header() {
                   >
                     {favoriteItems.length !== 0 ? (
                       favoriteItems.map(
-                        ({ productName, productID, fileName, _id }) => (
+                        ({
+                          fileName,
+                          productName,
+                          productPrice,
+                          videoUrl,
+                          previewUrl,
+                          productDesc,
+                          productCategory,
+                          productID,
+                          _id,
+                        }) => (
                           <FavCard
-                            key={_id}
-                            courseName={productName}
-                            courseID={productID}
-                            courseSrc={fileName}
-                            _id={_id}
+                          fileName={fileName}
+                          productName={productName}
+                          productPrice={productPrice}
+                          videoUrl={videoUrl}
+                          previewUrl={previewUrl}
+                          productDesc={productDesc}
+                          productCategory={productCategory}
+                          productID={productID}
+                          _id={_id}
                           />
                         )
                       )
@@ -130,18 +146,20 @@ function Header() {
                 </div>
               )}
               {isAuthenticated().role === 0 && (
-                <li class="nav-item">
+                <li class="nav-item ml-2">
                   <Link class="nav-link" to="/cart">
                     <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                     <span className="ml-3 d-inline d-sm-none mr-2">Cart</span>
-                    <span className="rounded-circle pr-1 pl-1 items__dot">
-                      {cartItems && cartItems.length}
-                    </span>
+                    {cartItems && cartItems.length !== 0 && (
+                      <span className="rounded-circle pr-1 pl-1 items__dot">
+                        {cartItems.length}
+                      </span>
+                    )}
                   </Link>
                 </li>
               )}
 
-              {isAuthenticated().role === 0 && (
+              {/* {isAuthenticated().role === 0 && (
                 <li class="nav-item">
                   <div className="nav-link">
                     <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
@@ -150,9 +168,9 @@ function Header() {
                     </span>
                   </div>
                 </li>
-              )}
+              )} */}
 
-              <div className="dropdown">
+              <div className="dropdown ml-sm-3">
                 <button
                   class="nav-link btn dropdown-toggle"
                   data-toggle="dropdown"

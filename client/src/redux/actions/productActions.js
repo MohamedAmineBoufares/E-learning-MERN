@@ -25,8 +25,6 @@ export const createProduct = (data) => async (dispatch) => {
 
     data.productImage = pic;
 
-    console.log("AFTER! ", data);
-
     const response = await axios.post("/api/product", data);
 
     dispatch({ type: STOP_LOADING });
@@ -149,8 +147,6 @@ export const deleteProduct = (productId) => async (dispatch) => {
 
 export const updateProduct = (productId, data) => async (dispatch) => {
   try {
-
-    console.log("data", data)
     dispatch({ type: START_LOADING });
 
     const src = data.productImage;
@@ -159,8 +155,6 @@ export const updateProduct = (productId, data) => async (dispatch) => {
     const pic = uploadCloudinaryPIC.data.secure_url;
 
     data.productImage = pic;
-
-    console.log("AFTER! ", data);
 
     const response = await axios.put(`/api/product/${productId}`, data);
 
