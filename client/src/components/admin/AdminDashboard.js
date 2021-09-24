@@ -18,17 +18,15 @@ const AdminDashboard = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  
+
   return (
-    <section style={{marginTop: "10rem"}}>
+    <section style={{ marginTop: "10rem" }}>
       <AdminActionBtns />
       <AdminCategoryModal />
       <AdminProductModal />
-      <AdminOrdersModal/>
+      <AdminOrdersModal />
       <AdminBody />
     </section>
   );

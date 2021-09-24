@@ -66,14 +66,14 @@ function AllCourses() {
   };
 
   return (
-    <div className="col mt-5 all__courses__container">
+    <div class="col mt-5 all__courses__container">
       <div class="row">
         <div class="col">
-          <h1 className="what__to__learn">What to learn next ?</h1>
+          <h1 class="what__to__learn">What to learn next ?</h1>
         </div>
       </div>
 
-      <div className="row mb-5 justify-content-center">
+      <div class="row mb-5 justify-content-center">
         <div class="input-group col-sm-5 justify-content-center">
           <select
             class="custom-select"

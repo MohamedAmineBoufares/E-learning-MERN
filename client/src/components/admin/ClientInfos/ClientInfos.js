@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "./ClientInfos.module.css";
-import { Avatar } from "@material-ui/core";
+import emailjs from "emailjs-com";
 
 import { showLoading } from "../../../helpers/loading";
 
@@ -28,34 +27,78 @@ function ClientInfos({
     dispatch(clearMessages());
   }, [dispatch]);
 
+  const emailParams = {
+    userName: userName,
+    userEmail: userMail,
+  };
+
+  const sendAcceptEmail = (e) => {
+    emailjs
+      .send(
+        "service_gflmj5t",
+        "template_s4nskbb",
+        emailParams,
+        "user_r0ERYcdhk45IfQAJoQpQx"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
+  const sendRejectEmail = (e) => {
+    emailjs
+      .send(
+        "service_gflmj5t",
+        "template_flzziru",
+        emailParams,
+        "user_r0ERYcdhk45IfQAJoQpQx"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   const submitOrder = () => {
+    sendAcceptEmail();
     dispatch(allowOrder(orderID, userMail));
   };
 
   const declineOrder = () => {
+    sendRejectEmail();
     dispatch(rejectOrder(orderID, userMail));
   };
-
   return (
-    <div class="card mb-3">
-      <h4 class="card-header">{userName}</h4>
-      <div class="card-body col">
-        <div className="row">
-          <div className="col-sm-5 mb-4 mb-sm-0">
-            <h5 class="card-title">{userMail}</h5>
-            <p class="card-text">{userGsm}</p>
+    <div className="card mb-3">
+      <h4 className="card-header">{userName}</h4>
+      <div className="card-body col">
+        <div classNameName="row">
+          <div classNameName="col-sm-5 mb-4 mb-sm-0">
+            <h5 className="card-title">{userMail}</h5>
+            <p className="card-text">{userGsm}</p>
           </div>
-          <div className="col-sm-4">
+          <div classNameName="col-sm-4">
             <ul>
               {courses &&
-                courses.map(({ courseName }) => <li>{courseName}</li>)}
+                courses.map(({ courseName }, i) => (
+                  <li key={i}>{courseName}</li>
+                ))}
             </ul>
             <h3>{total + " DT"}</h3>
           </div>
 
-          <div className="col d-flex justify-content-center align-items-center mt-4 mt-sm-0">
+          <div classNameName="col d-flex justify-content-center align-items-center mt-4 mt-sm-0">
             <a
-              className="btn btn-primary"
+              classNameName="btn btn-primary"
               href={srcRecep}
               target="_blank"
               rel="noreferrer"
@@ -66,16 +109,16 @@ function ClientInfos({
         </div>
       </div>
 
-      <div className="card-footer">
+      <div classNameName="card-footer">
         {loading ? (
           <div>{showLoading()}</div>
         ) : (
           <div>
-            <button href="#" class="btn btn-info mr-3" onClick={submitOrder}>
+            <button href="#" className="btn btn-info mr-3" onClick={submitOrder}>
               Accept
             </button>
 
-            <button class="btn btn-outline-danger" onClick={declineOrder}>
+            <button className="btn btn-outline-danger" onClick={declineOrder}>
               Refuse
             </button>
           </div>

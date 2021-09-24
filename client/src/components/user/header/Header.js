@@ -9,6 +9,8 @@ import { isAuthenticated } from "../../../helpers/auth";
 
 import { useSelector } from "react-redux";
 
+import logoBlue from "../../assets/logo_blue.png";
+
 import FavCard from "../favCard/FavCard";
 import EmptyFav from "../../emptyFav/EmptyFav";
 
@@ -43,11 +45,11 @@ function Header() {
   };
 
   return (
-    <nav class="navbar navbar-light navbar-expand-sm fixed-top ">
+    <nav class="navbar navbar-light navbar-expand-sm fixed-top">
       <div class="container col-sm-12">
-        <a class="navbar-brand col-auto col-sm-2" href="./Header.js">
-          Logo
-        </a>
+        <div class="navbar-brand">
+          <img alt="plateform logo" src={logoBlue} width="80" />
+        </div>
 
         <div className="dropdown form-group">
           <input
@@ -127,15 +129,15 @@ function Header() {
                           _id,
                         }) => (
                           <FavCard
-                          fileName={fileName}
-                          productName={productName}
-                          productPrice={productPrice}
-                          videoUrl={videoUrl}
-                          previewUrl={previewUrl}
-                          productDesc={productDesc}
-                          productCategory={productCategory}
-                          productID={productID}
-                          _id={_id}
+                            fileName={fileName}
+                            productName={productName}
+                            productPrice={productPrice}
+                            videoUrl={videoUrl}
+                            previewUrl={previewUrl}
+                            productDesc={productDesc}
+                            productCategory={productCategory}
+                            productID={productID}
+                            _id={_id}
                           />
                         )
                       )

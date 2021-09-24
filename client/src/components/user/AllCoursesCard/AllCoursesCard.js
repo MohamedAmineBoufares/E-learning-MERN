@@ -11,13 +11,10 @@ import { addToCart } from "../../../redux/actions/cartActions";
 import { addToFavorite } from "../../../redux/actions/favoriteActions";
 import { isAuthenticated } from "../../../helpers/auth";
 
-
 function AllCoursesCard({ product }) {
   const dispatch = useDispatch();
-  
 
   const [userID, setUserID] = useState();
-
 
   // Constes so I can recall them inside an object, later
   const productName = product.productName;
@@ -30,13 +27,10 @@ function AllCoursesCard({ product }) {
   const _id = product._id;
 
   useEffect(() => {
-    
     if (isAuthenticated() && isAuthenticated().role === 0) {
       setUserID(getLocalStorage("user")._id);
     }
   }, []);
-
-  
 
   const addCart = () => {
     const item = {
@@ -71,7 +65,7 @@ function AllCoursesCard({ product }) {
   };
 
   return (
-    <div className="col mb-5">
+    <div className="col mb-5 col-sm-12">
       <div class="card card__all__courses__container">
         <img
           class="card-img-top"
@@ -80,9 +74,11 @@ function AllCoursesCard({ product }) {
           title={product.productName}
           height="200"
         />
-        <div class="card-body col-sm-12">
+        <div class="card-body">
           <h4 className="card-text">{product.productPrice} DT</h4>
+
           <h2 class="card-title">{product.productName}</h2>
+
           {/* <p class="card-text d-flex justify-content-around w-50">
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>

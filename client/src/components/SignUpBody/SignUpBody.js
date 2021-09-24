@@ -6,9 +6,11 @@ import isEmpty from "validator/lib/isEmpty";
 import equals from "validator/lib/equals";
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { signup } from "../../api/auth";
-import { getLocalStorage } from "../../helpers/localStorage";
+import { useHistory } from "react-router";
 
 function SignUpBody() {
+  let history = useHistory();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -66,7 +68,6 @@ function SignUpBody() {
 
       signup(data)
         .then((response) => {
-          console.log("Axios signup success: ", response);
           setFormData({
             username: "",
             email: "",
@@ -76,10 +77,9 @@ function SignUpBody() {
             successMsg: response.data.successMessage,
           });
 
-          console.log(getLocalStorage())
+          history.push("/login");
         })
         .catch((err) => {
-          console.log("Axios signup error: ", err);
           setFormData({
             ...formData,
             loading: false,
