@@ -28,15 +28,19 @@ export const addToCart = (data, userID) => async (dispatch) => {
       previewUrl: data.previewUrl,
     });
 
-    dispatch({ type: ADD_TO_CART, payload: 
-      {productID: data._id,
-      productName: data.productName,
-      productPrice: data.productPrice,
-      productDesc: data.productDesc,
-      productCategory: data.productCategory,
-      fileName: data.fileName,
-      videoUrl: data.videoUrl,
-      previewUrl: data.previewUrl,} });
+    dispatch({
+      type: ADD_TO_CART,
+      payload: {
+        productID: data._id,
+        productName: data.productName,
+        productPrice: data.productPrice,
+        productDesc: data.productDesc,
+        productCategory: data.productCategory,
+        fileName: data.fileName,
+        videoUrl: data.videoUrl,
+        previewUrl: data.previewUrl,
+      },
+    });
 
     dispatch({ type: STOP_LOADING });
 

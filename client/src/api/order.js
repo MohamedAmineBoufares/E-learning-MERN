@@ -6,11 +6,10 @@ export const sendOrder = async (data, user, src, total, phoneNumber) => {
     userEmail: user.email,
     userPhone: phoneNumber,
     userID: user._id,
-    course: data.map(
+    course: data.map(  
       ({
         productID,
         productName,
-
         fileName,
         productPrice,
         productDesc,
@@ -19,7 +18,7 @@ export const sendOrder = async (data, user, src, total, phoneNumber) => {
         previewUrl,
       }) => ({
         courseID: productID,
-        courseName: productName,
+        courseName: productName, 
         courseSrc: fileName,
         coursePrice: productPrice,
         courseDesc: productDesc,

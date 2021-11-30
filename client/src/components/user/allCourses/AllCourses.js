@@ -13,6 +13,7 @@ function AllCourses() {
   const products = useSelector((state) => state.products.products);
   const categories = useSelector((state) => state.categories.categories);
 
+
   const [filtredProduct, setFiltredProducts] = useState([]);
 
   // const [filter, setFilter] = useState("");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./FavCard.css";
 
 import { isAuthenticated } from "../../../helpers/auth";
@@ -20,12 +20,18 @@ function FavCard({
 }) {
   const dispatch = useDispatch();
 
-  const remove = (e) => {
-    e.preventDefault();
+  const [userID, setUserID] = useState("");
+
+  useEffect(() => {
     if (isAuthenticated()) {
-      const userID = getLocalStorage("user")._id;
-      dispatch(removeFromFavList(userID, productID));
+      const ID = getLocalStorage("user")._id;
+      setUserID(ID);
+      console.log("heeelo !", productID)
     }
+  }, []);
+
+  const remove = () => {
+    dispatch(removeFromFavList(userID, productID));
   };
 
   const addCart = (e) => {
@@ -37,15 +43,12 @@ function FavCard({
       previewUrl,
       productDesc,
       productCategory,
-      _id,
+      _id: productID,
     };
 
     // Sending the course to store
-    if (isAuthenticated()) {
-      const userID = getLocalStorage("user")._id;
-      dispatch(addToCart(item, userID));
-      remove(e);
-    }
+    dispatch(addToCart(item, userID));
+    dispatch(removeFromFavList(userID, productID));
   };
 
   return (
@@ -63,8 +66,8 @@ function FavCard({
           <h5 class="card-title">{productName}</h5>
         </div>
 
-        <div className="col-2" onClick={addCart}>
-          <button className="btn btn-primary mb-2" title="add course to cart">
+        <div className="col-2" >
+          <button className="btn btn-primary mb-2" title="add course to cart" onClick={addCart}>
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
           </button>
           <button
